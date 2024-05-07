@@ -1,0 +1,142 @@
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 100px;
+    z-index: 5;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+}
+header  li{
+    list-style: none;
+}
+header  a{
+    text-decoration: none;
+    color: black;
+    font-weight:900;
+}
+.Logo{
+    flex: 1;
+}
+.Logo >a >img{
+    max-width: 130px;
+
+}
+.menu{
+    flex: 4;
+    display: flex;
+    align-items: center;
+}
+.menu > li{
+    padding: 10px 15px;
+    position: relative;
+}
+.menu > li > ul{
+    display: none;
+    position: absolute;
+    left: -5px;
+    right: -5px;
+    top: 40px;
+    padding: 0;
+    font-size: 14px;
+    box-shadow: 0px 0px 3px 0px #b9aaaa;
+    background: #f6f5f2;
+}
+.menu .list-type-product > a{
+    padding: 10px 15px;
+}
+.menu .list-type-product:hover ul{
+    display: block;
+}
+.menu > li > ul li{
+    
+    padding: 6px 5px;
+}
+.menu > li > ul li:hover{
+    cursor: pointer;
+    background: #a69a9aa6;
+}
+.others{
+    display: flex;
+    align-items: center;
+} 
+.others >li{
+   margin: 0 10px;
+}
+.others > .link-profile{
+    padding: 5px 0px;
+    cursor: pointer;
+}
+.others > .link-profile:hover ul{
+    display: block;
+}
+.others > .link-profile ul{
+    display: none; 
+    width: 130px;
+    position: absolute;
+    top: 40px;
+    left: -100px;
+    padding: 0;
+    font-size: 14px;
+    box-shadow: 0px 0px 3px 0px #b9aaaa;
+    background: #f6f5f2;
+}
+.others > .link-profile ul a:hover{
+    color: black;
+}
+.others > .link-profile ul li{
+    padding: 5px 0px 5px 3px;
+
+}
+.others > .link-profile ul li:hover{
+    cursor: pointer;
+    background: #a69a9aa6;
+}
+.others > li{
+    position:relative;
+}
+.others >li:first-child>i{
+    position:absolute;
+    left: 2px;
+    padding-left: 2px;
+    line-height: 28px;
+}
+.others > li:first-child > input{
+    padding-left: 25px;
+    width: 180px;
+    height: 28px;
+    border-radius: 45px;
+    border: 1px solid #c6bc9e;
+    background: none; /*#fbe8e8*/
+    /* padding: 5px 0px 5px 25px; */
+}
+.others > li:first-child > input:focus{
+    outline: none;
+}
+
+.others >li  .fa-circle{
+    font-size: 5px;
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    
+}
+.others > li > button {
+    font-size:13px;
+    width: 85px;
+    border-radius: 45px;
+    background: none;
+    padding: 5px 10px;
+    border: 1px solid #c6bc9e;
+}
+.others > li > button{
+    cursor: pointer;
+}
+.others > li > button:hover{
+    /* background:linear-gradient(rgb(255, 125, 125), rgb(255, 148, 148), rgb(255, 181, 181), rgb(255, 191, 191), rgb(255, 223, 223));
+    border:1px solid rgb(255, 208, 208); */
+    background: linear-gradient(#ffffff, #fff8ed, #fff7de, #ffefc3, #ffecad);
+    border: 1px solid #fff4d5;
+}

@@ -1,0 +1,74 @@
+.form-contact {
+    display: flex;
+    justify-content: center;
+}
+
+.form-contact > div{
+    width: 1330px;
+    margin: 30px 0px;
+}
+.form-contact > div >p{
+    font-size: 20px;
+}
+.info{
+    width: 1330px;
+    display: flex;
+}
+.info > div{
+    width: 25%;
+    margin: 10px;
+    text-align: justify;
+    font-size: 14px;
+    
+}
+.box-contact{
+    display: flex;
+    justify-content: center;
+}
+.box-contact span{
+    color: red;
+}
+.box-contact .input-contact{
+    display:flex ;
+    justify-content: center;
+}
+.input-contact{
+    width: 1330px;
+    margin-top: 20px;
+}
+.box-contact .input-contact .tab1{
+    width: 25%;
+   
+}
+.box-contact .input-contact .tab2{
+    width: 75%;
+}
+.box-contact .input-contact .tab2 input{
+    width: 100%;
+    border: 1px solid #e5d7c6;
+    box-shadow: 0px 0px 3px 1px #e5d7c6;
+    padding: 5px;
+}
+.box-contact .input-contact .tab2 input:focus{
+    outline: none;
+}
+.box-contact .input-contact .tab2 textarea{
+    width: 100%;
+    border: 1px solid #e5d7c6;
+    box-shadow: 0px 0px 3px 1px #e5d7c6;
+    padding: 5px;
+}
+.box-contact .input-contact .tab2 textarea:focus{
+    outline: none;
+}
+.box-contact button{
+    margin: 20px 0px;
+     padding:10px 15px; 
+     font-size:large; 
+     float: right; 
+     background:rgb(194, 166, 115);
+     color: white;
+    border: 1px solid #e5d7c6;
+}
+
+

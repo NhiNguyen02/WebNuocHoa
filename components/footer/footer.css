@@ -1,0 +1,49 @@
+.footer-list{
+    background:#F0EBE3;
+    display: flex;
+    justify-content: space-around;
+}
+.footer-list a{
+    text-decoration: none;
+    color: black;
+    font-size:medium;
+}
+.footer-list a:hover{
+    color: #ce8195;
+}
+.footer-list li{
+    list-style-type: none;
+}
+.footer-list > .imglogo > a img{
+    min-width: 200px;
+    width: 100%;
+}
+.footer-list p{
+    font-weight: bolder;
+    margin: 5px 0px;
+}
+.footer-list > .imglogo, .about-us, .policy, .pay-and-transport{
+    margin: 30px 0px;
+}
+.pay-and-transport .pay img{
+    max-width:30px;
+}.pay-and-transport div{
+    display: flex;
+    flex-wrap: wrap;
+}
+.pay-and-transport div img{
+    max-width: calc(100%/4);
+}
+.footer-list > .pay-and-transport >.pay, .transport{
+    margin: 15px 0px;
+}
+.end-footer{
+    text-align: center;
+    background-color:#b8ae9f ;
+    padding: 5px 0px;
+}
+.end-footer p{
+
+    margin: 0;
+    color: #fff6d3;
+}

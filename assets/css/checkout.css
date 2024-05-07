@@ -1,0 +1,100 @@
+.containercheckout{
+    display: flex;
+    justify-content: center;
+}
+.checkoutform{
+    max-width: 1330px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    padding: 20px 0px;
+}
+.checkoutform .checkoutform_main{
+    width: 60%;
+}
+.checkoutform .checkout_coupon{
+    width: 35%;
+    border-left: 1px solid #cbc9c9;
+    padding: 0px 10px;
+}
+.checkoutmain{
+    display: flex;
+    justify-content: space-around;
+}
+.checkoutmain > div{
+    width: 45%;
+}
+.checkoutmain input[type=text], textarea{
+    width: 100%;
+    border: 1px solid #cdcdcd;
+}
+.checkoutmain input[type=text]:focus, textarea:focus{
+    outline: none;
+}
+.checkoutmain input[type=text]{
+    padding: 10px 5px;
+}
+.checkoutmain_info .maininfo, textarea{
+    margin: 10px 0px;
+    background: white;
+    border: 1px solid #cbc9c9;
+    box-shadow: 1px 1px 3px 1px #e0e0e0;
+}
+.checkoutmain_others > div{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px;
+    margin: 10px 0px;
+    border: 1px solid #cbc9c9;
+    box-shadow: 1px 1px 3px 1px #d0d0d0;
+    background: white;
+}
+.checkout_coupon_top{
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0px;
+    border-bottom:1px solid #cbc9c9;
+    border-top: 1px solid #cbc9c9;
+    padding: 10px 0px;
+}
+.checkout_coupon_top_img{
+    width: 15%;
+}
+.checkout_coupon_main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.checkout_coupon_main .checkout_coupon_main_{
+    width: 90%;
+}
+.checkout_coupon_main_ .checkcode_coupon{
+    display: flex;
+    margin: 15px 0px;
+}
+.checkcode_coupon input{
+    width: 70%;
+    padding: 5px 5px;
+    margin: 0px 5px;
+}
+.checkcode_coupon button{
+    width: 25%;
+    padding: 5px 5px;
+    margin: 0px 5px;
+    font-size: medium;
+    background: #cfb2b2;
+    border: 1px solid #cbc9c9;
+}
+.checkout_coupon_main_ .checkout_coupon_main_footer{
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 5px;
+    
+}
+.checkout_coupon_main_ .checkout_coupon_main_footer button{
+    padding: 5px 10px;
+    font-size:medium;
+    background: #cfb2b2;
+    border: 1px solid #cbc9c9;
+}

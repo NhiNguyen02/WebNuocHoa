@@ -1,0 +1,73 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img{
+    width: 100%;
+}
+.container{
+    max-width:1536px ;
+    margin: 0 auto;
+    position: relative;
+}
+.topadmin {
+    background: #FD9291;
+    display: flex;
+    height: 80px;
+    justify-content: space-between;
+    align-items: center;
+}
+.Logo{
+    width: 130px;
+}
+span{
+    font-size: 20px;
+}
+.icon{
+    max-width: 50px;
+    margin-right: 20px;
+}
+.mainadmin{
+    display: flex;
+    height: calc(100vh);
+}
+.adminleft{
+    max-width: 30%;
+    background: #FD9291;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding-top: 40px;
+    color: white;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+
+
+.adminleft a{
+    display: flex;
+    align-items: center;
+}
+.adminleft > div:last-child{
+    margin-top: 20px;
+    border-top: 1px solid #bfbfbf;
+}
+.adminleft > div:last-child div{
+    margin: 20px 0;
+}
+.adminright{
+    max-width: 70%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.adminright div:first-child{
+    max-width: 500px;
+}
