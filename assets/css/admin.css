@@ -12,12 +12,17 @@ img{
     margin: 0 auto;
     position: relative;
 }
-.topadmin {
-    background: #FD9291;
+.buttonAction{
     display: flex;
-    height: 80px;
+    justify-content: flex-end;
+    width: 100%;
+}
+.topadmin {
+    background: #DAC0A3;
+    display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px;
 }
 .Logo{
     width: 130px;
@@ -26,7 +31,7 @@ span{
     font-size: 20px;
 }
 .icon{
-    max-width: 50px;
+    max-width: 30px;
     margin-right: 20px;
 }
 .mainadmin{
@@ -34,8 +39,8 @@ span{
     height: calc(100vh);
 }
 .adminleft{
-    max-width: 30%;
-    background: #FD9291;
+    max-width: 20%;
+    background: #DAC0A3;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -44,15 +49,18 @@ span{
     padding-top: 40px;
     color: white;
 }
-a{
-    text-decoration: none;
-    color: white;
-}
-
-
-.adminleft a{
+.adminleft li{
     display: flex;
     align-items: center;
+    text-decoration: none;
+    color: white;
+    padding: 20px ;
+}
+.adminleft li:hover{
+    cursor: pointer;
+}
+.adminleft li:focus{
+    outline: 1px solid rgb(0, 0, 0);
 }
 .adminleft > div:last-child{
     margin-top: 20px;
@@ -62,12 +70,92 @@ a{
     margin: 20px 0;
 }
 .adminright{
-    max-width: 70%;
+    max-width: 80%;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.adminright div:first-child{
-    max-width: 500px;
+table, th, td{
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+} 
+tr input{
+    cursor: pointer;
+}
+th, td{
+    padding: 10px 10px;
+    
+}
+td{
+    font-size: 14px;
+}
+td i{
+    cursor: pointer;
+}
+button{
+    background: #5bcce6;
+    padding: 10px 20px;
+    border: 1px solid #5bcce6;
+    cursor: pointer;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+@keyframes righttoleft {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+@keyframes lefttorifht {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+#contentModal {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    max-width: 400px;
+    float: right;
+    height: 100%;
+}
+
+.modal-content form{
+    display: flex;
+    flex-direction: column;
+}
+.close {
+color: #aaa;
+float: right;
+font-size: 28px;
+font-weight: bold;
+}
+
+.close:hover {
+color: black;
+text-decoration: none;
+cursor: pointer;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+.admin_product{
+    display: none;
 }
