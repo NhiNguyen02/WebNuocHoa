@@ -1,4 +1,11 @@
 <?php 
+
+session_start();
+
+    if(!isset($_SESSION['user_name'])){
+    header('location:http://localhost/WebNuocHoa/');
+    }
+    
     if(isset($_POST['update']))
     {
         $input1='none';  

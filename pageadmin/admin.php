@@ -5,7 +5,7 @@
 session_start();
 
 if(!isset($_SESSION['user_name_ad'])){
-   header('location:http://localhost/WebNuocHoa/home.php');
+   header('location:http://localhost/WebNuocHoa/');
 }
 ?>
 

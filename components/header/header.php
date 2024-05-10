@@ -54,13 +54,13 @@ if(!isset($_SESSION['user_name'])){
                 <li style="display: <?php echo $action1; ?> ;"><button onclick="openRegister()">Đăng kí</button></li>
                 <?php echo $action4;?>
                 <!-- <li style="position: relative;" <?php echo $action3; ?> ><img  src="../../../WebNuocHoa/assets/images/iconCart.svg" alt=""><i class="fa-solid fa-circle" style="color: #fb0505;"></i></li> -->
-                <li class="link-profile"><a href="../../../WebNuocHoa/page/profile.php"><img src="../../../WebNuocHoa/assets/images/iconAccount.svg" alt=""></a>
+                <li class="link-profile"><a href="../../../WebNuocHoa/page/profile.php"> <img src="../../../WebNuocHoa/assets/images/iconAccount.svg" alt=""> 
                     <ul>
                         <!-- <a href=""><li>Thông tin cá nhân</li></a>
                         <a href="../../../WebNuocHoa/page/logout.php"><li>Đăng xuất</li></a> -->
                         <?php echo $action2;?>
                     </ul> 
-                    
+                    </a>
                     
                 </li>
             </div>
