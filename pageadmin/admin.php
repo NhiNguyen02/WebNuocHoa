@@ -1,3 +1,13 @@
+<?php
+
+@include 'config.php';
+
+session_start();
+
+if(!isset($_SESSION['user_name_ad'])){
+   header('location:http://localhost/WebNuocHoa/');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
