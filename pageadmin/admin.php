@@ -1,3 +1,14 @@
+<?php
+
+@include 'config.php';
+
+session_start();
+
+if(!isset($_SESSION['user_name_ad'])){
+   header('location:http://localhost/WebNuocHoa/home.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +27,9 @@
                     <img src="../../WebNuocHoa/assets/images/logo.svg" alt="">
                 </div> -->
                 <div class="logout">
+                <a href="http://localhost/WebNuocHoa/page/logout.php"> 
                     <img class="icon" src="../../WebNuocHoa/assets/admin/signOut.svg" alt="">
+                </a>
                 </div>
             </div>
             <div class="mainadmin">

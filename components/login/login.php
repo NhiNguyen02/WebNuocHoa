@@ -1,6 +1,6 @@
 <?php
-@include '../../../../Xampp/htdocs/WebNuocHoa/components/connect/config.php';
-//  session_start();
+@include 'config.php';
+
 
 if(isset($_POST['submit'])){
 
@@ -16,10 +16,16 @@ if(isset($_POST['submit'])){
       $row = mysqli_fetch_array($result);
 
       if($row['user_type'] == 'user'){
+        $_SESSION['user_id'] = $row['id'];
          $_SESSION['user_name'] = $row['name'];
-
          $_SESSION['email'] = $row['email'];
          header('location:http://localhost/WebNuocHoa/home.php');
+      }
+      if($row['user_type'] == 'admin'){
+        $_SESSION['user_name_ad'] = $row['name'];
+
+        $_SESSION['email_ad'] = $row['email'];
+        header('location:http://localhost/WebNuocHoa/pageadmin/admin.php');
       }
      
    }else{
