@@ -2,11 +2,6 @@
 
 include 'components/connect/config.php';
 
-if(isset($_SESSION['user_id'])){
-    $user_id = $_SESSION['user_id'];
- }else{
-    $user_id = '';
- };
 
 if(isset($_POST['submit1'])){
 
@@ -15,7 +10,7 @@ if(isset($_POST['submit1'])){
     $name = filter_var($name, FILTER_SANITIZE_STRING);
     $email = $_POST['email'];
     $email = filter_var($email, FILTER_SANITIZE_STRING);
-    $pass = sha1($_POST['password']);
+    $pass = md5($_POST['password']);
     $pass = filter_var($pass, FILTER_SANITIZE_STRING);
     $user_type = 'user';
 

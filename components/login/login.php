@@ -1,16 +1,11 @@
 <?php
 include 'components/connect/config.php';
 
-if(isset($_SESSION['user_id'])){
-    $user_id = $_SESSION['user_id'];
- }else{
-    $user_id = '';
- };
 if(isset($_POST['submit'])){
 
    $email = $_POST['email'];
    $email = filter_var($email, FILTER_SANITIZE_STRING);
-   $pass = sha1($_POST['password']);
+   $pass = md5($_POST['password']);
    $pass = filter_var($pass, FILTER_SANITIZE_STRING);
 
    $select = $conn->prepare("SELECT * FROM `taikhoan` WHERE email = ? AND password = ?");
