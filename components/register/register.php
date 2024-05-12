@@ -1,32 +1,48 @@
 <?php
 
-@include 'config.php';
+include 'components/connect/config.php';
 
-if(isset($_POST['submit'])){
+if(isset($_SESSION['user_id'])){
+    $user_id = $_SESSION['user_id'];
+ }else{
+    $user_id = '';
+ };
 
-   $name = mysqli_real_escape_string($conn, $_POST['name']);
-   $email = mysqli_real_escape_string($conn, $_POST['email']);
-   $pass = md5($_POST['password']);
-   $user_type = 'user';
+if(isset($_POST['submit1'])){
 
-   $select = " SELECT * FROM taikhoan WHERE email = '$email' && password = '$pass' ";
 
-   $result = mysqli_query($conn, $select);
+    $name = $_POST['name'];
+    $name = filter_var($name, FILTER_SANITIZE_STRING);
+    $email = $_POST['email'];
+    $email = filter_var($email, FILTER_SANITIZE_STRING);
+    $pass = sha1($_POST['password']);
+    $pass = filter_var($pass, FILTER_SANITIZE_STRING);
+    $user_type = 'user';
 
-   if(mysqli_num_rows($result) > 0){
+    //$select = " SELECT * FROM taikhoan WHERE email = '$email' && password = '$pass' ";
 
-      $error[] = 'user already exist!';
+    //$result = mysqli_query($conn, $select);
 
-   }else{
+    $select = $conn->prepare("SELECT * FROM `taikhoan` WHERE email = ?");
+    $select->execute([$email,]);
+    $row = $select->fetch(PDO::FETCH_ASSOC);
+    if($select->rowCount() > 0){
 
-      if($pass != $pass){
-         $error[] = 'password not matched!';
-      }else{
-         $insert = "INSERT INTO taikhoan(name, email, password, user_type) VALUES('$name','$email','$pass','$user_type')";
-         mysqli_query($conn, $insert);
-         
-      }
-   }
+        $error1[] = 'user already exist!';
+
+    }else{
+
+        if($pass != $pass){
+            $error1[] = 'password not matched!';
+        }else{
+            $insert = $conn->prepare("INSERT INTO `taikhoan`(name, email, password, user_type) VALUES(?,?,?,?)");
+            $insert->execute([$name, $email, $pass, $user_type]);
+
+            //$insert = "INSERT INTO taikhoan(name, email, password, user_type) VALUES('$name','$email','$pass','$user_type')";
+            //mysqli_query($conn, $insert);
+            
+        }
+    }
 
 };
 ?>
@@ -46,12 +62,11 @@ if(isset($_POST['submit'])){
     <div class="container">
         <div id="wraperLogin">
             <div class="template-login">
-                <a href=""></a>
                 <form action=""style="text-align: center;" method="post">
                     <h1 style="margin-bottom: 5px;">Đăng kí</h1>
                     <?php
-                    if(isset($error)){
-                        foreach($error as $error){
+                    if(isset($error1)){
+                        foreach($error1 as $error1){
                             echo '<span class="error-msg">'.$error.'</span>';
                         };
                     };
@@ -62,7 +77,7 @@ if(isset($_POST['submit'])){
                     </div>
                     <div class="input-common">
                         <p id="lable1">Email</p>
-                        <input id="inputField1" type="text" name="email">
+                        <input id="inputField1" type="email" name="email">
                     </div>
                     <div class="input-common">
                         <p id="lable2">Password</p>
@@ -72,7 +87,7 @@ if(isset($_POST['submit'])){
                             <h4><input type="checkbox" name="" id=""> Tôi đồng với điều khoản và dịch vụ</h4>
                     </div>
                     <div class="button-log" >
-                        <button name="submit">Đăng kí</button>
+                        <button name="submit1">Đăng kí</button>
                     </div>
                     <span>Đã có tài khoản? <strong onclick="swapLogin()" style="margin-left: 5px; cursor: pointer;">Đăng nhập</strong></span>
                 </form>

@@ -1,19 +1,23 @@
 <?php
-@include 'config.php';
+include 'components/connect/config.php';
 
-
+if(isset($_SESSION['user_id'])){
+    $user_id = $_SESSION['user_id'];
+ }else{
+    $user_id = '';
+ };
 if(isset($_POST['submit'])){
 
-   $email = mysqli_real_escape_string($conn, $_POST['email']);
-   $pass = md5($_POST['password']);
+   $email = $_POST['email'];
+   $email = filter_var($email, FILTER_SANITIZE_STRING);
+   $pass = sha1($_POST['password']);
+   $pass = filter_var($pass, FILTER_SANITIZE_STRING);
 
-   $select = " SELECT * FROM taikhoan WHERE email = '$email' && password = '$pass' ";
+   $select = $conn->prepare("SELECT * FROM `taikhoan` WHERE email = ? AND password = ?");
+   $select->execute([$email, $pass]);
+   $row = $select->fetch(PDO::FETCH_ASSOC);
 
-   $result = mysqli_query($conn, $select);
-
-   if(mysqli_num_rows($result) > 0){
-
-      $row = mysqli_fetch_array($result);
+   if($select->rowCount() > 0){
 
       if($row['user_type'] == 'user'){
         $_SESSION['user_id'] = $row['id'];
@@ -22,17 +26,16 @@ if(isset($_POST['submit'])){
          header('location:http://localhost/WebNuocHoa/home.php');
       }
       if($row['user_type'] == 'admin'){
+        $_SESSION['user_id'] = $row['id'];
         $_SESSION['user_name_ad'] = $row['name'];
-
         $_SESSION['email_ad'] = $row['email'];
         header('location:http://localhost/WebNuocHoa/pageadmin/admin.php');
       }
-     
-   }else{
-      $error[] = 'incorrect email or password!';
-   }
+    }else{
+        $error[] = 'incorrect email or password!';
+    }
 
-};
+}
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +63,7 @@ if(isset($_POST['submit'])){
                     ?>
                     <div class="input-common">
                         <p id="lable1">Email</p>
-                        <input id="inputField1" type="text" name="email">
+                        <input id="inputField1" type="email" name="email">
                     </div>
                     <div class="input-common">
                         <p id="lable2">Password</p>
