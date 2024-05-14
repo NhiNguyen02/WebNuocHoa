@@ -56,7 +56,7 @@
                             </div>
                             <div class="input-contact">
                                 <div class="tab1"><label for="">Nội dung<span>* </span>:</label></div>
-                                <div class="tab2"><textarea name="" id="" cols="30" rows="10" placeholder="Nội dung"></textarea></div> 
+                                <div class="tab2"><textarea name="" id="" cols="30" rows="10" style="resize: none;" placeholder="Nội dung"></textarea></div> 
                             </div>
                             <button>Gửi đi</button>
                         </form>

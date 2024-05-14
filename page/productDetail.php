@@ -99,9 +99,6 @@
                     <p><strong>Dung tích:</strong></p>
                     <div class="choice-size">
                         <button >10ml</button>
-                        <button>20ml</button>
-                        <button>50ml</button>
-                        <button>70ml</button>
                     </div>
                     <p><strong>Số lượng:</strong></p>
                     <div class="quantity-product">

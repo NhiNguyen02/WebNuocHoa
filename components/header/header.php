@@ -1,16 +1,23 @@
 <?php
 
 @include '../WebNuocHoa/components/connect/config.php';
-session_start();
+if(!isset($_SESSION)){ 
+    session_start(); 
+} 
 if(!isset($_SESSION['user_name'])){
    $action1='block';
    $action2='';
+    $action4='<li style="position: relative;" onclick="openLogin()" ><img  src="../../../WebNuocHoa/assets/images/iconCart.svg" alt=""><i class="fa-solid fa-circle" style="color: #fb0505;"></i></li>';
+
 }else{
     $user_info=$_SESSION['user_name'];
     $action1='none';
     $action2='<a href="../../../WebNuocHoa/page/profile.php"><li>' . $user_info . '</li></a>
     <a href="../../../WebNuocHoa/page/logout.php"><li>Đăng xuất</li></a>';
+    $action4='<li style="position: relative;"><a href="../../../WebNuocHoa/page/cart.php"><img  src="../../../WebNuocHoa/assets/images/iconCart.svg" alt=""></a><i class="fa-solid fa-circle" style="color: #fb0505;"></i></li>';
+    
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,14 +54,15 @@ if(!isset($_SESSION['user_name'])){
                 <li><input placeholder="Search" type="text"><i class="fa-solid fa-magnifying-glass"></i></li>
                 <li style="display: <?php echo $action1; ?> ;"><button onclick="openLogin()">Đăng nhập</button></li>
                 <li style="display: <?php echo $action1; ?> ;"><button onclick="openRegister()">Đăng kí</button></li>
-                <li style="position: relative;"><a href="../../../WebNuocHoa/page/cart.php"><img  src="../../../WebNuocHoa/assets/images/iconCart.svg" alt=""></a><i class="fa-solid fa-circle" style="color: #fb0505;"></i></li>
-                <li class="link-profile"><a href="../../../WebNuocHoa/page/profile.php"></a><img src="../../../WebNuocHoa/assets/images/iconAccount.svg" alt="">
+                <?php echo $action4;?>
+                <!-- <li style="position: relative;" <?php echo $action3; ?> ><img  src="../../../WebNuocHoa/assets/images/iconCart.svg" alt=""><i class="fa-solid fa-circle" style="color: #fb0505;"></i></li> -->
+                <li class="link-profile"><a href="../../../WebNuocHoa/page/profile.php"> <img src="../../../WebNuocHoa/assets/images/iconAccount.svg" alt=""> 
                     <ul>
                         <!-- <a href=""><li>Thông tin cá nhân</li></a>
                         <a href="../../../WebNuocHoa/page/logout.php"><li>Đăng xuất</li></a> -->
                         <?php echo $action2;?>
                     </ul> 
-                    
+                    </a>
                     
                 </li>
             </div>

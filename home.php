@@ -73,6 +73,5 @@
         </div>
         <?php include "../WebNuocHoa/components/footer/footer.php" ?>
     </div>
-    
 </body>
 </html>     
