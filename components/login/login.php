@@ -1,18 +1,12 @@
 <?php
-<<<<<<< HEAD
 
 @include 'config.php';
-=======
-include 'components/connect/config.php';
-
->>>>>>> c09912d3d36db8289e32ea15d5282f064940ae3e
 if(isset($_POST['submit'])){
     $email=$_POST['email'];
     $pass=md5($_POST['password1']);
     $select = " SELECT * FROM taikhoan WHERE email = '$email' && password = '$pass' ";
     $result = mysqli_query($conn, $select);
 
-<<<<<<< HEAD
     if(mysqli_num_rows($result) > 0){
        $row = mysqli_fetch_array($result);
  
@@ -36,35 +30,6 @@ if(isset($_POST['submit'])){
     }
     echo '<script>history.replaceState({}, "", window.location.href.split("?")[0]);</script>';
 
-=======
-   $email = $_POST['email'];
-   $email = filter_var($email, FILTER_SANITIZE_STRING);
-   $pass = md5($_POST['password']);
-   $pass = filter_var($pass, FILTER_SANITIZE_STRING);
-
-   $select = $conn->prepare("SELECT * FROM `taikhoan` WHERE email = ? AND password = ?");
-   $select->execute([$email, $pass]);
-   $row = $select->fetch(PDO::FETCH_ASSOC);
-
-   if($select->rowCount() > 0){
-
-      if($row['user_type'] == 'user'){
-        $_SESSION['user_id'] = $row['id'];
-         $_SESSION['user_name'] = $row['name'];
-         $_SESSION['email'] = $row['email'];
-         header('location:http://localhost/WebNuocHoa/home.php');
-      }
-      if($row['user_type'] == 'admin'){
-        $_SESSION['user_id'] = $row['id'];
-        $_SESSION['user_name_ad'] = $row['name'];
-        $_SESSION['email_ad'] = $row['email'];
-        header('location:http://localhost/WebNuocHoa/pageadmin/admin.php');
-      }
-    }else{
-        $error[] = 'incorrect email or password!';
-    }
-
->>>>>>> c09912d3d36db8289e32ea15d5282f064940ae3e
 }
 ?>
 
@@ -86,12 +51,8 @@ if(isset($_POST['submit'])){
                     <h1 style="margin-bottom: 5px; text-align:center;">Đăng nhập</h1>
                     <div class="input-common">
                         <p id="lable1">Email</p>
-<<<<<<< HEAD
                         <input id="inputField1" type="text" name="email">
                         <div id="error5" style="color: red; font-size: 12px;"></div>
-=======
-                        <input id="inputField1" type="email" name="email">
->>>>>>> c09912d3d36db8289e32ea15d5282f064940ae3e
                     </div>
                     <div class="input-common">
                         <p id="lable2">Password</p>
