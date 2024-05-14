@@ -1,38 +1,36 @@
 <?php
+
 @include 'config.php';
-
-
 if(isset($_POST['submit'])){
+    $email=$_POST['email'];
+    $pass=md5($_POST['password1']);
+    $select = " SELECT * FROM taikhoan WHERE email = '$email' && password = '$pass' ";
+    $result = mysqli_query($conn, $select);
 
-   $email = mysqli_real_escape_string($conn, $_POST['email']);
-   $pass = md5($_POST['password']);
+    if(mysqli_num_rows($result) > 0){
+       $row = mysqli_fetch_array($result);
+ 
+       if($row['user_type'] == 'user'){
+         $_SESSION['user_id'] = $row['id'];
+          $_SESSION['user_name'] = $row['name'];
+          $_SESSION['email'] = $row['email'];
+          header('location:http://localhost/WebNuocHoa/home.php');
+       }
+       if($row['user_type'] == 'admin'){
+         $_SESSION['user_name_ad'] = $row['name'];
+ 
+         $_SESSION['email_ad'] = $row['email'];
+         header('location:http://localhost/WebNuocHoa/pageadmin/admin.php');
+       }
+      
+    }else{
+        echo '<script type="text/javascript">
+        window.onload = function () { alert("Đăng nhập thất bại (Bạn đã có tài khoản chưa?)"); }
+        </script>';
+    }
+    echo '<script>history.replaceState({}, "", window.location.href.split("?")[0]);</script>';
 
-   $select = " SELECT * FROM taikhoan WHERE email = '$email' && password = '$pass' ";
-
-   $result = mysqli_query($conn, $select);
-
-   if(mysqli_num_rows($result) > 0){
-
-      $row = mysqli_fetch_array($result);
-
-      if($row['user_type'] == 'user'){
-        $_SESSION['user_id'] = $row['id'];
-         $_SESSION['user_name'] = $row['name'];
-         $_SESSION['email'] = $row['email'];
-         header('location:http://localhost/WebNuocHoa/home.php');
-      }
-      if($row['user_type'] == 'admin'){
-        $_SESSION['user_name_ad'] = $row['name'];
-
-        $_SESSION['email_ad'] = $row['email'];
-        header('location:http://localhost/WebNuocHoa/pageadmin/admin.php');
-      }
-     
-   }else{
-      $error[] = 'incorrect email or password!';
-   }
-
-};
+}
 ?>
 
 <!DOCTYPE html>
@@ -49,36 +47,33 @@ if(isset($_POST['submit'])){
 <body>
         <div id="wraperLogin">
             <div class="template-login">
-                <form action=""style="text-align: center; " method="post">
-                    <h1 style="margin-bottom: 5px;">Đăng nhập</h1>
-                    <?php
-                        if(isset($error)){
-                            foreach($error as $error){
-                                echo '<span class="error-msg">'.$error.'</span>';
-                            };
-                        };
-                    ?>
+                <form action="" method="post" name="formLogin" onsubmit="return checkFormLogin()">
+                    <h1 style="margin-bottom: 5px; text-align:center;">Đăng nhập</h1>
                     <div class="input-common">
                         <p id="lable1">Email</p>
                         <input id="inputField1" type="text" name="email">
+                        <div id="error5" style="color: red; font-size: 12px;"></div>
                     </div>
                     <div class="input-common">
                         <p id="lable2">Password</p>
-                        <input id="inputField2" type="password" name="password">
+                        <input id="inputField2" type="password" name="password1">
+                        <div id="error6" style="color: red; font-size: 12px;"></div>
                     </div>
                     <div style="display: flex; padding: 15px 0px;">
                             <h4 style="margin-right: 30px;"><input type="checkbox" name="" id="">Lưu mật khẩu</h4>
                             <a href="" > <strong>Quên mật khẩu</strong></a>
                     </div>
                     <div class="button-log" >
-                        <button name="submit">Đăng nhập</button>
+                        <button name="submit" >Đăng nhập</button>
                     </div>
-                    <span>Chưa có tài khoản? <strong onclick="swapRegister()" style="margin-left: 5px; cursor: pointer;">Đăng kí</strong></span>
+                    <span style="display:flex; justify-content: center;">Chưa có tài khoản? <strong onclick="swapRegister()" style="margin-left: 5px; cursor: pointer;">Đăng kí</strong></span>
                 </form>
                 <div class="exit">
                     <button onclick="closeLogin()"><i class="fa-solid fa-xmark" style="color: #ffffff;"></i></button>
                 </div>
             </div>
         </div>
+        
 </body>
+<script src="../../../WebNuocHoa/assets/js/checkform.js"></script>
 </html>

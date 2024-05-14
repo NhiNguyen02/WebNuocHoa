@@ -18,7 +18,7 @@ a:hover{
     position: relative;
     z-index: 100; */
     max-width: 400px;
-    height: 450px;
+    width: 100%;
     border: 2px solid #FeFDFD;
     border-radius: 20px;
     background-color: #fffbf3;
