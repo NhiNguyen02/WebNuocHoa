@@ -181,17 +181,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-
-
-// document.addEventListener("DOMContentLoaded", function(){
-//     var edits= document.querySelectorAll('.fa-pen-to-square');
-//     edits.forEach(function(edit){
-//         edit.addEventListener("click", function(){
-//             var row=this.closest('tr');
-//             if(row){
-
-//             }
-//         })
-//     })
-// })
-
+var edits=[document.querySelectorAll(".editstaff"), document.querySelectorAll(".editproduct"),document.querySelectorAll(".editwarehouse"),document.querySelectorAll(".editmegaphone")];
+edits.forEach(function(edit1,index) {
+    edit1.forEach(function(edit2){
+        edit2.onclick = function() {
+            modal.style.display = "block";
+            contentModal.innerHTML="<span class=\"close\">&times;</span><br>";
+            contentModal.innerHTML += updatecontents[index];
+            contentModal.style.animation = "righttoleft ease 2s";  
+            var span =document.getElementsByClassName("close")[0];
+            span.onclick = function() {
+                contentModal.style.animation = "lefttorifht ease 2s";
+                contentModal.addEventListener('animationend', function() {
+                    modal.style.display = "none";
+                },{ once: true });
+            }
+        };
+    })
+}); // Chọn phần tử đầu tiên trong HTMLCollection

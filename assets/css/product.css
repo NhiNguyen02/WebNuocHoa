@@ -99,10 +99,11 @@
     display: flex;
     justify-content: center;
     margin: 20px 0px;
+    font-weight: 600;
 }
 .layout-product > .product{
-    /* background: url("../../../WebNuocHoa/assets/images/products/templateProduct.png"); */
-    /* background-repeat: no-repeat; */
+    /* background: url("../../../WebNuocHoa/assets/images/products/templateProduct.png");
+    background-repeat: no-repeat; */
     background: #F0EBE3;
     max-width: 200px;
     width: 100%;
@@ -110,18 +111,31 @@
     box-shadow: 1px 1px 3px 1px #d3d3d3;
 }
 .layout-product > .product:hover{
-    box-shadow: 1px 1px 10px 1px #bebebe;
+    box-shadow: 1px 1px 5px 1px #bebebe;
 }
-
+.product > .productComponents> .productdetail:hover{
+    color:#8d6a57;
+}
 .product > .productComponents> .productdetail>.picture{
    margin: 10px 10px;
    /* display: inline-flex; */
-   
+   display: flex;
+   align-items: center;
+   aspect-ratio: 1;
    overflow: hidden;
 }
-.product > .productComponents> .productdetail>.picture > img{
-    max-width: 300px;
+.product > .productComponents> .productdetail>.picture div{
+    max-width: 180px;
+    background: white;
     width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+}
+.product > .productComponents> .productdetail>.picture  img{
+     /* max-width: 300px;  */
+     aspect-ratio: 1.5; 
+    /* width: 100%; */
 }
 .product > .productComponents> .productdetail>.picture img{
     transition: all ease-in-out 0.5s;
@@ -139,25 +153,28 @@
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    font-size: 13px;
+    font-size: 15px;
+    height: 50px;
 }
 .product > .productComponents> .productdetail> .styleProduct > p{
     max-width: 200px;
     padding: 0px 10px;
     margin: 0;
 }
-/* .product > .productComponents> .productdetail> .price{
-    margin: 10px 0px;
-} */
+.product > .productComponents> .productdetail> .price{
+    margin: 0px 0px 5px 0px;
+    font-weight: bold;
+}
 .product > .productComponents> .buttonBuy{
     margin-bottom: 10px;
 }
 .product > .productComponents> .buttonBuy > button{
     font-size: 13px;
+    font-weight: 600;
     border-radius: 25px;
-    padding: 5px 10px;
+    padding: 5px 15px;
     border: 1px solid #ffecce;
     background:linear-gradient(rgb(255, 249, 240),rgb(253, 241, 221), rgb(255, 237, 195), rgb(255, 217, 160));
 }

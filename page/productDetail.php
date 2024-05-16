@@ -1,3 +1,40 @@
+<?php
+
+include '../components/connect/config.php';
+session_start();
+if(isset($_POST['mua'])){
+    header('location:checkout.php');
+}
+if(isset($_POST['add_to_cart'])){
+    if(!isset($_SESSION['user_id'])){
+        header('location:http://localhost/WebNuocHoa/');
+    }
+    $user_id = $_SESSION['user_id'];
+    $pid = $_GET['pid'];
+    $qty = $_POST['qty'];
+
+    $check_cart_numbers = $conn->prepare("SELECT * FROM `giohang` WHERE MAKH = ? AND MASP = ?");
+    $check_cart_numbers->bind_param("ii", $user_id, $pid);
+    $check_cart_numbers->execute();
+    $check_cart_numbers_result = $check_cart_numbers->get_result();
+
+    if($check_cart_numbers_result->num_rows > 0){
+        $message[] = 'Sản phẩm đã thêm vào giỏ hàng!';
+    }else{
+
+        $insert_cart = $conn->prepare("INSERT INTO `giohang`(MAKH, MASP, SOLUONG) VALUES(?,?,?)");
+        $insert_cart->bind_param("iii", $user_id, $pid, $qty);
+        $insert_cart->execute();
+        $insert_cart->close();
+
+        $message = 'Thêm vào giỏ hàng thàng công!';
+    }
+ 
+       $check_cart_numbers->close();    
+       header('location:cart.php');
+ }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,21 +56,30 @@
         <div id="hiddenRegister" style="display:none"> <?php include "../../WebNuocHoa/components/register/register.php" ?></div>
         <div style="display: block; height:80px;"></div>
         <div class="product-container">
-            <div class="product-main">
+            <?php
+                $pid = $_GET['pid'];
+                $select_products = "SELECT * FROM sanpham WHERE MASP = $pid ";
+                $result_products = mysqli_query($conn, $select_products);
+            
+                if(mysqli_num_rows($result_products) > 0){
+                    while($fetch_products = mysqli_fetch_assoc($result_products)){ 
+            ?>
+            <form action="" method="post" >
+                <div class="product-main">
                 <div class="product-gellery">
                     <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff; margin-bottom:10px;" class="swiper mySwiper2">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="../../WebNuocHoa/assets/images/products/nuochoanu/product5.webp" />
+                                <img src="../assets/images/addproducts/<?= $fetch_products['image_01']; ?>" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="../../WebNuocHoa/assets/images/products/nuochoanu/product5_1.webp" />
+                                <img src="../assets/images/addproducts/<?= $fetch_products['image_02']; ?>" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="../../WebNuocHoa/assets/images/products/nuochoanu/product5_2.webp" />
+                                <img src="../assets/images/addproducts/<?= $fetch_products['image_03']; ?>" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="../../WebNuocHoa/assets/images/products/nuochoanu/product5_3.webp" />
+                                <img src="../assets/images/addproducts/<?= $fetch_products['image_04']; ?>" />
                             </div>
                         </div>
                         <div class="swiper-button-next"></div>
@@ -42,16 +88,16 @@
                     <div thumbsSlider="" style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"class="swiper mySwiper">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="../../WebNuocHoa/assets/images/products/nuochoanu/product5.webp" />
+                                <img src="../assets/images/addproducts/<?= $fetch_products['image_01']; ?>" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="../../WebNuocHoa/assets/images/products/nuochoanu/product5_1.webp" />
+                                <img src="../assets/images/addproducts/<?= $fetch_products['image_02']; ?>" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="../../WebNuocHoa/assets/images/products/nuochoanu/product5_2.webp" />
+                                <img src="../assets/images/addproducts/<?= $fetch_products['image_03']; ?>" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="../../WebNuocHoa/assets/images/products/nuochoanu/product5_3.webp" />
+                                <img src="../assets/images/addproducts/<?= $fetch_products['image_04']; ?>" />
                             </div>
                         </div>
                         <div class="swiper-button-next"></div>
@@ -59,7 +105,7 @@
                     </div>
                 </div>
                 <div class="introduce-product">
-                    <h2>CHLOE LOVE STORY EAU SENSUELLE</h2>
+                    <h2><?= $fetch_products['TENSP']; ?></h2>
                     <div class="product-rating">
                         <div class="star-rating">
                             <span>5.0</span>
@@ -81,12 +127,14 @@
                             <div class="overlay" style="width: 10%"></div>
                         </div>
                     </div>
-                    <span style="margin: 10px 0px;"><strong>Tình trạng:</strong> Còn hàng</span>
+                    <span style="margin: 10px 0px;"><strong>Tình trạng:</strong> <?php if($fetch_products['SOLUONG'] > 0) { ?>
+                                                                                            Còn hàng
+                                                                                        <?php } else { ?>
+                                                                                            Hết hàng
+                                                                                        <?php } ?>  </span>
                     <p><strong>Độ lưu hương: </strong>Lâu 6-8 tiếng</p>
 
-                    <span class="price-product">
-                        2.900.000
-                        <span>₫</span>
+                    <span class="price-product"><?= $fetch_products['GIABAN']; ?><span> VNĐ</span>
                     </span>
                     <!-- <p><strong>Giới tính: </strong></p>
                     <div class="choice-sex">
@@ -94,21 +142,25 @@
                     </div> -->
                     <p><strong>Thương hiệu:</strong></p>
                     <div class="choice-origin">
-                        <a href="">Chloé</a>
+                        <a href=""><?= $fetch_products['THUONGHIEU']; ?></a>
                     </div>
                     <p><strong>Dung tích:</strong></p>
                     <div class="choice-size">
-                        <button >10ml</button>
+                        <button ><?= $fetch_products['DUNGTICH']; ?></button>
                     </div>
                     <p><strong>Số lượng:</strong></p>
                     <div class="quantity-product">
                         <input id="decrement" type="button" value="-">
-                        <input id="quantity" type="number" value="1" min="1" step="1" inputmode="numeric" autocomplete="off" class="no-spinner" >
+                        <input id="quantity" type="number" name="qty" value="1" min="1" step="1" inputmode="numeric" autocomplete="off" class="no-spinner" >
                         <input id="increment" type="button" value="+">
                     </div>
+                    <!-- <div class="choice-button">
+                        <button onclick="window.location.href='checkout.php'">MUA NGAY</button>
+                        <button name="add_to_cart" onclick="window.location.href='cart.php'">THÊM VÀO GIỎ HÀNG</button>
+                    </div> -->
                     <div class="choice-button">
-                        <button onclick="window.location.href='../../WebNuocHoa/page/checkout.php'">MUA NGAY</button>
-                        <button onclick="window.location.href='../../WebNuocHoa/page/cart.php'">THÊM VÀO GIỎ HÀNG</button>
+                        <button name="mua">MUA NGAY</button>
+                        <button name="add_to_cart" >THÊM VÀO GIỎ HÀNG</button>
                     </div>
                 </div>
                 <div class="info-more">
@@ -159,14 +211,15 @@
                     </div>
                     <div class="tab-panels">
                         <div id="tab-descriptions" class="tab-button1">
-                            <p>
+                            <p><?= $fetch_products['MOTA']; ?></p>
+                            <!-- <p>
                                 Narciso Rodriguez là thương hiệu không còn quá xa lạ với giới mộ điệu nước hoa. Năm 2022, một “nàng thơ” mới Narciso Rodriguez là Narciso Cristal EDP xuất hiện, tiếp tục làm xao xuyến biết bao con tim thiếu nữ bởi hương thơm nhẹ nhàng và gợi cảm. Bậc thầy điều chế Natalie Gracia- Cetto là người đứng sau hương thơm này. Thiết kế từ thủy tinh vuông vức cùng màu hồng cánh sen dịu dàng, nước hoa Narciso Rodriguez Narciso Cristal hớp hồn người khác từ ánh nhìn đầu tiên.
                                 Hương thơm của Cristal được ví như viên pha lê lấp lánh với nhiều mặt cắt tỏa sáng, càng nhìn càng yêu, càng chìm đắm trong nét đẹp tự nhiên. Lớp hương ban đầu rực rỡ của từng tép cam mọng nước, tràn đầy nhựa sống, “nàng” đang soi chiếu ánh hào quang của mình lên những cánh hoa lan và hoa cam tinh khiết thêm phần gợi cảm. Lớp hương trung tâm như cả vườn hoa sặc sỡ hương sắc với những cánh hoa mềm mại, ngát thơm của hồng, hòa nhài kiêu sa, hoa trắng.
                                 Note xạ hương được tăng cường càng làm cho hương thơm thêm phần lan tỏa mạnh mẽ đồng thời tạo nét bí ẩn khiến cho đối phương bị khiêu khích nhiều hơn. Nước hoa Narciso Rodriguez Cristal khép lại trong vòng tay ấm áp của note gỗ cùng hổ phách ngọt lịm tim. Tất cả những nét tươi trẻ, thơ mộng, cuốn hút của tuổi thanh xuân như được chứa đựng trong Cristal, hương thơm hứa hẹn sự cuốn hút bất diệt giành cho những ai trót yêu “nàng thơ” mới của nhà Narciso Rodriguez.
                             </p>
                             <li>- Hương đầu: Hoa lan Nam Phi, hoa cam, cam Bergamot</li>
                             <li>- Hương giữa: Xạ hương, hoa hồng, hoa nhài, hoa trắng</li>
-                            <li>- Hương cuối: Gỗ Cashmere, tuyết tùng, Benzoin, hổ phách</li>
+                            <li>- Hương cuối: Gỗ Cashmere, tuyết tùng, Benzoin, hổ phách</li> -->
                         </div>
                         <div id="tab-instructions" class="tab-button2">
                             <p>Cách sử dụng được Heleneperfume đề xuất dành cho bạn:</p>
@@ -195,6 +248,13 @@
                         <h2>REVIEW</h2>
                     </div>
                 </div>
+            </form>
+            <?php
+                }
+            } else {
+                    echo '<h2>Sản phẩm không tồn tại!</h2>';
+                }
+            ?>         
                 <div class="slidebar-comment">
                     <div>
                         <h3>THEO DÕI THÊM NHIỀU KÊNH CHUYÊN VỀ NƯỚC HOA CỦA HELENE PERFUME</h3>

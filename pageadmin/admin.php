@@ -1,12 +1,5 @@
 <?php
-
-// @include 'config.php';
-
-// session_start();
-
-// if(!isset($_SESSION['user_name_ad'])){
-//    header('location:http://localhost/WebNuocHoa/');
-// }
+include 'beAdmin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -186,7 +179,7 @@
                             <thead>
                                 <tr>
                                     <th>STT</th>
-                                    <th>Tên đăng nhập</th>
+                                    <th>Họ tên</th>
                                     <th>Email</th>
                                     <th>Số điện thoại</th>
                                     <th>Địa chỉ</th>
@@ -195,15 +188,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>abc</td>
-                                    <td>a@gmail.com</td>
-                                    <td>23909549675</td>
-                                    <td>jhgfreuhvntueoibrnte</td>
-                                    <td>0</td>
-                                    <td><i class="fa-solid fa-trash"></td>
-                                </tr>
+                                <?php
+                                    $select = "SELECT * FROM taikhoan ";
+                                    $result = mysqli_query($conn, $select);
+                                
+                                    if(mysqli_num_rows($result) > 0){
+                                        while($fetch = mysqli_fetch_assoc($result)){ 
+                                ?>
+                                    <tr>
+                                        <td><?= $fetch['id']; ?></td>
+                                        <td><?= $fetch['name']; ?></td>
+                                        <td><?= $fetch['email']; ?></td>
+                                        <td><?= $fetch['sdt']; ?></td>
+                                        <td><?= $fetch['diachi']; ?></td>
+                                        <td>0</td>
+                                        <td><a href="admin.php?deleteuser=<?= $fetch['id']; ?>"><i class="fa-solid fa-trash"></i></a></td>
+                                    </tr>
+
+                                <?php
+                                    }
+                                } else {
+                                        echo '<h2>Hiện tại chưa có sản phẩm!</h2>';
+                                    }
+                                ?>
                             </tbody>
                         </table>
                         <div id="pagination">
@@ -237,45 +244,29 @@
                             </thead>
                             <tbody>
                                 <?php
-                                // Mảng chứa thông tin sản phẩm nước hoa với các dung tích và giá tương ứng
-                                $perfumes = array(
-                                    array("Dior Sauvage","product2.webp", "Dior", array("50ml" => 1500000 , "100ml" => 2500000, "200ml" => 3500000),array("50ml" => 30, "100ml" => 30, "200ml" => 30), '<i class="fa-solid fa-eye"></i>','<i class="fa-solid fa-pen-to-square"></i>','<i class="fa-solid fa-trash"></i>'),
-                                    array("Chanel No. 5","product2.webp", "Chanel", array("50ml" => 2000000, "100ml" => 3000000, "200ml" => 4000000),array("50ml" => 30, "100ml" => 30, "200ml" => 30), '<i class="fa-solid fa-eye"></i>','<i class="fa-solid fa-pen-to-square"></i>','<i class="fa-solid fa-trash"></i>'),
-                                    array("Chanel No. 5","product2.webp", "Chanel", array("50ml" => 2000000, "100ml" => 3000000, "200ml" => 4000000),array("50ml" => 30, "100ml" => 30, "200ml" => 30), '<i class="fa-solid fa-eye"></i>','<i class="fa-solid fa-pen-to-square"></i>','<i class="fa-solid fa-trash"></i>'),
-                                    array("Chanel No. 5","product2.webp", "Chanel", array("50ml" => 2000000, "100ml" => 3000000, "200ml" => 4000000),array("50ml" => 30, "100ml" => 30, "200ml" => 30), '<i class="fa-solid fa-eye"></i>','<i class="fa-solid fa-pen-to-square"></i>','<i class="fa-solid fa-trash"></i>'),
-                                    array("Chanel No. 5","product2.webp", "Chanel", array("50ml" => 2000000, "100ml" => 3000000, "200ml" => 4000000),array("50ml" => 30, "100ml" => 30, "200ml" => 30), '<i class="fa-solid fa-eye"></i>','<i class="fa-solid fa-pen-to-square"></i>','<i class="fa-solid fa-trash"></i>'),
-                                );
-
-                                // Lặp qua từng sản phẩm và hiển thị thông tin trong bảng
-                                foreach ($perfumes as $key => $perfume) {
-                                    echo "<tr>";
-                                    echo "<td>" . ($key + 1) . "</td>";
-                                    echo "<td>" . $perfume[0] . "</td>";
-                                    echo "<td> <div class=\"imgproduct\" style=\"max-width:80px;\"><img src=\"../../WebNuocHoa/assets/images/products/nuochoanu/" . $perfume[1] . "\"  alt=\"image\"></div></td>";
-                                    echo "<td>" . $perfume[2] . "</td>";
-                                    echo "<td>";
-                                    // Lặp qua mỗi dung tích và giá của sản phẩm
-                                    foreach ($perfume[3] as $volume => $price) {
-                                        echo "<div>" . $volume . "</div>";
+                                    $select_products = "SELECT * FROM sanpham ";
+                                    $result_products = mysqli_query($conn, $select_products);
+                                
+                                    if(mysqli_num_rows($result_products) > 0){
+                                        while($fetch_products = mysqli_fetch_assoc($result_products)){ 
+                                ?>
+                                    <tr>
+                                    <td><?= $fetch_products['MASP']; ?></td>
+                                    <td><?= $fetch_products['TENSP']; ?></td>
+                                    <td> <div class="imgproduct" style="max-width:80px;"><img src="../assets/images/addproducts/<?= $fetch_products['image_01']; ?>"   alt="image"></div></td>
+                                    <td><?= $fetch_products['THUONGHIEU']; ?></td>
+                                    <td><?= $fetch_products['DUNGTICH']; ?></td>
+                                    <td><?= $fetch_products['GIABAN']; ?></td>
+                                    <td><?= $fetch_products['SOLUONG']; ?></td>
+                                    <td><i class="fa-solid fa-eye"></i></td>
+                                    <td><i class="fa-solid fa-pen-to-square"></i></td>
+                                    <td><a href="admin.php?delete=<?= $fetch_products['MASP']; ?>"><i class="fa-solid fa-trash"></i></a></td>
+                                    </tr>
+                                <?php
                                     }
-                                    echo "</td>";
-                                    echo "<td>";
-                                    // Lặp qua mỗi dung tích và giá của sản phẩm và hiển thị giá tương ứng
-                                    foreach ($perfume[3] as $volume => $price) {
-                                        echo "<div>" . number_format($price) . "</div>";
+                                } else {
+                                        echo '<h2>Hiện tại chưa có sản phẩm!</h2>';
                                     }
-                                    echo "</td>";
-                                    echo "<td>";
-                                    // Lặp qua mỗi dung tích và giá của sản phẩm và hiển thị giá tương ứng
-                                    foreach ($perfume[4] as $volume => $quatity) {
-                                        echo "<div>" . number_format($quatity) . "</div>";
-                                    }
-                                    echo "</td>";
-                                    echo "<td>". $perfume[5]."</td>";
-                                    echo "<td>". $perfume[6]."</td>";
-                                    echo "<td>". $perfume[7]."</td>";
-                                    echo "</tr>";
-                                }
                                 ?>
                             </tbody>
                         </table>
@@ -345,14 +336,15 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>MADH</th>
+                                <th>MADH</th>
                                     <th>Tên khách hàng</th>
                                     <th>Thời gian đặt hàng</th>
                                     <th>Tình trạng thanh toán</th>
                                     <th>Tổng tiền đơn hàng (VNĐ)</th>
                                     <th>Hình thức thanh toán</th>
-                                    <th>Trạng thái đơn hàng</th>
-                                    <th>Chỉnh sửa</th>
+                                    <th>Đã giao</th>
+                                    <th>Chưa giao</th>
+                                    <th>Đang chuẩn bị hàng</th>
                                     <th>Xóa</th>
                                 </tr>
                             </thead>
@@ -364,8 +356,9 @@
                                     <td>Đã thanh toán</td>
                                     <td>6.000.000</td>
                                     <td>Chuyển khoản ngân hàng</td>
-                                    <td>Đã giao</td>
-                                    <td><i class="fa-solid fa-pen-to-square"></i></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
                                     <td><i class="fa-solid fa-trash"></i></td>
                                 </tr>
                             </tbody>
@@ -468,7 +461,13 @@
                             file_get_contents("../../WebNuocHoa/pageadmin/addMegaphone.php")
                         ];
                         echo "<script>" . "var contents = " . json_encode($contents) . ";" . "</script>";
-                        
+                        $updatecontents=[
+                            file_get_contents("../../WebNuocHoa/pageadmin/editStaff.php"),
+                            file_get_contents("../../WebNuocHoa/pageadmin/editProduct.php"),
+                            file_get_contents("../../WebNuocHoa/pageadmin/editWarehouse.php"),
+                            file_get_contents("../../WebNuocHoa/pageadmin/editMegaphone.php")
+                        ];
+                        echo "<script>" . "var updatecontents = " . json_encode($updatecontents) . ";" . "</script>";
                      ?>
                 </div>
             </div>

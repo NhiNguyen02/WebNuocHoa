@@ -13,7 +13,6 @@ if(isset($_POST['submit'])){
        if($row['user_type'] == 'user'){
          $_SESSION['user_id'] = $row['id'];
           $_SESSION['user_name'] = $row['name'];
-          $_SESSION['email'] = $row['email'];
           header('location:http://localhost/WebNuocHoa/home.php');
        }
        if($row['user_type'] == 'admin'){
