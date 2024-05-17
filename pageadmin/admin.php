@@ -1,5 +1,7 @@
 <?php
+
 include 'beAdmin.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
