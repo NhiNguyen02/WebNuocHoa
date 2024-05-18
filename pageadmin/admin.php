@@ -84,7 +84,7 @@ include 'beAdmin.php';
                                     <td>fbregughbeur bghnbgfjvfdkghbrhkj</td>
                                     <td>fbhiss</td>
                                     <td>5000000</td>
-                                    <td><i class="fa-solid fa-pen-to-square"></i></td>
+                                    <td><i class="fa-solid fa-pen-to-square editstaff"></i></td>
                                     <td><i class="fa-solid fa-trash"></i></td>
                                 </tr>
                             </tbody>
@@ -267,6 +267,18 @@ include 'beAdmin.php';
                                 } else {
                                         echo '<h2>Hiện tại chưa có sản phẩm!</h2>';
                                     }
+                                    echo "</td>";
+                                    echo "<td>";
+                                    // Lặp qua mỗi dung tích và giá của sản phẩm và hiển thị giá tương ứng
+                                    foreach ($perfume[4] as $volume => $quatity) {
+                                        echo "<div>" . number_format($quatity) . "</div>";
+                                    }
+                                    echo "</td>";
+                                    echo "<td><i class=\"fa-solid fa-eye\"></i></td>";
+                                    echo "<td><i class=\"fa-solid fa-pen-to-square editproduct\"></i></td>";
+                                    echo "<td><i class=\"fa-solid fa-trash\"></i></td>";
+                                    echo "</tr>";
+
                                 ?>
                             </tbody>
                         </table>
@@ -281,88 +293,41 @@ include 'beAdmin.php';
                             <span>6</span>
                             <span>>></span>
                         </div>
-                        
-                        <!-- <div id="myModal" class="modal">
-                            <div class="modal-content" id="contentModal">
-                                <span class="close">&times;</span><br>
-                                <h1 style="text-align:center;">Thêm sản phẩm</h1>
-                                <form action="">
-                                    
-                                    <div>    
-                                        <label for="">Tên sản phẩm:</label>    
-                                        <input type="text">
-                                    </div>
-                                    <div>
-                                        <label for="">Thương hiệu:</label>
-                                        <input type="text">
-                                    </div>
-                                    <div>
-                                        <label for="">Loại sản phẩm:</label>
-                                        <input type="text">
-                                    </div>
-                                    <div>
-                                        <label for="">Thông tin chi tiết:</label>
-                                        <textarea style="resize: none;" cols="30" rows="10" name="" id=""></textarea>
-                                    </div>
-                                    <div>
-                                        <label  for="">Số dung lượng:</label>
-                                        <input id="capacity" type="number">
-                                    </div>
-                                    <div style="justify-content:flex-end">
-                                        <button style="margin-top:5px;padding:3px">Create</button>
-                                    </div>
-                                    <div id="addFields"></div>
-                                    <div>
-                                        <label for="">Hình 0:</label>
-                                        <input type="file">
-                                    </div>
-                                    <div>
-                                        <label for="">Hình 1:</label>
-                                        <input type="file">
-                                    </div>
-                                    <div>
-                                        <label for="">Hình 2:</label>
-                                        <input type="file">
-                                    </div>
-                                    <div>
-                                        <label for="">Hình 3:</label>
-                                        <input type="file">
-                                    </div>
-                                    <button>ADD</button>
-                            </div>
-                        </div>       -->
                     </div>
                     <div id="admin_order">
-                        <table>
-                            <thead>
-                                <tr>
-                                <th>MADH</th>
-                                    <th>Tên khách hàng</th>
-                                    <th>Thời gian đặt hàng</th>
-                                    <th>Tình trạng thanh toán</th>
-                                    <th>Tổng tiền đơn hàng (VNĐ)</th>
-                                    <th>Hình thức thanh toán</th>
-                                    <th>Đã giao</th>
-                                    <th>Chưa giao</th>
-                                    <th>Đang chuẩn bị hàng</th>
-                                    <th>Xóa</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>dh01</td>
-                                    <td>abc</td>
-                                    <td>20/04/2024</td>
-                                    <td>Đã thanh toán</td>
-                                    <td>6.000.000</td>
-                                    <td>Chuyển khoản ngân hàng</td>
-                                    <td><input type="checkbox"></td>
-                                    <td><input type="checkbox"></td>
-                                    <td><input type="checkbox"></td>
-                                    <td><i class="fa-solid fa-trash"></i></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <form action="" method="post">
+                            <div style="display:flex; justify-content:flex-end; margin-bottom: 10px;"><button id="">Lưu</button></div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>MADH</th>
+                                        <th>Tên khách hàng</th>
+                                        <th>Thời gian đặt hàng</th>
+                                        <th>Tình trạng thanh toán</th>
+                                        <th>Tổng tiền đơn hàng (VNĐ)</th>
+                                        <th>Hình thức thanh toán</th>
+                                        <th>Đã giao</th>
+                                        <th>Chưa giao</th>
+                                        <th>Đang chuẩn bị hàng</th>
+                                        <th>Xóa</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>dh01</td>
+                                        <td>abc</td>
+                                        <td>20/04/2024</td>
+                                        <td>Đã thanh toán</td>
+                                        <td>6.000.000</td>
+                                        <td>Chuyển khoản ngân hàng</td>
+                                        <td><input type="checkbox"></td>
+                                        <td><input type="checkbox"></td>
+                                        <td><input type="checkbox"></td>
+                                        <td><i class="fa-solid fa-trash"></i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
                         <div id="pagination">
                             <span><<</span>    
                             <span>1</span>
@@ -401,7 +366,7 @@ include 'beAdmin.php';
                                     <td>400</td>
                                     <td>200</td>
                                     <td>Cháy hàng</td>
-                                    <td><i class="fa-solid fa-pen-to-square"></i></td>
+                                    <td><i class="fa-solid fa-pen-to-square editwarehouse"></i></td>
                                     <td><i class="fa-solid fa-trash"></i></td>
                                 </tr>
                             </tbody>
@@ -431,7 +396,7 @@ include 'beAdmin.php';
                                     <td>fhdfa</td>
                                     <td>1/4/2024</td>
                                     <td>5/5/2024</td>
-                                    <td><i class="fa-solid fa-pen-to-square"></i></td>
+                                    <td><i class="fa-solid fa-pen-to-square editmegaphone"></i></td>
                                     <td><i class="fa-solid fa-trash" data-id="001"></i></td>
 
                                 </tr>

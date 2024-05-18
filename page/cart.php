@@ -29,9 +29,8 @@ if(isset($_POST['mua'])){
 }
 if(isset($_POST['sp'])){
     header('Location:http://localhost/WebNuocHoa/page/product.php');
-}
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +38,6 @@ if(isset($_POST['sp'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../WebNuocHoa/assets/css/style.css">
     <link rel="stylesheet" href="../../WebNuocHoa/assets/css/cart.css">
-    <link rel="stylesheet" href="../../WebNuocHoa/assets/css/productDetail.css">
     <title>Document</title>
 </head>
 <body>
@@ -85,6 +83,11 @@ if(isset($_POST['sp'])){
                                         <input id="quantity" name="qty" type="number" value="<?= $fetch_cart['SOLUONG']; ?>" min="1" inputmode="numeric" autocomplete="off" class="no-spinner" >
                                         <button id="increment" name="update_qty" type="submit"> + </button>
                                     </div>
+                                    <?php 
+                                        $sub_total = ($fetch_cart['GIABAN'] * $fetch_cart['SOLUONG']);
+                                        $grand_total += $sub_total;
+                                            }
+                                    ?>
                                 </div>
                                 <div class="maincart_product_remove">
                                     <a type="submit" name="delete" href="cart.php?delete=<?= $fetch_cart['MAGH']; ?>"> <i class="fa-solid fa-trash-can"></i></a> 
@@ -130,11 +133,10 @@ if(isset($_POST['sp'])){
                         ';
                     }
                     ?>
-
             </div>
         </div>
         <?php include "../components/footer/footer.php" ?>
     </div>
-    <script src="../../WebNuocHoa/assets/js/quantity.js"></script>
+    <script src="../../WebNuocHoa/assets/js/cart.js"></script>
 </body>
 </html>
