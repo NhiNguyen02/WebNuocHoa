@@ -1,5 +1,5 @@
-<?php
-include 'beAdmin.php';
+<?php 
+    include "beAdmin.php"
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,6 +8,8 @@ include 'beAdmin.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../WebNuocHoa/assets/css/admin.css">
     <link rel="stylesheet" href="../assets//icons/fontawesome-free-6.4.0-web/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
 <body>
@@ -31,9 +33,9 @@ include 'beAdmin.php';
                         <li tabindex="0" id="tabadmin_staff">
                             <i class="fa-solid fa-address-card icon"></i><span>Quản lý nhân viên</span>
                         </li>
-                        <!-- <li tabindex="1" id="tabadmin_calendar">
+                        <li tabindex="1" id="tabadmin_calendar">
                             <i class="fa-solid fa-calendar-days icon"></i><span>Quản lý lịch làm việc</span>
-                        </li> -->
+                        </li>
                         <li tabindex="2" id="tabadmin_user">
                             <i class="fa-solid fa-users icon"></i><span>Quản lí khách hàng</span>
                         </li>
@@ -60,7 +62,7 @@ include 'beAdmin.php';
                         <table style="max-width: 1200px;">
                             <thead>
                                 <tr>
-                                    <th>MANV</th>
+                                    <th>Mã nhân viên</th>
                                     <th>Tên nhân viên</th>
                                     <th>Anh</th>
                                     <th>Ngày sinh</th>
@@ -102,66 +104,84 @@ include 'beAdmin.php';
                             <span>>></span>
                         </div>
                     </div>
-                    <!-- <div id="admin_calendar">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Hình ảnh</th>
-                                    <th>Thương hiệu</th>
-                                    <th>Dung tích</th>
-                                    <th>Giá (VNĐ)</th>
-                                    <th>Số lượng</th>
-                                    <th>Hidden</th>
-                                    <th>Chỉnh sửa</th>
-                                    <th>Xóa</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                // Mảng chứa thông tin sản phẩm nước hoa với các dung tích và giá tương ứng
-                                $perfumes = array(
-                                    array("Dior Sauvage","product2.webp", "Dior", array("50ml" => 1500000 , "100ml" => 2500000, "200ml" => 3500000),array("50ml" => 30, "100ml" => 30, "200ml" => 30), '<i class="fa-solid fa-eye"></i>','<i class="fa-solid fa-pen-to-square"></i>','<i class="fa-solid fa-trash"></i>'),
-                                    array("Chanel No. 5","product2.webp", "Chanel", array("50ml" => 2000000, "100ml" => 3000000, "200ml" => 4000000),array("50ml" => 30, "100ml" => 30, "200ml" => 30), '<i class="fa-solid fa-eye"></i>','<i class="fa-solid fa-pen-to-square"></i>','<i class="fa-solid fa-trash"></i>'),
-                                    array("Chanel No. 5","product2.webp", "Chanel", array("50ml" => 2000000, "100ml" => 3000000, "200ml" => 4000000),array("50ml" => 30, "100ml" => 30, "200ml" => 30), '<i class="fa-solid fa-eye"></i>','<i class="fa-solid fa-pen-to-square"></i>','<i class="fa-solid fa-trash"></i>'),
-                                    array("Chanel No. 5","product2.webp", "Chanel", array("50ml" => 2000000, "100ml" => 3000000, "200ml" => 4000000),array("50ml" => 30, "100ml" => 30, "200ml" => 30), '<i class="fa-solid fa-eye"></i>','<i class="fa-solid fa-pen-to-square"></i>','<i class="fa-solid fa-trash"></i>'),
-                                    array("Chanel No. 5","product2.webp", "Chanel", array("50ml" => 2000000, "100ml" => 3000000, "200ml" => 4000000),array("50ml" => 30, "100ml" => 30, "200ml" => 30), '<i class="fa-solid fa-eye"></i>','<i class="fa-solid fa-pen-to-square"></i>','<i class="fa-solid fa-trash"></i>'),
-                                );
-
-                                // Lặp qua từng sản phẩm và hiển thị thông tin trong bảng
-                                foreach ($perfumes as $key => $perfume) {
-                                    echo "<tr>";
-                                    echo "<td>" . ($key + 1) . "</td>";
-                                    echo "<td>" . $perfume[0] . "</td>";
-                                    echo "<td> <div style=\"max-width:80px;\"><img src=\"../../WebNuocHoa/assets/images/products/nuochoanu/" . $perfume[1] . "\"  alt=\"image\"></div></td>";
-                                    echo "<td>" . $perfume[2] . "</td>";
-                                    echo "<td>";
-                                    // Lặp qua mỗi dung tích và giá của sản phẩm
-                                    foreach ($perfume[3] as $volume => $price) {
-                                        echo "<div>" . $volume . "</div>";
-                                    }
-                                    echo "</td>";
-                                    echo "<td>";
-                                    // Lặp qua mỗi dung tích và giá của sản phẩm và hiển thị giá tương ứng
-                                    foreach ($perfume[3] as $volume => $price) {
-                                        echo "<div>" . number_format($price) . "</div>";
-                                    }
-                                    echo "</td>";
-                                    echo "<td>";
-                                    // Lặp qua mỗi dung tích và giá của sản phẩm và hiển thị giá tương ứng
-                                    foreach ($perfume[4] as $volume => $quatity) {
-                                        echo "<div>" . number_format($quatity) . "</div>";
-                                    }
-                                    echo "</td>";
-                                    echo "<td>". $perfume[5]."</td>";
-                                    echo "<td>". $perfume[6]."</td>";
-                                    echo "<td>". $perfume[7]."</td>";
-                                    echo "</tr>";
-                                }
-                                ?>
-                            </tbody>
-                        </table>
+                    <div id="admin_calendar">
+                        <div style="display:flex; justify-content:flex-end; margin-bottom: 10px;"><button id="editcalendar">Chỉnh sửa</button></div>
+                        <div class="table-responsive">
+                            <table class="tablecalendar">
+                                <thead>
+                                    <tr>
+                                        <th><span>Ca</span></th>
+                                        <th>
+                                            <span>Thứ 2</span>
+                                            <br>
+                                            15/05/2024
+                                        </th>
+                                        <th>
+                                            <span>Thứ 3</span>
+                                            <br>
+                                            15/05/2024
+                                        </th>
+                                        <th>
+                                            <span>Thứ 4</span>
+                                            <br>
+                                            15/05/2024
+                                        </th>
+                                        <th>
+                                            <span>Thứ 5</span>
+                                            <br>
+                                            15/05/2024
+                                        </th>
+                                        <th>
+                                            <span>Thứ 6</span>
+                                            <br>
+                                            15/05/2024
+                                        </th>
+                                        <th>
+                                            <span>Thứ 7</span>
+                                            <br>
+                                            15/05/2024
+                                        </th>
+                                        <th>
+                                            <span>Chủ nhật</span>
+                                            <br>
+                                            15/05/2024
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span>Sáng</span></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="align-bottom">
+                                        <td><span>Chiều</span></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Tối</span></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="align-top">This cell is aligned to the top.</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                         <div id="pagination">
                             <span><<</span>    
                             <span>1</span>
@@ -173,13 +193,13 @@ include 'beAdmin.php';
                             <span>6</span>
                             <span>>></span>
                         </div>
-                    </div> -->
+                    </div>                   
                     <div id="admin_user">
                         <table>
                             <thead>
                                 <tr>
                                     <th>STT</th>
-                                    <th>Họ tên</th>
+                                    <th>Tên đăng nhập</th>
                                     <th>Email</th>
                                     <th>Số điện thoại</th>
                                     <th>Địa chỉ</th>
@@ -230,7 +250,7 @@ include 'beAdmin.php';
                         <table>
                             <thead>
                                 <tr>
-                                    <th>MASP</th>
+                                    <th>Mã sản phẩm</th>
                                     <th>Tên sản phẩm</th>
                                     <th>Hình ảnh</th>
                                     <th>Thương hiệu</th>
@@ -243,7 +263,7 @@ include 'beAdmin.php';
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
+                            <?php
                                     $select_products = "SELECT * FROM sanpham ";
                                     $result_products = mysqli_query($conn, $select_products);
                                 
@@ -259,7 +279,7 @@ include 'beAdmin.php';
                                     <td><?= $fetch_products['GIABAN']; ?></td>
                                     <td><?= $fetch_products['SOLUONG']; ?></td>
                                     <td><i class="fa-solid fa-eye"></i></td>
-                                    <td><i class="fa-solid fa-pen-to-square"></i></td>
+                                    <td><i class="fa-solid fa-pen-to-square editproduct"></i></td>
                                     <td><a href="admin.php?delete=<?= $fetch_products['MASP']; ?>"><i class="fa-solid fa-trash"></i></a></td>
                                     </tr>
                                 <?php
@@ -267,18 +287,6 @@ include 'beAdmin.php';
                                 } else {
                                         echo '<h2>Hiện tại chưa có sản phẩm!</h2>';
                                     }
-                                    echo "</td>";
-                                    echo "<td>";
-                                    // Lặp qua mỗi dung tích và giá của sản phẩm và hiển thị giá tương ứng
-                                    foreach ($perfume[4] as $volume => $quatity) {
-                                        echo "<div>" . number_format($quatity) . "</div>";
-                                    }
-                                    echo "</td>";
-                                    echo "<td><i class=\"fa-solid fa-eye\"></i></td>";
-                                    echo "<td><i class=\"fa-solid fa-pen-to-square editproduct\"></i></td>";
-                                    echo "<td><i class=\"fa-solid fa-trash\"></i></td>";
-                                    echo "</tr>";
-
                                 ?>
                             </tbody>
                         </table>
@@ -296,11 +304,11 @@ include 'beAdmin.php';
                     </div>
                     <div id="admin_order">
                         <form action="" method="post">
-                            <div style="display:flex; justify-content:flex-end; margin-bottom: 10px;"><button id="">Lưu</button></div>
+                            <div style="display:flex; justify-content:flex-end; margin-bottom: 10px;"><button id="openModal1">Lưu</button></div>
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>MADH</th>
+                                        <th>Mã đơn hàng</th>
                                         <th>Tên khách hàng</th>
                                         <th>Thời gian đặt hàng</th>
                                         <th>Tình trạng thanh toán</th>
@@ -328,6 +336,7 @@ include 'beAdmin.php';
                                 </tbody>
                             </table>
                         </form>
+                        
                         <div id="pagination">
                             <span><<</span>    
                             <span>1</span>
@@ -340,32 +349,28 @@ include 'beAdmin.php';
                             <span>>></span>
                         </div>
                     </div>
-                    <div id="admin_warehouse">
+                    <div id="admin_warehouse"> 
+                        <div style="display:flex; justify-content:flex-end; margin-bottom: 10px;"><button id="openModal4">Thêm sản phẩm vào kho</button></div>
                         <table>
                             <thead>
                                 <tr>
-                                    <th>MASP</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Hình ảnh</th>
-                                    <th>Thương hiệu</th>
+                                    <th>Mã kho</th>
+                                    <th>Tên kho</th>
+                                    <th>Địa chỉ kho</th>
+                                    <th>Số sản phẩm</th>
                                     <th>Số lượng tồn kho</th>
-                                    <th>Đã bán</th>
-                                    <th>Đang giao dịch</th>
-                                    <th>Trạng thái</th>
+                        
                                     <th>Chỉnh sửa</th>
                                     <th>Xóa</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>1</td>
-                                    <td>sfddh</td>
-                                    <td><div class="imgproduct"><img  src="../../WebNuocHoa/assets/images/products/nuochoanu/product3.webp" alt=""></div></td>
-                                    <td>hghdgi</td>
-                                    <td>10</td>
-                                    <td>400</td>
-                                    <td>200</td>
-                                    <td>Cháy hàng</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                     <td><i class="fa-solid fa-pen-to-square editwarehouse"></i></td>
                                     <td><i class="fa-solid fa-trash"></i></td>
                                 </tr>
@@ -423,7 +428,9 @@ include 'beAdmin.php';
                         $contents = [
                             file_get_contents("../../WebNuocHoa/pageadmin/addStaff.php"),
                             file_get_contents("../../WebNuocHoa/pageadmin/addProduct.php"),
-                            file_get_contents("../../WebNuocHoa/pageadmin/addMegaphone.php")
+                            file_get_contents("../../WebNuocHoa/pageadmin/addMegaphone.php"),
+                            file_get_contents("../../WebNuocHoa/pageadmin/addWarehouse.php"),
+                            file_get_contents("../../WebNuocHoa/pageadmin/editCalendar.php")
                         ];
                         echo "<script>" . "var contents = " . json_encode($contents) . ";" . "</script>";
                         $updatecontents=[

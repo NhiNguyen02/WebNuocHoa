@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <h1 style="text-align:center;">Sửa khuyến mãi</h1>
+    <h1 style="text-align:center;">Chỉnh sửa khuyến mãi</h1>
     <form action="">
         <div>
             <label for="">Loại khuyến mãi:</label>

@@ -23,22 +23,24 @@ body{
     max-width: 615px;
     width: 100%;
     position: absolute;
-    left: 200px;
+    left: 110px;
     top: 260px;
-    text-align: justify;
-    color: #8b6e6e;
     padding: 10px 30px;
     font-weight: 600;
 }
 .slogan h1{
-    font-size: 85px;
-    font-family: "Pinyon Script", cursive;
-    margin-left: -180px;
+    font-size: 50px;
+    /* font-family: "Pinyon Script", cursive; */
+    /* margin-left: -180px; */
+    text-align: center;
+    color: #cf6a7f;
+    text-shadow: 2px 2px 1px #8d8d8d;
 }
 .slogan p{
     font-size: 35px;
     text-align: left;
     font-family: "Pinyon Script", cursive;
+    color: #000;
 }
 
 .template-layout{

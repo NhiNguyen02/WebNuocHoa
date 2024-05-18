@@ -1,14 +1,17 @@
 .containercheckout{
     display: flex;
     justify-content: center;
+    margin-bottom: 100px;
 }
 .checkoutform{
-    max-width: 1330px;
+    max-width: 1340px;
     width: 100%;
     display: flex;
     justify-content: center;
     margin-top: 50px;
-    padding: 20px 0px;
+    border: 1px solid #dbdbdb;
+    padding: 50px 10px;
+    box-shadow: 1px 1px 3px 2px #e6e6e6;
 }
 .checkoutform .checkoutform_main{
     width: 60%;
@@ -25,14 +28,14 @@
 .checkoutmain > div{
     width: 45%;
 }
-.checkoutmain input[type=text], textarea{
+.checkoutmain input[type=text],input[type=email], input[type=number], textarea{
     width: 100%;
     border: 1px solid #cdcdcd;
 }
-.checkoutmain input[type=text]:focus, textarea:focus{
+.checkoutmain input[type=text]:focus, input[type=email]:focus, textarea:focus{
     outline: none;
 }
-.checkoutmain input[type=text]{
+.checkoutmain input[type=text],input[type=email]{
     padding: 10px 5px;
 }
 .checkoutmain_info .maininfo, textarea{
@@ -58,8 +61,15 @@
     border-top: 1px solid #cbc9c9;
     padding: 10px 0px;
 }
-.checkout_coupon_top_img{
-    width: 15%;
+.checkout_coupon_top > div{
+    width: 25%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.checkout_coupon_top_img img{
+    aspect-ratio: 1.5;
 }
 .checkout_coupon_main{
     display: flex;
@@ -97,4 +107,5 @@
     font-size:medium;
     background: #cfb2b2;
     border: 1px solid #cbc9c9;
+    box-shadow: 1px 1px 5px 2px #d6d6d6;
 }

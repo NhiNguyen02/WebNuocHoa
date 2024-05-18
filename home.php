@@ -18,14 +18,13 @@
         <div id="hiddenLogin"  style="display:none"> <?php include "../WebNuocHoa/components/login/login.php" ?></div>
         <div id="hiddenRegister" style="display:none"> <?php include "../WebNuocHoa/components/register/register.php" ?></div>
         <div style="display: block; height: 1000px;">
-            <div class="introduce"></div>
             <div class="template-layout"></div>
             <div class="template-layout1"></div> 
             <div class="flower1">
                 <img src="./assets/images/flower1.svg" alt="">
             </div>
             <div class="slogan">
-                <h1>Helene Perfume</h1>
+                <h1>BẮT ĐẦU MỘT NGÀY VỚI PERFUME HELENE</h1>
                 <p>"Sự cân bằng nghệ thuật nơi mỗi bông hoa thể hiện bản thân với sự gợi cảm và tươi mới."</p>
             </div>
             <div class="slide">

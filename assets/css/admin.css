@@ -10,9 +10,10 @@ img{
     width: 100%;
 }
 .container{
-    max-width:1536px ;
+    max-width:1536px !important;
     margin: 0 auto;
     position: relative;
+    padding: 0 !important;
 }
 .admin{
   background: #F6F5F2;
@@ -23,7 +24,7 @@ img{
     width: 100%;
 }
 .topadmin {
-    background: #DAC0A3;
+    background: #FD9291;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
@@ -43,8 +44,8 @@ span{
     height: calc(100vh);
 }
 .adminleft{
-    max-width: 18%;
-    background: #DAC0A3;
+    max-width: 19%;
+    background: #FD9291;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -58,7 +59,7 @@ span{
     align-items: center;
     text-decoration: none;
     color: white;
-    padding: 20px ;
+    padding: 15px ;
     border-top: 1px solid whitesmoke;
 }
 .adminleft li:hover{
@@ -75,7 +76,7 @@ span{
     margin: 20px 0;
 }
 .adminright{
-    max-width: 82%;
+    max-width: 81%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -85,10 +86,16 @@ table{
   max-width: 1200px;
 }
 table, th, td{
-    border: 1px solid black;
-    border-collapse: collapse;
-    text-align: center;
+  border: 1px solid black !important;
+  border-collapse: collapse !important;
+  text-align: center;
 } 
+.tablecalendar thead th{
+  width: calc(90%/7);
+}
+.tablecalendar thead th:first-child{
+  width: 10%;
+}
 tr input{
     cursor: pointer;
 }
@@ -195,6 +202,7 @@ select{
   float: right;
   font-size: 28px;
   font-weight: bold;
+  text-align: end;
 }
 
 .close:hover {
@@ -221,3 +229,4 @@ input::-webkit-inner-spin-button {
 #pagination span:hover{
   cursor: pointer;
 }
+

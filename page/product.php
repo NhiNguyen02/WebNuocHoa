@@ -118,7 +118,9 @@ if(isset($_POST['mua'])){
                         <div class="productComponents">
                             <a class="productdetail" href="productDetail.php?pid= <?= $fetch_products['MASP']; ?>">
                                 <div class="picture">
-                                    <img src="../assets/images/addproducts/<?= $fetch_products['image_01']; ?>" alt="">
+                                    <div>
+                                        <img src="../assets/images/addproducts/<?= $fetch_products['image_01']; ?>" alt="">
+                                    </div>
                                 </div>
                                 <div class="styleProduct">
                                     <p><?= $fetch_products['TENSP']; ?></p>

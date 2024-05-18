@@ -1,4 +1,5 @@
 var staff=document.getElementById("admin_staff");
+var calendar=document.getElementById("admin_calendar");
 var users=document.getElementById("admin_user");
 var products=document.getElementById("admin_product");
 var order=document.getElementById("admin_order");
@@ -6,6 +7,7 @@ var warehouse=document.getElementById("admin_warehouse");
 var backgroundadmin=document.getElementById("backgroundadmin");
 var megaphone=document.getElementById("admin_megaphone");
 staff.style.display="none";
+calendar.style.display="none";
 users.style.display="none";
 products.style.display="none";
 order.style.display="none";
@@ -13,6 +15,17 @@ warehouse.style.display="none";
 megaphone.style.display="none";
 document.getElementById("tabadmin_staff").addEventListener("click", function(){
     staff.style.display="block";
+    calendar.style.display="none";
+    users.style.display="none";
+    products.style.display="none";
+    order.style.display="none";
+    warehouse.style.display="none";
+    megaphone.style.display="none";
+    backgroundadmin.style.display="none";
+})
+document.getElementById("tabadmin_calendar").addEventListener("click", function(){
+    staff.style.display="none";
+    calendar.style.display="block";
     users.style.display="none";
     products.style.display="none";
     order.style.display="none";
@@ -22,6 +35,7 @@ document.getElementById("tabadmin_staff").addEventListener("click", function(){
 })
 document.getElementById("tabadmin_user").addEventListener("click", function(){
     staff.style.display="none";
+    calendar.style.display="none";
     users.style.display="block";
     products.style.display="none";
     order.style.display="none";
@@ -31,6 +45,7 @@ document.getElementById("tabadmin_user").addEventListener("click", function(){
 })
 document.getElementById("tabadmin_product").addEventListener("click", function(){
     staff.style.display="none";
+    calendar.style.display="none";
     users.style.display="none";
     products.style.display="block";
     order.style.display="none";
@@ -40,6 +55,7 @@ document.getElementById("tabadmin_product").addEventListener("click", function()
 })
 document.getElementById("tabadmin_order").addEventListener("click", function(){
     staff.style.display="none";
+    calendar.style.display="none";
     users.style.display="none";
     products.style.display="none";
     order.style.display="block";
@@ -49,6 +65,7 @@ document.getElementById("tabadmin_order").addEventListener("click", function(){
 })
 document.getElementById("tabadmin_warehouse").addEventListener("click", function(){
     staff.style.display="none";
+    calendar.style.display="none";
     users.style.display="none";
     products.style.display="none";
     order.style.display="none";
@@ -58,6 +75,7 @@ document.getElementById("tabadmin_warehouse").addEventListener("click", function
 })
 document.getElementById("tabadmin_megaphone").addEventListener("click", function(){
     staff.style.display="none";
+    calendar.style.display="none";
     users.style.display="none";
     products.style.display="none";
     order.style.display="none";
@@ -67,7 +85,7 @@ document.getElementById("tabadmin_megaphone").addEventListener("click", function
 })
 var modal = document.getElementById("myModal");
 var contentModal = document.getElementById("contentModal");
-var btns=[document.getElementById("openModal1"),document.getElementById("openModal2"),document.getElementById("openModal3")];
+var btns=[document.getElementById("openModal1"),document.getElementById("openModal2"),document.getElementById("openModal3"),document.getElementById("openModal4"), document.getElementById("editcalendar")];
 var form = document.getElementById("myForm");
 btns.forEach(function(btn, index) {
     btn.onclick = function() {

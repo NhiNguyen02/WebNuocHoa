@@ -301,4 +301,3 @@ if(isset($_POST['add_to_cart'])){
   <script src="../../WebNuocHoa/assets/js/tab.js"></script>
 </body>
 </html>
-

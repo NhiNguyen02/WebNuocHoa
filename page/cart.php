@@ -15,22 +15,34 @@ if(!isset($_SESSION['user_id'])){
     $delete_cart_item->close();
 }
 
-if(isset($_POST['update_qty'])){
-    $cart_id = $_POST['cart_id'];
-    $qty = $_POST['qty'];
-    $update_qty = $conn->prepare("UPDATE `giohang` SET SOLUONG = ? WHERE MAGH = ?");
-    $update_qty->bind_param("ii", $qty, $cart_id);
-    $update_qty->execute();
-    $update_qty->close();
-    $message = 'Đã cập nhật số lượng!';
+if(isset($_POST['update_qty'])) {
+    foreach($_POST['update_qty'] as $cart_id => $action) {
+        $qty = $_POST['qty'][$cart_id];
+        
+        if($action == '-') {
+            // Decrement quantity
+            $qty = max(1, $qty - 1); // Ensure quantity doesn't go below 1
+        } elseif($action == '+') {
+            // Increment quantity
+            $qty += 1;
+        }
+        
+        // Update quantity in the database
+        $update_qty = $conn->prepare("UPDATE `giohang` SET SOLUONG = ? WHERE MAGH = ?");
+        $update_qty->bind_param("ii", $qty, $cart_id);
+        $update_qty->execute();
+        $update_qty->close();
+    }
+    echo '<script>history.replaceState({}, "", window.location.href.split("?")[0]);</script>';
 }
 if(isset($_POST['mua'])){
     header('Location:http://localhost/WebNuocHoa/page/checkout.php');
 }
 if(isset($_POST['sp'])){
     header('Location:http://localhost/WebNuocHoa/page/product.php');
-
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,90 +61,96 @@ if(isset($_POST['sp'])){
         <div class="cart-container">
             <div class="top-cart">
                 <h3>GIỎ HÀNG</h3>
-                <!-- <span> (12 sản phẩm )</span> -->
+                <span> (12 sản phẩm )</span>
             </div>
             <div class="main-cart">
-            <div class="maincartproduct">
-                
-                    <div class="maincart_product">
-                <?php
-                    $grand_total = 0;
-                    $select_cart = $conn->prepare("SELECT giohang.*, TENSP, GIABAN, image_01 FROM `giohang`
-                                                    JOIN `sanpham` ON giohang.MASP = sanpham.MASP
-                                                    WHERE giohang.MAKH = ?");
-                    $select_cart->bind_param("i", $user_id);
-                    $select_cart->execute();
-                    $result = $select_cart->get_result();
+                <div id="hiddenmain-cart-none">
+                    <div class="main-cart-none" >
+                        <div class="img-cart">
+                            <img src="../../WebNuocHoa/assets/images/empty-bags.png" alt="">
+                        </div>
+                        <div class="come-back">
+                            <a href="../../WebNuocHoa/page/product.php">TIẾP TỤC LỰA CHỌN</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="hiddenmaincartproduct">
+                    <div class="maincartproduct">
+                        <div class="maincart_product">
+                            <form action="" method="post">
+                                <div class="maincart_product_">
+                                    <?php
+                                        $grand_total = 0;
+                                        $select_cart = $conn->prepare("SELECT giohang.*, TENSP, GIABAN, image_01 FROM `giohang`
+                                                                        JOIN `sanpham` ON giohang.MASP = sanpham.MASP
+                                                                        WHERE giohang.MAKH = ?");
+                                        $select_cart->bind_param("i", $user_id);
+                                        $select_cart->execute();
+                                        $result = $select_cart->get_result();
 
-                    if($result->num_rows > 0){
-                        while($fetch_cart = $result->fetch_assoc()){
-                ?>
-                        
-                        <form action="" method="post">
-                            <div class="maincart_product_">
-                                <input type="hidden" name="cart_id" value="<?= $fetch_cart['MAGH']; ?>">
-                                <div class="maincart_product_img">
-                                    <img src="../assets/images/addproducts/<?= $fetch_cart['image_01']; ?>" alt="">
-                                </div>
-                                <a href=""><?= $fetch_cart['TENSP']; ?></a>
-                                <span><?= $fetch_cart['GIABAN']; ?></span>
-                                <div>
-                                    <div class="quantity-product">
-                                        
-                                        <button id="decrement" name="update_qty" type="submit"> - </button>
-                                        <input id="quantity" name="qty" type="number" value="<?= $fetch_cart['SOLUONG']; ?>" min="1" inputmode="numeric" autocomplete="off" class="no-spinner" >
-                                        <button id="increment" name="update_qty" type="submit"> + </button>
+                                        if($result->num_rows > 0){
+                                            echo '<script>
+                                                    document.getElementById("hiddenmain-cart-none").style.display="none";
+                                                    </script>';
+                                            echo '<script>
+                                                    document.getElementById("hiddenmaincartproduct").style.display="block";
+                                                </script>';
+                                            while($fetch_cart = $result->fetch_assoc()){
+                                    ?>
+
+                                    <div class="maincart_product__">
+                                        <input type="hidden" name="cart_id" value="<?= $fetch_cart['MAGH']; ?>">
+                                        <div class="maincart_product_img">
+                                            <div>
+                                                <img src="../assets/images/addproducts/<?= $fetch_cart['image_01']; ?>" alt="">
+                                            </div>
+                                        </div>
+                                        <a href=""><?= $fetch_cart['TENSP']; ?></a>
+                                        <span><?= $fetch_cart['GIABAN']; ?></span>
+                                        <div>
+                                        <div class="quantity-product">   
+                                            <button id="decrement" name="update_qty[<?= $fetch_cart['MAGH']; ?>]" type="submit" value="-"> - </button>
+                                            <input id="quantity_<?= $fetch_cart['MAGH']; ?>" data-cartid="<?= $fetch_cart['MAGH']; ?>"  name="qty[<?= $fetch_cart['MAGH']; ?>]" type="number" value="<?= $fetch_cart['SOLUONG']; ?>" min="1" inputmode="numeric" autocomplete="off" class="no-spinner" >
+                                            <button id="increment" name="update_qty[<?= $fetch_cart['MAGH']; ?>]" type="submit" value="+"> + </button>
+                                        </div>
+
+                                        </div>
+                                        <div class="maincart_product_remove">
+                                            <a type="submit" name="delete" href="cart.php?delete=<?= $fetch_cart['MAGH']; ?>"> <i class="fa-solid fa-trash-can"></i></a> 
+                                        </div>
                                     </div>
                                     <?php 
                                         $sub_total = ($fetch_cart['GIABAN'] * $fetch_cart['SOLUONG']);
                                         $grand_total += $sub_total;
                                             }
+                                        }else {
+                                            echo '<script>
+                                                    document.getElementById("hiddenmain-cart-none").style.display="block";
+                                                    </script>';
+                                            echo '<script>
+                                                        document.getElementById("hiddenmaincartproduct").style.display="none";
+                                                    </script>';
+                                        }
+                                            $select_cart->close();
                                     ?>
                                 </div>
-                                <div class="maincart_product_remove">
-                                    <a type="submit" name="delete" href="cart.php?delete=<?= $fetch_cart['MAGH']; ?>"> <i class="fa-solid fa-trash-can"></i></a> 
-                                </div>
-                            </div>
-                        </form> 
-                            <?php $sub_total = ($fetch_cart['GIABAN'] * $fetch_cart['SOLUONG']);
-                                $grand_total += $sub_total;
-                            ?>                             
-                <?php  
-                    }            
-                } else {
-                    echo '<div class="main-cart-none">
-                                <div class="img-cart">
-                                    <img src="../../WebNuocHoa/assets/images/empty-bags.png" alt="">
-                                </div>
-                                <div class="come-back">
-                                    <a href="../../WebNuocHoa/page/product.php">TIẾP TỤC LỰA CHỌN</a>
-                                </div>
-                            </div>';
-                }
-                    $select_cart->close();
-                ?>
-                <?php
-                if($grand_total > 0 ){
-                        echo '
+                            </form>
                         </div>
-                            <div class="maincart_totalprice">
-                                <div class="maincart_totalprice_">
-                                    <p>Tạm tính: </p><span>';
-                                     echo $grand_total;
-                                    echo ' VNĐ</span>
-                                </div>
-                                <div class="maincart_totalprice_">
-                                    <p>Thành tiền: </p><span><strong style="font-size: large; font-weight:bold;"></p><span>';echo $grand_total;echo' VNĐ</strong></span>
-                                </div>
-                                <form method="post">
+                        <div class="maincart_totalprice">
+                            <div class="maincart_totalprice_">
+                                <p>Tạm tính: </p><span><?= $grand_total ?> VNĐ</span>
+                            </div>
+                            <div class="maincart_totalprice_">
+                                <p>Thành tiền: </p><span><strong style="font-size: large; font-weight:bold;"></p><span><?= $grand_total ?> VNĐ</strong></span>
+                            </div>
+                            <form method="post">
                                 <button name="mua" > MUA NGAY </button>
                                 <button name="sp" > TIẾP TỤC MUA HÀNG </button>
-                                </form> 
-                            </div>
+                            </form> 
                         </div>
-                        ';
-                    }
-                    ?>
+                    </div> 
+                </div>
+                              
             </div>
         </div>
         <?php include "../components/footer/footer.php" ?>
