@@ -2,8 +2,8 @@
 
 include '../components/connect/config.php';
 
-    if (isset($_GET['MASP'])) {
-        $qq = $_GET['MASP'];
+    if (isset($_SESSION['MASP'])) {
+        $qq = $_SESSION['MASP'];
     
         echo "Giá trị của biến \$qq là: $qq";
     } else {

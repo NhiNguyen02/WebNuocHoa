@@ -3,6 +3,7 @@
 
     if (isset($_POST['sss'])) {
         $MASP = $_POST['idd']; 
+        $_SESSION['MASP'] = $MASP;
         echo $MASP;
 
     } else {
