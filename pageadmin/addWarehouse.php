@@ -1,3 +1,56 @@
+<?php 
+    include '../components/connect/config.php';
+    if (isset($_POST['add_kh'])) {
+
+        $ten = $_POST['ten'];
+        $dc = $_POST['dc'];
+    
+        $select_k = "SELECT * FROM khohang WHERE TENKHO = '$ten'";
+        $result_k = mysqli_query($conn, $select_k);
+    
+        if (mysqli_num_rows($result_k) == 0) { 
+            $insert = "INSERT INTO khohang (TENKHO, DIACHI) VALUES ('$ten', '$dc')";
+            mysqli_query($conn, $insert);
+            
+        } 
+        
+        header('location:http://localhost/webNuocHoa/pageadmin/admin.php');
+
+    }
+    if(isset($_GET['delete_kh'])){
+
+        $delete_id = $_GET['delete_kh'];
+
+        $delete_product_image = mysqli_prepare($conn, "SELECT * FROM `sanpham` WHERE MAKHO  = ?");
+        mysqli_stmt_bind_param($delete_product_image, "i", $delete_id);
+        mysqli_stmt_execute($delete_product_image);
+        $result = mysqli_stmt_get_result($delete_product_image);
+        if (mysqli_fetch_assoc($result)>0){
+        $fetch_delete_image = mysqli_fetch_assoc($result);
+
+        unlink('../assets/images/addproducts/'.$fetch_delete_image['image_01']);
+        unlink('../assets/images/addproducts/'.$fetch_delete_image['image_02']);
+        unlink('../assets/images/addproducts/'.$fetch_delete_image['image_03']);
+        unlink('../assets/images/addproducts/'.$fetch_delete_image['image_04']);
+        }
+        $delete_product = mysqli_prepare($conn, "DELETE FROM `sanpham` WHERE MAKHO = ?");
+        mysqli_stmt_bind_param($delete_product, "i", $delete_id);
+        mysqli_stmt_execute($delete_product);
+
+        $delete_cart = mysqli_prepare($conn, "DELETE FROM `giohang`WHERE MAKHO = ? ");
+        mysqli_stmt_bind_param($delete_cart, "i", $delete_id);
+        mysqli_stmt_execute($delete_cart);
+
+        $delete_km = $conn->prepare("DELETE FROM `khohang` WHERE MAKHO = ?");
+        $delete_km->bind_param("i", $delete_id);
+        $delete_km->execute();
+        $delete_km->close();
+     
+        header('location:http://localhost/webNuocHoa/pageadmin/admin.php');
+
+     }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,44 +62,16 @@
 <body>
 
     <h1 style="text-align:center;">Thêm sản phẩm vào kho</h1>
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="" method="post">
         <div>    
-            <label for="">Tên sản phẩm:</label>    
-            <input type="text" name="name">
+            <label for="">Tên kho hàng:</label>    
+            <input type="text" name="ten">
         </div>
         <div>
-            <label for="">Thương hiệu:</label>
-            <input type="text" name="tenTH">
+            <label for="">Địa chỉ kho:</label>
+            <input type="text" name="dc">
         </div>
-        <div>
-            <label  for="">Dung tích:</label>
-            <input id="capacity" type="number" name="dt">
-        </div>
-        <div>
-            <label  for="">Giá (VNĐ):</label>
-            <input id="capacity" type="number" name="gia">
-        </div>
-        <div>
-            <label for="">Tổng số lượng:</label>
-            <input type="number" name="sl">
-        </div>
-        <div>
-            <label for="">Hình 1:</label>
-            <input type="file" name="image_01" accept="image/jpg, image/jpeg, image/png, image/webp">
-        </div>
-        <div>
-            <label for="">Hình 2:</label>
-            <input type="file" name="image_02" accept="image/jpg, image/jpeg, image/png, image/webp">
-        </div>
-        <div>
-            <label for="">Hình 3:</label>
-            <input type="file" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp">
-        </div>
-        <div>
-            <label for="">Hình 4:</label>
-            <input type="file" name="image_04" accept="image/jpg, image/jpeg, image/png, image/webp">
-        </div>
-        <div style="display: flex; justify-content:flex-end; margin-top:5px; padding:10px 30px;" ><button name="add_product">ADD</button></div>   
+        <div style="display: flex; justify-content:flex-end; margin-top:5px; padding:10px 30px;" ><button name="add_kh">ADD</button></div>   
     </form>   
 </body>
 </html>

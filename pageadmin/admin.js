@@ -203,6 +203,19 @@ var edits=[document.querySelectorAll(".editstaff"), document.querySelectorAll(".
 edits.forEach(function(edit1,index) {
     edit1.forEach(function(edit2){
         edit2.onclick = function() {
+            const masp = this.getAttribute('data-masp');
+            const mota = this.getAttribute('data-mota');
+            const tensp = this.getAttribute('data-tensp');
+            const makho = this.getAttribute('data-makho');
+            const image01 = this.getAttribute('data-image01');
+            const image02 = this.getAttribute('data-image02');
+            const image03 = this.getAttribute('data-image03');
+            const image04 = this.getAttribute('data-image04');
+            const thuonghieu = this.getAttribute('data-thuonghieu');
+            const dungtich = this.getAttribute('data-dungtich');
+            const giaban = this.getAttribute('data-giaban');
+            const soluong = this.getAttribute('data-soluong');
+
             modal.style.display = "block";
             contentModal.innerHTML="<span class=\"close\">&times;</span><br>";
             contentModal.innerHTML += updatecontents[index];
@@ -214,7 +227,19 @@ edits.forEach(function(edit1,index) {
                     modal.style.display = "none";
                 },{ once: true });
             }
+            console.log( document.querySelector('#masp'), masp)
+            document.querySelector('#masp').value = masp;
+            document.querySelector('#mota').value = mota;
+            document.querySelector('#tensp').value = tensp;
+            document.querySelector('#makho').value = makho;
+            document.querySelector('#image01').value = image01;
+            document.querySelector('#image02').value = image02;
+            document.querySelector('#image03').value = image03;
+            document.querySelector('#image04').value = image04;
+            document.querySelector('#thuonghieu').value = thuonghieu;
+            document.querySelector('#capacity').value = dungtich;
+            document.querySelector('#giaban').value = giaban;
+            document.querySelector('#soluong').value = soluong;
         };
     })
 }); // Chọn phần tử đầu tiên trong HTMLCollection
-

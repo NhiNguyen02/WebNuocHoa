@@ -1,13 +1,41 @@
 <?php 
-    include "beAdmin.php";
 
-    if (isset($_POST['sss'])) {
-        $MASP = $_POST['idd']; 
-        echo $MASP;
+    include '../components/connect/config.php';
+    session_start();
+    
+    if(isset($_GET['deleteuser'])){
 
-    } else {
-        echo "Lỗi: Không tìm thấy mã sản phẩm.";
+        $delete_id = $_GET['deleteuser'];
+    
+        $delete_user = $conn->prepare("DELETE FROM `taikhoan` WHERE id = ?");
+        $delete_user->bind_param("i", $delete_id);
+        $delete_user->execute();
+        $delete_user->close();
+        
+        $delete_cart = $conn->prepare("DELETE FROM `giohang` WHERE MAKH = ?");
+        $delete_cart->bind_param("i", $delete_id);
+        $delete_cart->execute();
+        $delete_cart->close();
+    
+        $delete_orders = $conn->prepare("DELETE FROM `donhang` WHERE MAKH = ?");
+        $delete_orders->bind_param("i", $delete_id);
+        $delete_orders->execute();
+        $delete_orders->close();
+        
+        header('location:admin.php');
     }
+    if(isset($_GET['delete_dh'])){
+
+        $delete_id = $_GET['delete_dh'];
+    
+        $delete_user = $conn->prepare("DELETE FROM `donhang` WHERE MAHD = ?");
+        $delete_user->bind_param("i", $delete_id);
+        $delete_user->execute();
+        $delete_user->close();
+        
+        header('location:admin.php');
+    }
+    
 ?>
 
 <!DOCTYPE html>
@@ -72,8 +100,8 @@
                             <thead>
                                 <tr>
                                     <th>Mã nhân viên</th>
-                                    <th>Tên nhân viên</th>
-                                    <th>Anh</th>
+                                    <th>Họ tên</th>
+                                    <th>Hình ảnh</th>
                                     <th>Ngày sinh</th>
                                     <th>Giới tính</th>
                                     <th>Số điện thoại</th>
@@ -85,19 +113,39 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>001</td>
-                                    <td>ABC</td>
-                                    <td><img src="../../WebNuocHoa/assets/images/iconAccount.svg" alt=""></td>
-                                    <td>12/3/2000</td>
-                                    <td>Nam</td>
-                                    <td>1234567892</td>
-                                    <td>fbregughbeur bghnbgfjvfdkghbrhkj</td>
-                                    <td>fbhiss</td>
-                                    <td>5000000</td>
-                                    <td><i class="fa-solid fa-pen-to-square editstaff"></i></td>
-                                    <td><i class="fa-solid fa-trash"></i></td>
-                                </tr>
+                                <?php
+                                    $select_nv = "SELECT * FROM admin ";
+                                    $result_nv = mysqli_query($conn, $select_nv);
+                                
+                                    if(mysqli_num_rows($result_nv) > 0){
+                                        while($fetch_nv = mysqli_fetch_assoc($result_nv)){ 
+                                ?>
+                                    <tr>
+                                    <td><?= $fetch_nv['MANV']; ?></td>
+                                    <td><?= $fetch_nv['HOTEN']; ?></td>
+                                    <td><div class="imgproduct" style="max-width:60px;"><img src="../assets/images/avata/<?= $fetch_nv['HINHANH']; ?>" alt="image"></div></td>
+                                    <td><?= $fetch_nv['NGSINH']; ?></td>
+                                    <td><?= $fetch_nv['GIOITINH']; ?></td>
+                                    <td><?= $fetch_nv['SDT']; ?></td>
+                                    <td><?= $fetch_nv['DIACHI']; ?></td>
+                                    <td><?php if($fetch_nv['CHUCVU'] == "admin") { ?>
+                                                    Quản lý
+                                                <?php }  
+                                                elseif ($fetch_nv['CHUCVU'] == "admin_phu") { ?>
+                                                    Nhân viên
+                                                <?php } ?></td>
+                                    <td><?= $fetch_nv['LUONG']; ?></td>
+                                    <td><i data-masp="<?= $fetch_nv['DIACHI']; ?>" class="fa-solid fa-pen-to-square editproduct"></i>
+                                    
+                                    </td>
+                                    <td><a href="addStaff.php?delete_staff=<?= $fetch_nv['MANV']; ?>"><i class="fa-solid fa-trash"></i></a></td>
+                                    </tr>
+                                <?php
+                                    }
+                                } else {
+                                        echo '<h2>Hiện tại chưa có nhân sự!</h2>';
+                                    }
+                                ?>
                             </tbody>
                         </table>
 
@@ -220,9 +268,8 @@
                                 <?php
                                     $select = "SELECT * FROM taikhoan ";
                                     $result = mysqli_query($conn, $select);
-                                
                                     if(mysqli_num_rows($result) > 0){
-                                        while($fetch = mysqli_fetch_assoc($result)){ 
+                                        while($fetch = mysqli_fetch_assoc($result)){
                                 ?>
                                     <tr>
                                         <td><?= $fetch['id']; ?></td>
@@ -237,7 +284,7 @@
                                 <?php
                                     }
                                 } else {
-                                        echo '<h2>Hiện tại chưa có sản phẩm!</h2>';
+                                        echo '<h2>Hiện tại chưa có tài khoản khách hàng!</h2>';
                                     }
                                 ?>
                             </tbody>
@@ -266,6 +313,7 @@
                                     <th>Dung tích</th>
                                     <th>Giá (VNĐ)</th>
                                     <th>Số lượng</th>
+                                    <th>Kho hàng</th>
                                     <th>Hidden</th>
                                     <th>Chỉnh sửa</th>
                                     <th>Xóa</th>
@@ -273,7 +321,7 @@
                             </thead>
                             <tbody>
                             <?php
-                                    $select_products = "SELECT * FROM sanpham ";
+                                    $select_products = "SELECT sanpham.*, TENKHO FROM sanpham, khohang WHERE sanpham.MAKHO = khohang.MAKHO ";
                                     $result_products = mysqli_query($conn, $select_products);
                                 
                                     if(mysqli_num_rows($result_products) > 0){
@@ -287,13 +335,23 @@
                                     <td><?= $fetch_products['DUNGTICH']; ?></td>
                                     <td><?= $fetch_products['GIABAN']; ?></td>
                                     <td><?= $fetch_products['SOLUONG']; ?></td>
-                                    <td><i class="fa-solid fa-eye"></i></td>
-                                    <!-- <form method="post">
-                                        <input type="hidden" name="idd" value="<?= $fetch_products['MASP']; ?>">
-                                        <td><button name="sss" class="fa-solid fa-pen-to-square editproduct"></button></td>
-                                    </form> -->
-                                    <td><i data-masp="<?= $fetch_products['MASP']; ?>" class="fa-solid fa-pen-to-square editproduct"></i></td>
-                                    <td><a href="admin.php?delete=<?= $fetch_products['MASP']; ?>"><i class="fa-solid fa-trash"></i></a></td>
+                                    <td><?= $fetch_products['TENKHO']; ?></td>
+                                    <td><a href="http://localhost/WebNuocHoa/page/productDetail.php?pid=<?= $fetch_products['MASP']; ?>"><i class="fa-solid fa-eye"></i></a></td>
+                                    <td>
+                                        <i data-masp="<?= $fetch_products['MASP']; ?>" class="fa-solid fa-pen-to-square editproduct"
+                                        data-masp="<?= $fetch_products['MASP']; ?>"
+                                        data-mota="<?= $fetch_products['MOTA']; ?>"
+                                        data-tensp="<?= $fetch_products['TENSP']; ?>"
+                                        data-makho="<?= $fetch_products['MAKHO']; ?>"
+                                        data-image01="<?= $fetch_products['image_01']; ?>"
+                                        data-image02="<?= $fetch_products['image_02']; ?>"
+                                        data-image03="<?= $fetch_products['image_03']; ?>"
+                                        data-image04="<?= $fetch_products['image_04']; ?>"
+                                        data-thuonghieu="<?= $fetch_products['THUONGHIEU']; ?>"
+                                        data-dungtich="<?= $fetch_products['DUNGTICH']; ?>"
+                                        data-giaban="<?= $fetch_products['GIABAN']; ?>"
+                                        data-soluong="<?= $fetch_products['SOLUONG']; ?>"></i></td>
+                                    <td><a href="addProduct.php?delete=<?= $fetch_products['MASP']; ?>"><i class="fa-solid fa-trash"></i></a></td>
                                     </tr>
                                 <?php
                                     }
@@ -317,35 +375,65 @@
                     </div>
                     <div id="admin_order">
                         <form action="" method="post">
-                            <div style="display:flex; justify-content:flex-end; margin-bottom: 10px;"><button id="openModal1">Lưu</button></div>
+                            <!-- <div style="display:flex; justify-content:flex-end; margin-bottom: 10px;"><button id="openModal1">Chỉnh sửa</button><button id="openModal1">Lưu</button></div> -->
+                            <div style="display:flex; justify-content:flex-end; margin-bottom: 10px;"><button name="hoadon" >Chỉnh sửa</button><button name="hoadon1" >Lưu</button></div>
                             <table>
                                 <thead>
                                     <tr>
                                         <th>Mã đơn hàng</th>
-                                        <th>Tên khách hàng</th>
+                                        <th>Khách hàng</th>
+                                        <th>Sản phẩm</th>
                                         <th>Thời gian đặt hàng</th>
                                         <th>Tình trạng thanh toán</th>
-                                        <th>Tổng tiền đơn hàng (VNĐ)</th>
                                         <th>Hình thức thanh toán</th>
-                                        <th>Đã giao</th>
-                                        <th>Chưa giao</th>
-                                        <th>Đang chuẩn bị hàng</th>
+                                        <th>MÃ Voucher</th>
+                                        <th>Thành tiền (VNĐ)</th>
+                                        <th>Trạng thái</th>
+                                        <th>Ghi chú</th>
+                                        <!-- <th>Đang chuẩn bị hàng</th> -->
                                         <th>Xóa</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>dh01</td>
-                                        <td>abc</td>
-                                        <td>20/04/2024</td>
-                                        <td>Đã thanh toán</td>
-                                        <td>6.000.000</td>
-                                        <td>Chuyển khoản ngân hàng</td>
-                                        <td><input type="checkbox"></td>
-                                        <td><input type="checkbox"></td>
-                                        <td><input type="checkbox"></td>
-                                        <td><i class="fa-solid fa-trash"></i></td>
-                                    </tr>
+                                    <?php
+                                        $select_dh = "SELECT donhang.*, name FROM donhang, taikhoan WHERE donhang.MAKH = taikhoan.id";
+                                        $result_dh = mysqli_query($conn, $select_dh);
+                                        if(mysqli_num_rows($result_dh) > 0){
+                                            while($fetch_dh = mysqli_fetch_assoc($result_dh)){ 
+                                    ?>
+                                        <tr>
+                                        <td><?= $fetch_dh['MAHD']; ?></td>
+                                        <td><?= $fetch_dh['name']; ?></td>
+                                        <td><?= $fetch_dh['SANPHAM']; ?></td>
+                                        <td><?= $fetch_dh['NGAYBAN']; ?></td>
+                                        <td style="display: <?php echo $input1;?>;"><?= $fetch_dh['NGAYBAN']; ?></td>
+                                        <td style="display: <?php echo $input2;?>;"><select required name="gt" id="">
+                                                <option disabled selected hidden >-Chọn trạng thái-</option>
+                                                <option value="Đang xửa lý thanh toán">Đang xửa lý thanh toán</option>
+                                                <option value="Đã thanh toán">Đã thanh toán</option>
+                                            </select>
+                                        </td>
+                                        <td><?= $fetch_dh['THANHTOAN']; ?></td>
+                                        <td><?= $fetch_dh['MACTKM']; ?></td>
+                                        <td><?= $fetch_dh['THANHTIEN']; ?></td>
+                                        <td style="display: <?php echo $input1;?>;"><?= $fetch_dh['TRANGTHAI']; ?></td>
+                                        <td style="display: <?php echo $input2;?>;"><select required name="gt" id="">
+                                                <option disabled selected hidden >-Chọn trạng thái-</option>
+                                                <option value="Đợi xác thực thanh toán">Đợi xác thực thanh toán</option>
+                                                <option value="Người bán đang chuẩn bị hàng">Người bán đang chuẩn bị hàng</option>
+                                                <option value="Đơn hàng đang vận chuyển đến bạn">Đơn hàng đang vận chuyển đến bạn</option>
+                                                <option value="Đã nhận hàng">Đã nhận hàng</option>
+                                            </select>
+                                        </td>
+                                        <td><?= $fetch_dh['GHICHU']; ?></td>
+                                        <td><a href="admin.php?delete_dh=<?= $fetch_dh['MAHD']; ?>"><i class="fa-solid fa-trash"></i></a></td>
+                                        </tr>
+                                    <?php
+                                        }
+                                    } else {
+                                            echo '<h2>Hiện tại chưa có đơn đặt hàng!</h2>';
+                                        }
+                                    ?>
                                 </tbody>
                             </table>
                         </form>
@@ -363,7 +451,7 @@
                         </div>
                     </div>
                     <div id="admin_warehouse"> 
-                        <div style="display:flex; justify-content:flex-end; margin-bottom: 10px;"><button id="openModal4">Thêm sản phẩm vào kho</button></div>
+                        <div style="display:flex; justify-content:flex-end; margin-bottom: 10px;"><button id="openModal4">Thêm kho hàng</button></div>
                         <table>
                             <thead>
                                 <tr>
@@ -372,21 +460,34 @@
                                     <th>Địa chỉ kho</th>
                                     <th>Số sản phẩm</th>
                                     <th>Số lượng tồn kho</th>
-                        
                                     <th>Chỉnh sửa</th>
                                     <th>Xóa</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><i class="fa-solid fa-pen-to-square editwarehouse"></i></td>
-                                    <td><i class="fa-solid fa-trash"></i></td>
-                                </tr>
+                                <?php
+                                    $select_kh = "SELECT * FROM khohang ";
+                                    $result_kh = mysqli_query($conn, $select_kh);
+                                    if(mysqli_num_rows($result_kh) > 0){
+                                        while($fetch = mysqli_fetch_assoc($result_kh)){
+                                ?>
+                                    <tr>
+                                        <td><?= $fetch['MAKHO']; ?></td>
+                                        <td><?= $fetch['TENKHO']; ?></td>
+                                        <td><?= $fetch['DIACHI']; ?></td>
+                                        <td><?= $fetch['SOSP']; ?></td>
+                                        <td><?= $fetch['SLTONKHO']; ?></td>
+                                        <!-- <td>0</td> -->
+                                        <td><i class="fa-solid fa-pen-to-square editwarehouse"></i></td>
+                                        <td><a href="addWarehouse.php?delete_kh=<?= $fetch['MAKHO']; ?>"><i class="fa-solid fa-trash"></i></a></td>
+                                    </tr>
+
+                                <?php
+                                    }
+                                } else {
+                                        echo '<h2>Hiện tại chưa có kho hàng lưu trữ!</h2>';
+                                    }
+                                ?>
                             </tbody>
                         </table>
                         <div id="pagination"></div>
@@ -396,10 +497,10 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Khuyến mãi</th>
-                                    <th>Loại khuyến mãi</th>
-                                    <th>Hình thức</th>
-                                    <th>Trạng thái</th>
+                                    <th>Mã Voucher</th>
+                                    <th>Chương trình khuyến mãi</th>
+                                    <th>Giảm giá</th>
+                                    <th>Số tiền tối thiểu</th>
                                     <th>Thời gian bắt đầu</th>
                                     <th>Thời gian kết thúc</th>
                                     <th>Chỉnh sửa</th>
@@ -407,17 +508,32 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>jghkg</td>
-                                    <td>fhdgfd</td>
-                                    <td>vhdkfjhgdi</td>
-                                    <td>fhdfa</td>
-                                    <td>1/4/2024</td>
-                                    <td>5/5/2024</td>
+                                <?php
+                                    $select_km = "SELECT * FROM khuyenmai ";
+                                    $result_km = mysqli_query($conn, $select_km);
+                                
+                                    if(mysqli_num_rows($result_km) > 0){
+                                        while($fetch_km = mysqli_fetch_assoc($result_km)){ 
+                                ?>
+                                    <tr>
+                                    <td><?= $fetch_km['MAVOUCHER']; ?></td>
+                                    <td><?= $fetch_km['TENCT']; ?></td>
+                                    <td><?= $fetch_km['GIAMGIA']; ?> VNĐ</td>
+                                    <td><?= $fetch_km['TIENTOITHIEU']; ?> VNĐ</td>
+                                    <td><?= $fetch_km['NGAYBD']; ?></td>
+                                    <td><?= $fetch_km['NGAYKT']; ?></td>
                                     <td><i class="fa-solid fa-pen-to-square editmegaphone"></i></td>
-                                    <td><i class="fa-solid fa-trash" data-id="001"></i></td>
-
-                                </tr>
+                                    <td><a href="addMegaphone.php?delete_km=<?= $fetch_km['MAVOUCHER']; ?>"><i class="fa-solid fa-trash"></i></a></td>
+                            
+                                    
+                                    </tr>
+                                <?php
+                                    }
+                                } else {
+                                        echo '<h2>Hiện tại chưa có chương trình khuyến mãi!</h2>';
+                                    }
+                                ?>
+                                
                             </tbody>
                         </table>
                         <div id="pagination">

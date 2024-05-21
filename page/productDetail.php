@@ -13,10 +13,11 @@ if(isset($_POST['add_to_cart'])){
     $pid = $_GET['pid'];
     $qty = $_POST['qty'];
 
-    $select = " SELECT SOLUONG FROM `sanpham`
+    $select = " SELECT SOLUONG, MAKHO FROM `sanpham`
                 WHERE MASP = $pid ";
     $result = mysqli_query($conn, $select);
     $row = mysqli_fetch_array($result);
+    $makho = $row['MAKHO'];
     $slsp = $row['SOLUONG'];
     if($slsp > 0){
         $check_cart_numbers = $conn->prepare("SELECT * FROM `giohang` WHERE MAKH = ? AND MASP = ?");
@@ -28,8 +29,8 @@ if(isset($_POST['add_to_cart'])){
             $message[] = 'Sản phẩm đã thêm vào giỏ hàng!';
         }else{
 
-            $insert_cart = $conn->prepare("INSERT INTO `giohang`(MAKH, MASP, SOLUONG) VALUES(?,?,?)");
-            $insert_cart->bind_param("iii", $user_id, $pid, $qty);
+            $insert_cart = $conn->prepare("INSERT INTO `giohang`(MAKH, MASP, MAKHO, SOLUONG) VALUES(?,?,?,?)");
+            $insert_cart->bind_param("iiii", $user_id, $pid, $makho, $qty);
             $insert_cart->execute();
             $insert_cart->close();
 

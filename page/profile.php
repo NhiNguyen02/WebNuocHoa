@@ -16,16 +16,6 @@ session_start();
 
     if(isset($_POST['update1'])){
 
-        // $id = $_SESSION['user_id'];
-        // $name = $_POST['name'];     
-        // $email = $_POST['email'];
-        // $sdt = $_POST['sdt'];
-        
-        
-        // $update_user = mysqli_prepare($conn, "UPDATE `taikhoan` SET name = ?, email = ?, sdt = ? WHERE id = ?");
-        // mysqli_stmt_bind_param($update_user, "sssi", $name, $email, $sdt, $id);
-        // mysqli_stmt_execute($update_user);
-
         $id = $_SESSION['user_id'];
         $name = $_POST['name'];     
         $email = $_POST['email'];
@@ -101,8 +91,8 @@ session_start();
                             <label for="">Số điện thoại:</label>
                         </div>    
                         <div class="input-user">
-                            <p style="display: <?php echo $input1;?>;">0<?php echo $_SESSION['sdt'] ?></p>
-                            <p style="display: <?php echo $input2;?>;"><input type="number" value="<?php echo $_SESSION['sdt'] ?>" name="sdt">  </p>
+                            <p style="display: <?php echo $input1;?>;"><?php echo $_SESSION['sdt'] ?></p>
+                            <p style="display: <?php echo $input2;?>;"><input type="text" value="<?php echo $_SESSION['sdt'] ?>" name="sdt">  </p>
                         </div>
                     </div>
                     <div class="info-user">

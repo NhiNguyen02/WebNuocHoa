@@ -4,25 +4,24 @@
 if(isset($_POST['submit'])){
     $email=$_POST['email'];
     $pass=md5($_POST['password1']);
+
     $select = " SELECT * FROM taikhoan WHERE email = '$email' && password = '$pass' ";
     $result = mysqli_query($conn, $select);
+    $select_ad = " SELECT * FROM admin WHERE EMAIL = '$email' && MK = '$pass' ";
+    $result_ad = mysqli_query($conn, $select_ad);
 
     if(mysqli_num_rows($result) > 0){
-       $row = mysqli_fetch_array($result);
- 
-       if($row['user_type'] == 'user'){
-         $_SESSION['user_id'] = $row['id'];
-          $_SESSION['user_name'] = $row['name'];
-          header('location:http://localhost/WebNuocHoa/home.php');
-       }
-       if($row['user_type'] == 'admin'){
-         $_SESSION['user_name_ad'] = $row['name'];
- 
-         $_SESSION['email_ad'] = $row['email'];
-         header('location:http://localhost/WebNuocHoa/pageadmin/admin.php');
-       }
-      
-    }else{
+
+        $row = mysqli_fetch_array($result);
+        $_SESSION['user_id'] = $row['id'];
+        $_SESSION['user_name'] = $row['name'];
+        header('location:http://localhost/WebNuocHoa/home.php');
+
+    } elseif (mysqli_num_rows($result_ad) > 0) {
+        $row = mysqli_fetch_array($result_ad);
+        $_SESSION['id_ad'] = $row['MANV'];
+        header('location:http://localhost/WebNuocHoa/pageadmin/admin.php');
+    } else{
         echo '<script type="text/javascript">
         window.onload = function () { alert("Đăng nhập thất bại (Bạn đã có tài khoản chưa?)"); }
         </script>';

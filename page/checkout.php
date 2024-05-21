@@ -99,7 +99,7 @@ if(isset($_POST['order'])){
                                     <input type="text" name="name" value="<?php echo $_SESSION['user_name'] ?>" placeholder="Họ và tên" required>
                                 </div>
                                 <div class="maininfo">
-                                    <input type="number" name="sdt" value="0<?php echo $_SESSION['sdt'] ?>" placeholder="Số điện thoại" required>
+                                    <input type="text" name="sdt" value="0<?php echo $_SESSION['sdt'] ?>" placeholder="Số điện thoại" required>
                                 </div>
                                 <div class="maininfo">
                                     <input type="text" name="t" value="<?php echo $_SESSION['t'] ?>" placeholder="Tỉnh thành" required>

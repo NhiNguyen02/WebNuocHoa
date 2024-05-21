@@ -73,89 +73,90 @@
                 </div>
             </div>
         </div> -->
-        
-        <div class="layout-product">
-            <div class="product">
-                <div class="productComponents">
-                    <a class="productdetail" href="../../WebNuocHoa/page/productDetail.php">
-                        <div class="picture">
-                            <div>
-                                <img src="../../WebNuocHoa/assets/images/products/nuochoanu/product1.webp" alt="">
+        <div style="display: flex; justify-content:center;">
+            <div class="layout-product">
+                <div class="product">
+                    <div class="productComponents">
+                        <a class="productdetail" href="../../WebNuocHoa/page/productDetail.php">
+                            <div class="picture">
+                                <div>
+                                    <img src="../../WebNuocHoa/assets/images/products/nuochoanu/product1.webp" alt="">
+                                </div>
                             </div>
+                            <div class="styleProduct">
+                                <p>Lancome La Vie Est Belle EDP</p>
+                            </div>
+                            <div class="price">
+                                <p>130,000 - 3,400,000</p>
+                            </div>
+                        </a>
+                        <div class="buttonBuy">
+                            <button onclick="window.location.href='../../WebNuocHoa/page/checkout.php'">Buy Now</button>
                         </div>
-                        <div class="styleProduct">
-                            <p>Lancome La Vie Est Belle EDP</p>
-                        </div>
-                        <div class="price">
-                            <p>130,000 - 3,400,000</p>
-                        </div>
-                    </a>
-                    <div class="buttonBuy">
-                        <button onclick="window.location.href='../../WebNuocHoa/page/checkout.php'">Buy Now</button>
                     </div>
                 </div>
-            </div>
-            <div class="product">
-                <div class="productComponents">
-                    <a class="productdetail" href="../../WebNuocHoa/page/productDetail.php">
-                        <div class="picture">
-                            <div>
-                                <img src="../../WebNuocHoa/assets/images/products/nuochoanu/product2.webp" alt="">
+                <div class="product">
+                    <div class="productComponents">
+                        <a class="productdetail" href="../../WebNuocHoa/page/productDetail.php">
+                            <div class="picture">
+                                <div>
+                                    <img src="../../WebNuocHoa/assets/images/products/nuochoanu/product2.webp" alt="">
+                                </div>
                             </div>
+                            <div class="styleProduct">
+                                <p>Armaf Club De nuit Milestone EDP</p>
+                            </div>
+                            <div class="price">
+                                <p>130,000 - 3,400,000</p>
+                            </div>
+                        </a>
+                        <div class="buttonBuy">
+                            <button onclick="window.location.href='../../WebNuocHoa/page/checkout.php'">Buy Now</button>
                         </div>
-                        <div class="styleProduct">
-                            <p>Armaf Club De nuit Milestone EDP</p>
-                        </div>
-                        <div class="price">
-                            <p>130,000 - 3,400,000</p>
-                        </div>
-                    </a>
-                    <div class="buttonBuy">
-                        <button onclick="window.location.href='../../WebNuocHoa/page/checkout.php'">Buy Now</button>
                     </div>
                 </div>
-            </div>
-            <div class="product">
-                <div class="productComponents">
-                    <a class="productdetail" href="../../WebNuocHoa/page/productDetail.php">
-                        <div class="picture">
-                            <div>
-                                <img src="../../WebNuocHoa/assets/images/products/nuochoanu/product3.webp" alt="">
+                <div class="product">
+                    <div class="productComponents">
+                        <a class="productdetail" href="../../WebNuocHoa/page/productDetail.php">
+                            <div class="picture">
+                                <div>
+                                    <img src="../../WebNuocHoa/assets/images/products/nuochoanu/product3.webp" alt="">
+                                </div>
                             </div>
+                            <div class="styleProduct">
+                                <p>Chanel Coco Mademoiselle EDP</p>
+                            </div>
+                            <div class="price">
+                                <p>130,000 - 3,400,000</p>
+                            </div>
+                        </a>
+                        <div class="buttonBuy">
+                            <button onclick="window.location.href='../../WebNuocHoa/page/checkout.php'">Buy Now</button>
                         </div>
-                        <div class="styleProduct">
-                            <p>Chanel Coco Mademoiselle EDP</p>
-                        </div>
-                        <div class="price">
-                            <p>130,000 - 3,400,000</p>
-                        </div>
-                    </a>
-                    <div class="buttonBuy">
-                        <button onclick="window.location.href='../../WebNuocHoa/page/checkout.php'">Buy Now</button>
                     </div>
                 </div>
-            </div>
-            <div class="product">
-                <div class="productComponents">
-                    <a class="productdetail" href="../../WebNuocHoa/page/productDetail.php">
-                        <div class="picture">
-                            <div>
-                                <img src="../../WebNuocHoa/assets/images/products/nuochoanu/product4.webp" alt="">
+                <div class="product">
+                    <div class="productComponents">
+                        <a class="productdetail" href="../../WebNuocHoa/page/productDetail.php">
+                            <div class="picture">
+                                <div>
+                                    <img src="../../WebNuocHoa/assets/images/products/nuochoanu/product4.webp" alt="">
+                                </div>
                             </div>
+                            <div class="styleProduct">
+                                <p>Christian Dior Miss Dior EDP</p>
+                            </div>
+                            <div class="price">
+                                <p>130,000 - 3,400,000</p>
+                            </div>
+                        </a>
+                        <div class="buttonBuy">
+                            <button onclick="window.location.href='../../WebNuocHoa/page/checkout.php'">Buy Now</button>
                         </div>
-                        <div class="styleProduct">
-                            <p>Christian Dior Miss Dior EDP</p>
-                        </div>
-                        <div class="price">
-                            <p>130,000 - 3,400,000</p>
-                        </div>
-                    </a>
-                    <div class="buttonBuy">
-                        <button onclick="window.location.href='../../WebNuocHoa/page/checkout.php'">Buy Now</button>
                     </div>
                 </div>
-            </div>
-        </div> 
+            </div> 
+        </div>
         
         
         <div class="content-cricle">

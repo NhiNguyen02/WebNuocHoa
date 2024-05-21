@@ -12,7 +12,7 @@ if(isset($_POST['submit1'])){
             window.onload = function () { alert("Email đã đăng ký tài khoản"); }
         </script>';
     }else{
-        $insert="INSERT INTO taikhoan(name, email, password, user_type) VALUES ('$username','$email', '$password1','user')";
+        $insert="INSERT INTO taikhoan(name, email, password) VALUES ('$username','$email', '$password1')";
         mysqli_query($conn,$insert);
         echo '<script type="text/javascript">
             window.onload = function () { alert("Đăng ký thành công"); }
