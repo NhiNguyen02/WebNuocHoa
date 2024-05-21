@@ -203,6 +203,14 @@ var edits=[document.querySelectorAll(".editstaff"), document.querySelectorAll(".
 edits.forEach(function(edit1,index) {
     edit1.forEach(function(edit2){
         edit2.onclick = function() {
+            const masp = this.getAttribute('data-masp');
+            const tensp = this.getAttribute('data-tensp');
+            const image01 = this.getAttribute('data-image01');
+            const thuonghieu = this.getAttribute('data-thuonghieu');
+            const dungtich = this.getAttribute('data-dungtich');
+            const giaban = this.getAttribute('data-giaban');
+            const soluong = this.getAttribute('data-soluong');
+
             modal.style.display = "block";
             contentModal.innerHTML="<span class=\"close\">&times;</span><br>";
             contentModal.innerHTML += updatecontents[index];
@@ -214,6 +222,14 @@ edits.forEach(function(edit1,index) {
                     modal.style.display = "none";
                 },{ once: true });
             }
+            console.log( document.querySelector('#masp'), masp)
+            document.querySelector('#masp').value = masp;
+            document.querySelector('#tensp').value = tensp;
+            document.querySelector('#image01').src = '../assets/images/addproducts/' + image01;
+            document.querySelector('#thuonghieu').value = thuonghieu;
+            document.querySelector('#capacity').value = dungtich;
+            document.querySelector('#giaban').value = giaban;
+            document.querySelector('#soluong').value = soluong;
         };
     })
 }); // Chọn phần tử đầu tiên trong HTMLCollection

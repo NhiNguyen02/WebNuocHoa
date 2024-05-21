@@ -1,14 +1,6 @@
 <?php
 
 include '../components/connect/config.php';
-
-    if (isset($_SESSION['MASP'])) {
-        $qq = $_SESSION['MASP'];
-    
-        echo "Giá trị của biến \$qq là: $qq";
-    } else {
-        echo "Không có giá trị của \$MASP được gửi đến.";
-    }
 ?>
 
 <!DOCTYPE html>
@@ -24,17 +16,17 @@ include '../components/connect/config.php';
     <h1 style="text-align:center;">Chỉnh sửa thông tin sản phẩm</h1>
     <form action="">
     
-        <!-- <div>
+        <div>
             <label for="">Mã sản phẩm:</label>
-            <input value="1asd" type="text">
-        </div> -->
+            <input required id="masp" value="1asd" type="text">
+        </div>
         <div>    
             <label for="">Tên sản phẩm:</label>    
-            <input required value="<?= $qq ?>" type="text" name="name">
+            <input required id="tensp" type="text" name="name">
         </div>
         <div>
             <label for="">Thương hiệu:</label>
-            <input required value="Dior" type="text" name="tenTH">
+            <input required id="thuonghieu" type="text" name="tenTH">
         </div>
         <!-- <div>
             <label for="">Loại sản phẩm:</label>
@@ -50,11 +42,11 @@ include '../components/connect/config.php';
         </div> -->
         <div>
             <label  for="">Dung tích:</label>
-            <input required value="50 ml" id="capacity" type="text" name="dt">
+            <input required id="capacity" type="text" name="dt">
         </div>
         <div>
             <label  for="">Giá (VNĐ):</label>
-            <input required id="capacity" type="number" name="gia">
+            <input required id="giaban" type="number" name="gia">
         </div>
         <!-- <div style="justify-content:flex-end">
             <button type="button" id="createrow">Create</button>
@@ -62,11 +54,11 @@ include '../components/connect/config.php';
         <div id="addFields"></div> -->
         <div>
             <label for="">Tổng số lượng:</label>
-            <input required value="20" type="number" name="sl">
+            <input required  id="soluong" type="number" name="sl">
         </div>
         <div>
             <label for="file1">Hình 1:</label>
-            <input required id="file1" value="sp1.png" type="file">
+            <input required id="image01" type="file">
         </div>
         <div>
             <label for="file2">Hình 2:</label>

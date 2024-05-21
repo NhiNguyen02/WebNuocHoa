@@ -1,14 +1,6 @@
 <?php 
     include "beAdmin.php";
 
-    if (isset($_POST['sss'])) {
-        $MASP = $_POST['idd']; 
-        $_SESSION['MASP'] = $MASP;
-        echo $MASP;
-
-    } else {
-        echo "Lỗi: Không tìm thấy mã sản phẩm.";
-    }
 ?>
 
 <!DOCTYPE html>
@@ -293,7 +285,15 @@
                                         <input type="hidden" name="idd" value="<?= $fetch_products['MASP']; ?>">
                                         <td><button name="sss" class="fa-solid fa-pen-to-square editproduct"></button></td>
                                     </form> -->
-                                    <td><i data-masp="<?= $fetch_products['MASP']; ?>" class="fa-solid fa-pen-to-square editproduct"></i></td>
+                                    <td>
+                                        <i data-masp="<?= $fetch_products['MASP']; ?>" class="fa-solid fa-pen-to-square editproduct"
+                                        data-masp="<?= $fetch_products['MASP']; ?>"
+                                        data-tensp="<?= $fetch_products['TENSP']; ?>"
+                                        data-image01="<?= $fetch_products['image_01']; ?>"
+                                        data-thuonghieu="<?= $fetch_products['THUONGHIEU']; ?>"
+                                        data-dungtich="<?= $fetch_products['DUNGTICH']; ?>"
+                                        data-giaban="<?= $fetch_products['GIABAN']; ?>"
+                                        data-soluong="<?= $fetch_products['SOLUONG']; ?>"></i></td>
                                     <td><a href="admin.php?delete=<?= $fetch_products['MASP']; ?>"><i class="fa-solid fa-trash"></i></a></td>
                                     </tr>
                                 <?php
