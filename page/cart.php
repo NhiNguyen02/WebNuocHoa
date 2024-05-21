@@ -33,6 +33,20 @@ if(isset($_POST['update_qty'])) {
         $update_qty->execute();
         $update_qty->close();
     }
+
+    $select = " SELECT giohang.SOLUONG AS slg, sanpham.SOLUONG AS slsp FROM `giohang`
+                JOIN `sanpham` ON giohang.MASP = sanpham.MASP
+                WHERE giohang.MAKH = $user_id ";
+    $result = mysqli_query($conn, $select);
+    $row = mysqli_fetch_array($result);
+    $slsp = $row['slsp'];
+    $slg = $row['slg'];
+    if($slg > $slsp){
+        $update_qty = $conn->prepare("UPDATE `giohang` SET SOLUONG = ? WHERE MAGH = ?");
+        $update_qty->bind_param("ii", $slsp, $cart_id);
+        $update_qty->execute();
+        $update_qty->close();
+    }
     echo '<script>history.replaceState({}, "", window.location.href.split("?")[0]);</script>';
 }
 if(isset($_POST['mua'])){

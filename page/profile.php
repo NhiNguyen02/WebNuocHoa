@@ -102,7 +102,7 @@ session_start();
                         </div>    
                         <div class="input-user">
                             <p style="display: <?php echo $input1;?>;">0<?php echo $_SESSION['sdt'] ?></p>
-                            <p style="display: <?php echo $input2;?>;"><input type="number" value="0<?php echo $_SESSION['sdt'] ?>" name="sdt">  </p>
+                            <p style="display: <?php echo $input2;?>;"><input type="number" value="<?php echo $_SESSION['sdt'] ?>" name="sdt">  </p>
                         </div>
                     </div>
                     <div class="info-user">

@@ -217,3 +217,4 @@ edits.forEach(function(edit1,index) {
         };
     })
 }); // Chọn phần tử đầu tiên trong HTMLCollection
+

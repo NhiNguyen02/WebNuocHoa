@@ -18,10 +18,42 @@ if(isset($_POST['order'])){
     $h = $_POST['h'];
     $x = $_POST['x'];
     $sn = $_POST['sn'];
+
+    $tt = $_POST['tt'];
+    $sp = $_POST['sp'];
+    $tongia = $_POST['tongia'];
+    $gc = $_POST['gc'];
+    $ttgiao = "Người bán đang chuẩn bị hàng";
+    $km = '';
+
     $update_user = mysqli_prepare($conn, "UPDATE `taikhoan` SET name = ?, email = ?, sdt = ?, tinhthanh = ?, quanhuyen = ?, phuongxa = ?, sonha = ? WHERE id = ?");
     mysqli_stmt_bind_param($update_user, "ssissssi", $name, $email, $sdt, $t, $h, $x, $sn, $id);
     mysqli_stmt_execute($update_user);
 
+    $select_cart = $conn->prepare("SELECT giohang.*, sanpham.SOLUONG AS SP_SL FROM `giohang`
+                                                            JOIN `sanpham` ON giohang.MASP = sanpham.MASP
+                                                            WHERE giohang.MAKH = ?");
+    $select_cart->bind_param("i", $user_id);
+    $select_cart->execute();
+    $result = $select_cart->get_result();
+    while($fetch_cart = $result->fetch_assoc()){
+        $sl = $fetch_cart['SP_SL'] - $fetch_cart['SOLUONG'];
+        $update_sp = mysqli_prepare($conn, "UPDATE `sanpham` SET SOLUONG = ? WHERE MASP = ?");
+        mysqli_stmt_bind_param($update_sp, "ii", $sl, $fetch_cart['MASP']);
+        mysqli_stmt_execute($update_sp);
+        mysqli_stmt_close($update_sp);
+
+        $delete_cart = mysqli_prepare($conn, "DELETE FROM `giohang` WHERE MAKH = ?");
+        mysqli_stmt_bind_param($delete_cart, "i", $id);
+        mysqli_stmt_execute($delete_cart);
+    }
+
+    $insert_dh = $conn->prepare("INSERT INTO `donhang`(MAKH, SANPHAM, MACTKM, THANHTOAN, THANHTIEN, TRANGTHAI, GHICHU) VALUES(?,?,?,?,?,?,?)");
+    $insert_dh->bind_param("isssiss", $id, $sp, $km, $tt, $tongia, $ttgiao, $gc);
+    $insert_dh->execute();
+    $insert_dh->close();
+
+    header('location:profile.php');
  }
 ?>
 <!DOCTYPE html>
@@ -61,32 +93,32 @@ if(isset($_POST['order'])){
                             <div class="checkoutmain_info">
                                 <h3>Thông tin mua hàng</h3>
                                 <div class="maininfo">
-                                    <input type="email" name="email" value="<?php echo $_SESSION['email'] ?>" placeholder="Email">
+                                    <input type="email" name="email" value="<?php echo $_SESSION['email'] ?>" placeholder="Email" required>
                                 </div>
                                 <div class="maininfo">
-                                    <input type="text" name="name" value="<?php echo $_SESSION['user_name'] ?>" placeholder="Họ và tên">
+                                    <input type="text" name="name" value="<?php echo $_SESSION['user_name'] ?>" placeholder="Họ và tên" required>
                                 </div>
                                 <div class="maininfo">
-                                    <input type="text" name="sdt" value="0<?php echo $_SESSION['sdt'] ?>" placeholder="Số điện thoại">
+                                    <input type="number" name="sdt" value="0<?php echo $_SESSION['sdt'] ?>" placeholder="Số điện thoại" required>
                                 </div>
                                 <div class="maininfo">
-                                    <input type="text" name="t" value="<?php echo $_SESSION['t'] ?>" placeholder="Tỉnh thành">
+                                    <input type="text" name="t" value="<?php echo $_SESSION['t'] ?>" placeholder="Tỉnh thành" required>
                                 </div>
                                 <div class="maininfo">
-                                    <input type="text" name="h" value="<?php echo $_SESSION['h'] ?>" placeholder="Quận huyện">
+                                    <input type="text" name="h" value="<?php echo $_SESSION['h'] ?>" placeholder="Quận huyện" required>
                                 </div>
                                 <div class="maininfo">
-                                    <input type="text" name="x" value="<?php echo $_SESSION['x'] ?>" placeholder="Phường xã">
+                                    <input type="text" name="x" value="<?php echo $_SESSION['x'] ?>" placeholder="Phường xã" required>
                                 </div>
                                 <div class="maininfo">
-                                    <input type="text" name="sn" value="<?php echo $_SESSION['sn'] ?>" placeholder="Số nhà,...">
+                                    <input type="text" name="sn" value="<?php echo $_SESSION['sn'] ?>" placeholder="Số nhà,..." required>
                                 </div>
                                 <!-- <div >
                                     <input type="checkbox" name="" id="">
                                     Giao hàng đến địa chỉ khác
                                 </div> -->
                                 <div>
-                                    <textarea name="" id="" rows="3" placeholder="ghi chú (tùy chọn)"></textarea>
+                                    <textarea name="gc" id="" rows="3" placeholder="ghi chú (tùy chọn)"></textarea>
                                 </div>
                             </div>
                             <div class="checkoutmain_others">
@@ -101,7 +133,7 @@ if(isset($_POST['order'])){
                                 
                                 <div>
                                     <h3>Thanh toán</h3>
-                                    <select name="method" required>
+                                    <select name="tt" required>
                                     <option value="Thanh toán khi nhận hàng (COD)">Thanh toán khi nhận hàng (COD)</option>
                                     <option value="Thanh toán qua MOMO">Thanh toán qua MOMO</option>
                                     <option value="Thanh toán qua VNPay-QR">Thanh toán qua VNPay-QR</option>
@@ -135,6 +167,7 @@ if(isset($_POST['order'])){
                     <div>
                         <?php
                             $grand_total = 0;
+                            $cart_items[] = '';
                             $select_cart = $conn->prepare("SELECT giohang.*, TENSP, GIABAN, image_01 FROM `giohang`
                                                             JOIN `sanpham` ON giohang.MASP = sanpham.MASP
                                                             WHERE giohang.MAKH = ?");
@@ -144,6 +177,9 @@ if(isset($_POST['order'])){
 
                             if($result->num_rows > 0){
                                 while($fetch_cart = $result->fetch_assoc()){
+                                    $cart_items[] = $fetch_cart['TENSP'].' ('.$fetch_cart['GIABAN'].'VNĐ x '. $fetch_cart['SOLUONG'].')
+                                    ';
+                                    $total_products = implode($cart_items);
                         ?>
                         <div class="checkout_coupon_top">
                             <div class="checkout_coupon_top_img">
@@ -160,9 +196,8 @@ if(isset($_POST['order'])){
                                 <p><?= $fetch_cart['GIABAN']; ?> VNĐ</p>
                             </div>
                         </div>
-                        <?php  
-                            $sub_total = ($fetch_cart['GIABAN'] * $fetch_cart['SOLUONG']);
-                            $grand_total += $sub_total;
+                        <?php
+                            $grand_total += ($fetch_cart['GIABAN'] * $fetch_cart['SOLUONG']);
                             }            
                         } 
                         ?>
@@ -182,7 +217,9 @@ if(isset($_POST['order'])){
                                 </div>
                                 <div class="checkout_coupon_main_footer">
                                     <p>Tổng cộng:</p>
-                                    <span><strong><?= $grand_total+=29000; ?> VNĐ</strong></span>
+                                    <input type="hidden" name="sp" value="<?= $total_products; ?>">
+                                    <input type="hidden" name="tongia" value="<?= $grand_total+=29000; ?>">
+                                    <span><strong><?= $grand_total; ?> VNĐ</strong></span>
                                 </div>
                                 <div class="checkout_coupon_main_footer">
                                     <a href="../../WebNuocHoa/page/cart.php">< Quay  lại giỏ hàng</a>

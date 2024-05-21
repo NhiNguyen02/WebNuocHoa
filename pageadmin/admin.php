@@ -1,6 +1,15 @@
 <?php 
-    include "beAdmin.php"
+    include "beAdmin.php";
+
+    if (isset($_POST['sss'])) {
+        $MASP = $_POST['idd']; 
+        echo $MASP;
+
+    } else {
+        echo "Lỗi: Không tìm thấy mã sản phẩm.";
+    }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -279,7 +288,11 @@
                                     <td><?= $fetch_products['GIABAN']; ?></td>
                                     <td><?= $fetch_products['SOLUONG']; ?></td>
                                     <td><i class="fa-solid fa-eye"></i></td>
-                                    <td><i class="fa-solid fa-pen-to-square editproduct"></i></td>
+                                    <!-- <form method="post">
+                                        <input type="hidden" name="idd" value="<?= $fetch_products['MASP']; ?>">
+                                        <td><button name="sss" class="fa-solid fa-pen-to-square editproduct"></button></td>
+                                    </form> -->
+                                    <td><i data-masp="<?= $fetch_products['MASP']; ?>" class="fa-solid fa-pen-to-square editproduct"></i></td>
                                     <td><a href="admin.php?delete=<?= $fetch_products['MASP']; ?>"><i class="fa-solid fa-trash"></i></a></td>
                                     </tr>
                                 <?php
@@ -425,22 +438,29 @@
                 <div class="modal-content" id="contentModal">
                     <span class="close">&times;</span><br>
                     <?php 
+                        function getExecutedPhpContent($file) {
+                            ob_start();
+                            include $file;
+                            return ob_get_clean();
+                        }
+
                         $contents = [
-                            file_get_contents("../../WebNuocHoa/pageadmin/addStaff.php"),
-                            file_get_contents("../../WebNuocHoa/pageadmin/addProduct.php"),
-                            file_get_contents("../../WebNuocHoa/pageadmin/addMegaphone.php"),
-                            file_get_contents("../../WebNuocHoa/pageadmin/addWarehouse.php"),
-                            file_get_contents("../../WebNuocHoa/pageadmin/editCalendar.php")
+                            getExecutedPhpContent("../../WebNuocHoa/pageadmin/addStaff.php"),
+                            getExecutedPhpContent("../../WebNuocHoa/pageadmin/addProduct.php"),
+                            getExecutedPhpContent("../../WebNuocHoa/pageadmin/addMegaphone.php"),
+                            getExecutedPhpContent("../../WebNuocHoa/pageadmin/addWarehouse.php"),
+                            getExecutedPhpContent("../../WebNuocHoa/pageadmin/editCalendar.php")
                         ];
-                        echo "<script>" . "var contents = " . json_encode($contents) . ";" . "</script>";
-                        $updatecontents=[
-                            file_get_contents("../../WebNuocHoa/pageadmin/editStaff.php"),
-                            file_get_contents("../../WebNuocHoa/pageadmin/editProduct.php"),
-                            file_get_contents("../../WebNuocHoa/pageadmin/editWarehouse.php"),
-                            file_get_contents("../../WebNuocHoa/pageadmin/editMegaphone.php")
+                        echo "<script>var contents = " . json_encode($contents) . ";</script>";
+
+                        $updatecontents = [
+                            getExecutedPhpContent("../../WebNuocHoa/pageadmin/editStaff.php"),
+                            getExecutedPhpContent("../../WebNuocHoa/pageadmin/editProduct.php"),
+                            getExecutedPhpContent("../../WebNuocHoa/pageadmin/editWarehouse.php"),
+                            getExecutedPhpContent("../../WebNuocHoa/pageadmin/editMegaphone.php")
                         ];
-                        echo "<script>" . "var updatecontents = " . json_encode($updatecontents) . ";" . "</script>";
-                     ?>
+                        echo "<script>var updatecontents = " . json_encode($updatecontents) . ";</script>";
+                    ?>
                 </div>
             </div>
         </div>

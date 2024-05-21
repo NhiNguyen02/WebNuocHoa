@@ -13,24 +13,36 @@ if(isset($_POST['add_to_cart'])){
     $pid = $_GET['pid'];
     $qty = $_POST['qty'];
 
-    $check_cart_numbers = $conn->prepare("SELECT * FROM `giohang` WHERE MAKH = ? AND MASP = ?");
-    $check_cart_numbers->bind_param("ii", $user_id, $pid);
-    $check_cart_numbers->execute();
-    $check_cart_numbers_result = $check_cart_numbers->get_result();
+    $select = " SELECT SOLUONG FROM `sanpham`
+                WHERE MASP = $pid ";
+    $result = mysqli_query($conn, $select);
+    $row = mysqli_fetch_array($result);
+    $slsp = $row['SOLUONG'];
+    if($slsp > 0){
+        $check_cart_numbers = $conn->prepare("SELECT * FROM `giohang` WHERE MAKH = ? AND MASP = ?");
+        $check_cart_numbers->bind_param("ii", $user_id, $pid);
+        $check_cart_numbers->execute();
+        $check_cart_numbers_result = $check_cart_numbers->get_result();
 
-    if($check_cart_numbers_result->num_rows > 0){
-        $message[] = 'Sản phẩm đã thêm vào giỏ hàng!';
-    }else{
+        if($check_cart_numbers_result->num_rows > 0){
+            $message[] = 'Sản phẩm đã thêm vào giỏ hàng!';
+        }else{
 
-        $insert_cart = $conn->prepare("INSERT INTO `giohang`(MAKH, MASP, SOLUONG) VALUES(?,?,?)");
-        $insert_cart->bind_param("iii", $user_id, $pid, $qty);
-        $insert_cart->execute();
-        $insert_cart->close();
+            $insert_cart = $conn->prepare("INSERT INTO `giohang`(MAKH, MASP, SOLUONG) VALUES(?,?,?)");
+            $insert_cart->bind_param("iii", $user_id, $pid, $qty);
+            $insert_cart->execute();
+            $insert_cart->close();
 
-        $message = 'Thêm vào giỏ hàng thàng công!';
+            if($qty > $slsp){
+                $update_qty = $conn->prepare("UPDATE `giohang` SET SOLUONG = ? WHERE MAKH = ? AND MASP = ?");
+                $update_qty->bind_param("iii", $slsp, $user_id, $pid);
+                $update_qty->execute();
+                $update_qty->close();
+            }
+            $message = 'Thêm vào giỏ hàng thàng công!';
+        }
+        $check_cart_numbers->close();    
     }
- 
-       $check_cart_numbers->close();    
        header('location:cart.php');
  }
 ?>
@@ -205,9 +217,9 @@ if(isset($_POST['add_to_cart'])){
             <div class="product-footer">
                 <div class="link-info-footer">
                     <div class="row1">
-                        <button id="description" class="description-product"> THÔNG TIN SẢN PHẨM</button>
-                        <button id="instruction" class="instruction-product">HƯỚNG DẪN SỬ DỤNG & BẢO QUẢN</button>
-                        <button id="policy" class="policy-product">CHÍNH SÁCH ĐỔI TRẢ - BẢO HÀNH</button>
+                        <a id="description" class="description-product"> THÔNG TIN SẢN PHẨM |</a>
+                        <a id="instruction" class="instruction-product">| HƯỚNG DẪN SỬ DỤNG & BẢO QUẢN |</a>
+                        <a id="policy" class="policy-product">| CHÍNH SÁCH ĐỔI TRẢ - BẢO HÀNH</a>
                     </div>
                     <div class="tab-panels">
                         <div id="tab-descriptions" class="tab-button1">
@@ -221,7 +233,7 @@ if(isset($_POST['add_to_cart'])){
                             <li>- Hương giữa: Xạ hương, hoa hồng, hoa nhài, hoa trắng</li>
                             <li>- Hương cuối: Gỗ Cashmere, tuyết tùng, Benzoin, hổ phách</li> -->
                         </div>
-                        <div id="tab-instructions" class="tab-button2">
+                        <div id="tab-instructions" class="tab-button2" style="display: none;">
                             <p>Cách sử dụng được Heleneperfume đề xuất dành cho bạn:</p>
                             <li>- Nước hoa mang lại mùi hương cho cơ thể bạn thông qua việc tiếp xúc lên da và phản ứng với hơi ấm trên cơ thể của bạn. Việc được tiếp xúc với các bộ phận như cổ tay, khuỷu tay, sau tai, gáy, cổ trước là những vị trí được ưu tiên hàng đầu trong việc sử dụng nước hoa bởi sự kín đáo và thuận lợi trong việc tỏa mùi hương.</li>
                             <li>- Sau khi sử dụng, xịt nước hoa lên cơ thể, tránh dùng tay chà xát hoặc làm khô da bằng những vật dụng khác, điều này phá vỡ các tầng hương trong nước hoa, khiến nó có thể thay đổi mùi hương hoặc bay mùi nhanh hơn.</li>
@@ -232,7 +244,7 @@ if(isset($_POST['add_to_cart'])){
                             <li>- Nước hoa phổ thông (Designer) thường không có hạn sử dụng, ở một số Quốc gia, việc ghi chú hạn sử dụng là điều bắt buộc để hàng hóa được bán ra trên thị trường. Hạn sử dụng ở một số dòng nước hoa được chú thích từ 24 đến 36 tháng, và tính từ ngày bạn mở sản phẩm và sử dụng lần đầu tiên.</li>
                             <li>- Nước hoa là tổng hợp của nhiều thành phần hương liệu tự nhiên và tổng hợp, nên bảo quản nước hoa ở những nơi khô thoáng, mát mẻ, tránh nắng, nóng hoặc quá lạnh, lưu ý không để nước hoa trong cốp xe, những nơi có nhiệt độ nóng lạnh thất thường...</li>
                         </div>
-                        <div id="tab-policy" class="tab-button3">
+                        <div id="tab-policy" class="tab-button3" style="display: none;">
                             <p>Missi cam kết bảo hành trọn đời về mùi hương của chai nước hoa. Nếu sản phẩm không đúng chính hãng, khách hàng có quyền trả hàng hoàn tiền 100%</p>
                             <p><strong>ĐIỀU KIỆN BẢO HÀNH</strong></p>
                             <p>Sản phẩm phải còn đầy đủ tem, hộp của nhà sản xuất & và tem bảo hành của Missi.</p>
