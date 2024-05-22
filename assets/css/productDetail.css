@@ -9,8 +9,17 @@
     justify-content: center;
     margin-top: 35px;
 }
+.templateproductmain{
+    display: flex;
+    justify-content: center;
+    max-width: 1330px;
+    width: 100%;
+}
 .product-gellery, .introduce-product, .info-more{
     padding: 0 15px;
+}
+.introduce-product{
+    width: 35%;
 }
 .product-gellery{
     max-width: 450px;
