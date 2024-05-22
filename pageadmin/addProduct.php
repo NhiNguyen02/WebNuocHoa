@@ -93,6 +93,7 @@
         mysqli_stmt_execute($delete_product);
 
         header('location:http://localhost/webNuocHoa/pageadmin/admin.php');
+        echo '<script>history.replaceState({}, "", window.location.href.split("?")[0]);</script>';
     }
 
 ?>
@@ -111,6 +112,7 @@
     <div>
             <label for="">Chọn kho lưu trữ:</label>
             <select required name="kho" >
+                <option value="">--- Chọn kho ---</option>
                 <?php
                     $select = "SELECT * FROM khohang ";
                     $result = mysqli_query($conn, $select);

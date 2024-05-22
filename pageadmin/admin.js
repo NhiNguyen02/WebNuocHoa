@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-var edits=[document.querySelectorAll(".editstaff"), document.querySelectorAll(".editproduct"),document.querySelectorAll(".editwarehouse"),document.querySelectorAll(".editmegaphone")];
+var edits=[document.querySelectorAll(".editstaff"), document.querySelectorAll(".editproduct"), document.querySelectorAll(".editorder"),document.querySelectorAll(".editwarehouse"),document.querySelectorAll(".editmegaphone")];
 edits.forEach(function(edit1,index) {
     edit1.forEach(function(edit2){
         edit2.onclick = function() {

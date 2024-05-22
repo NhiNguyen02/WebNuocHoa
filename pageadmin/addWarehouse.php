@@ -13,9 +13,7 @@
             mysqli_query($conn, $insert);
             
         } 
-        
-        header('location:http://localhost/webNuocHoa/pageadmin/admin.php');
-
+        header('location:http://localhost/WebNuocHoa/pageadmin/admin.php');
     }
     if(isset($_GET['delete_kh'])){
 
@@ -45,10 +43,8 @@
         $delete_km->bind_param("i", $delete_id);
         $delete_km->execute();
         $delete_km->close();
-     
-        header('location:http://localhost/webNuocHoa/pageadmin/admin.php');
-
-     }
+        header('location:http://localhost/WebNuocHoa/pageadmin/admin.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +57,7 @@
 </head>
 <body>
 
-    <h1 style="text-align:center;">Thêm sản phẩm vào kho</h1>
+    <h1 style="text-align:center;">Thêm kho</h1>
     <form action="" method="post">
         <div>    
             <label for="">Tên kho hàng:</label>    

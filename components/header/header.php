@@ -13,6 +13,7 @@ if(!isset($_SESSION['user_name'])){
     $user_info=$_SESSION['user_name'];
     $action1='none';
     $action2='<a href="../../../WebNuocHoa/page/profile.php"><li>' . $user_info . '</li></a>
+    <li onclick="openPassword()" style="font-weight: bold;">Đổi mật khẩu</li>
     <a href="../../../WebNuocHoa/page/logout.php"><li>Đăng xuất</li></a>';
     $action4='<li style="position: relative;"><a href="../../../WebNuocHoa/page/cart.php"><img  src="../../../WebNuocHoa/assets/images/iconCart.svg" alt=""></a><i class="fa-solid fa-circle" style="color: #fb0505;"></i></li>';
     
@@ -30,6 +31,7 @@ if(!isset($_SESSION['user_name'])){
     <link rel="stylesheet" href="../../../WebNuocHoa/assets/css/style.css">
     <script src="../../../WebNuocHoa/components/login/loginOC.js"></script>
     <script src="../../../WebNuocHoa/components/register/registerOC.js"></script>
+    <script src="../../../WebNuocHoa/components/replacePassword/passwordJs.js"></script>
     <title>Document</title>
 </head>
 <body>

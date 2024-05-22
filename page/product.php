@@ -26,6 +26,7 @@ if(isset($_POST['mua'])){
         <?php include "../components/header/header.php" ?>
         <div id="hiddenLogin"  style="display:none"> <?php include "../../WebNuocHoa/components/login/login.php" ?></div>
         <div id="hiddenRegister" style="display:none"> <?php include "../../WebNuocHoa/components/register/register.php" ?></div>
+        <div id="hiddenPassword" style="display:none"> <?php include "../../WebNuocHoa/components/replacePassword/replacePassword.php" ?></div>
         <div style="display: block; height:80px;"></div>
         <div class="bannerProduct">
             <img src="../../WebNuocHoa/assets/images/products/bannerProduct.png" alt="">

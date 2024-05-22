@@ -1,8 +1,6 @@
 <?php 
-
     include '../components/connect/config.php';
     session_start();
-    
     if(isset($_GET['deleteuser'])){
 
         $delete_id = $_GET['deleteuser'];
@@ -35,7 +33,7 @@
         
         header('location:admin.php');
     }
-    
+    echo '<script>history.replaceState({}, "", window.location.href.split("?")[0]);</script>';
 ?>
 
 <!DOCTYPE html>
@@ -376,7 +374,7 @@
                     <div id="admin_order">
                         <form action="" method="post">
                             <!-- <div style="display:flex; justify-content:flex-end; margin-bottom: 10px;"><button id="openModal1">Chỉnh sửa</button><button id="openModal1">Lưu</button></div> -->
-                            <div style="display:flex; justify-content:flex-end; margin-bottom: 10px;"><button name="hoadon" >Chỉnh sửa</button><button name="hoadon1" >Lưu</button></div>
+                            <!-- <div style="display:flex; justify-content:flex-end; margin-bottom: 10px;"><button name="hoadon" >Chỉnh sửa</button><button name="hoadon1" >Lưu</button></div> -->
                             <table>
                                 <thead>
                                     <tr>
@@ -385,12 +383,13 @@
                                         <th>Sản phẩm</th>
                                         <th>Thời gian đặt hàng</th>
                                         <th>Tình trạng thanh toán</th>
-                                        <th>Hình thức thanh toán</th>
+                                        <!-- <th>Hình thức thanh toán</th> -->
                                         <th>MÃ Voucher</th>
                                         <th>Thành tiền (VNĐ)</th>
                                         <th>Trạng thái</th>
                                         <th>Ghi chú</th>
                                         <!-- <th>Đang chuẩn bị hàng</th> -->
+                                        <th>Chỉnh sửa</th>
                                         <th>Xóa</th>
                                     </tr>
                                 </thead>
@@ -407,25 +406,26 @@
                                         <td><?= $fetch_dh['SANPHAM']; ?></td>
                                         <td><?= $fetch_dh['NGAYBAN']; ?></td>
                                         <td style="display: <?php echo $input1;?>;"><?= $fetch_dh['NGAYBAN']; ?></td>
-                                        <td style="display: <?php echo $input2;?>;"><select required name="gt" id="">
+                                        <!-- <td style="display: <?php echo $input2;?>;"><select required name="gt" id="">
                                                 <option disabled selected hidden >-Chọn trạng thái-</option>
                                                 <option value="Đang xửa lý thanh toán">Đang xửa lý thanh toán</option>
                                                 <option value="Đã thanh toán">Đã thanh toán</option>
                                             </select>
-                                        </td>
+                                        </td> -->
                                         <td><?= $fetch_dh['THANHTOAN']; ?></td>
                                         <td><?= $fetch_dh['MACTKM']; ?></td>
                                         <td><?= $fetch_dh['THANHTIEN']; ?></td>
                                         <td style="display: <?php echo $input1;?>;"><?= $fetch_dh['TRANGTHAI']; ?></td>
-                                        <td style="display: <?php echo $input2;?>;"><select required name="gt" id="">
+                                        <!-- <td style="display: <?php echo $input2;?>;"><select required name="gt" id="">
                                                 <option disabled selected hidden >-Chọn trạng thái-</option>
                                                 <option value="Đợi xác thực thanh toán">Đợi xác thực thanh toán</option>
                                                 <option value="Người bán đang chuẩn bị hàng">Người bán đang chuẩn bị hàng</option>
                                                 <option value="Đơn hàng đang vận chuyển đến bạn">Đơn hàng đang vận chuyển đến bạn</option>
                                                 <option value="Đã nhận hàng">Đã nhận hàng</option>
                                             </select>
-                                        </td>
+                                        </td> -->
                                         <td><?= $fetch_dh['GHICHU']; ?></td>
+                                        <td><i class="fa-solid fa-pen-to-square editorder"></i></td>
                                         <td><a href="admin.php?delete_dh=<?= $fetch_dh['MAHD']; ?>"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
                                     <?php
@@ -572,6 +572,7 @@
                         $updatecontents = [
                             getExecutedPhpContent("../../WebNuocHoa/pageadmin/editStaff.php"),
                             getExecutedPhpContent("../../WebNuocHoa/pageadmin/editProduct.php"),
+                            getExecutedPhpContent("../../WebNuocHoa/pageadmin/editOrder.php"),
                             getExecutedPhpContent("../../WebNuocHoa/pageadmin/editWarehouse.php"),
                             getExecutedPhpContent("../../WebNuocHoa/pageadmin/editMegaphone.php")
                         ];

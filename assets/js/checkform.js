@@ -73,3 +73,41 @@ function checkFormLogin() {
     }
     return !error;
 }
+
+function checkFormPassword(){
+    var pass1 = document.forms["formPassword"]["password1"].value;
+    var pass2 = document.forms["formPassword"]["password2"].value;
+    var pass3 = document.forms["formPassword"]["password3"].value;
+    var error = false;
+    if (pass1 == "") {
+        document.getElementById("error7").innerHTML = "Bạn chưa nhập password"; 
+        error = true;
+    } else if (pass1.length < 8) {
+        document.getElementById("error7").innerHTML = "Password không hợp lệ"; 
+        error = true;
+    } else {
+        document.getElementById("error7").innerHTML = ""; 
+    }
+
+    if (pass2 == "") {
+        document.getElementById("error8").innerHTML = "Bạn chưa nhập password"; 
+        error = true;
+    } else if (pass2.length < 8) {
+        document.getElementById("error8").innerHTML = "Password từ 8 kí tự trở lên"; 
+        error = true;
+    } else {
+        document.getElementById("error8").innerHTML = ""; 
+    }
+
+    if (pass3 == "") {
+        document.getElementById("error9").innerHTML = "Bạn chưa nhập lại password"; 
+        error = true;
+    } else if (pass2 != pass3) {
+        document.getElementById("error9").innerHTML = "Password không trùng khớp"; 
+        error = true;
+    } else {
+        document.getElementById("error9").innerHTML = ""; 
+    }
+
+    return !error;
+}

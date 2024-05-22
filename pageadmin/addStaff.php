@@ -46,7 +46,7 @@
         mysqli_stmt_execute($delete);
 
         header('location:http://localhost/webNuocHoa/pageadmin/admin.php');
-        
+        echo '<script>history.replaceState({}, "", window.location.href.split("?")[0]);</script>';
     }
 
 ?>
