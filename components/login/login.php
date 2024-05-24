@@ -20,6 +20,8 @@ if(isset($_POST['submit'])){
     } elseif (mysqli_num_rows($result_ad) > 0) {
         $row = mysqli_fetch_array($result_ad);
         $_SESSION['id_ad'] = $row['MANV'];
+        $_SESSION['chucvu'] = $row['CHUCVU'];
+        $_SESSION['ten'] = $row['HOTEN'];
         header('location:http://localhost/WebNuocHoa/pageadmin/admin.php');
     } else{
         echo '<script type="text/javascript">

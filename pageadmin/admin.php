@@ -1,6 +1,16 @@
 <?php 
     include '../components/connect/config.php';
     session_start();
+    if(!isset($_SESSION['chucvu'])){
+        header('location:http://localhost/WebNuocHoa/');
+    }else{
+        $cvu = $_SESSION['chucvu'];
+    }
+    if(!isset($_SESSION['ten'])){
+        header('location:http://localhost/WebNuocHoa/');
+    }else{
+        $tenadmin = $_SESSION['ten'];
+    }
     if(isset($_GET['deleteuser'])){
 
         $delete_id = $_GET['deleteuser'];
@@ -62,7 +72,7 @@
                     <div>
                         <img class="" src="../../WebNuocHoa/assets/admin/userCircle.svg" alt="">
                     </div>
-                    <h1>Admin</h1>
+                    <h3><?php echo $cvu ?> - <?php echo $tenadmin ?></h3>
                     <p>Chúc mừng bạn trở lại</p>
                     <div>
                         <li tabindex="0" id="tabadmin_staff">
@@ -93,6 +103,10 @@
                         <img src="../../WebNuocHoa/assets/admin/backgroundAdmin.png" alt="">
                     </div>
                     <div id="admin_staff">
+                        <?php
+                            $cvu = $_SESSION['chucvu'];
+                            if($cvu == "Quản lý"){   
+                        ?>
                         <div style="display:flex; justify-content:flex-end; margin-bottom: 10px;"><button id="openModal1">Thêm nhân viên</button></div>
                         <table style="max-width: 1200px;">
                             <thead>
@@ -126,12 +140,7 @@
                                     <td><?= $fetch_nv['GIOITINH']; ?></td>
                                     <td><?= $fetch_nv['SDT']; ?></td>
                                     <td><?= $fetch_nv['DIACHI']; ?></td>
-                                    <td><?php if($fetch_nv['CHUCVU'] == "admin") { ?>
-                                                    Quản lý
-                                                <?php }  
-                                                elseif ($fetch_nv['CHUCVU'] == "admin_phu") { ?>
-                                                    Nhân viên
-                                                <?php } ?></td>
+                                    <td><?= $fetch_nv['CHUCVU']; ?></td>
                                     <td><?= $fetch_nv['LUONG']; ?></td>
                                     <td><i data-masp="<?= $fetch_nv['DIACHI']; ?>" class="fa-solid fa-pen-to-square editproduct"></i>
                                     
@@ -141,11 +150,11 @@
                                 <?php
                                     }
                                 } else {
-                                        echo '<h2>Hiện tại chưa có nhân sự!</h2>';
+                                        echo '<h1>Hiện tại chưa có nhân sự!</h1>';
                                     }
                                 ?>
                             </tbody>
-                        </table>
+                        </table>                      
 
                         <div id="pagination">
                             <span><<</span>    
@@ -158,8 +167,18 @@
                             <span>6</span>
                             <span>>></span>
                         </div>
+                        <?php
+                            } else {
+                                echo '<h1>Quản lý nhân viên</h1>';
+                                echo '<h2>Hiện tại bạn không có quyền truy cập !</h2>';
+                            }
+                        ?>
                     </div>
                     <div id="admin_calendar">
+                        <?php
+                            $cvu = $_SESSION['chucvu'];
+                            if($cvu == "Quản lý"){   
+                        ?>
                         <div style="display:flex; justify-content:flex-end; margin-bottom: 10px;"><button id="editcalendar">Chỉnh sửa</button></div>
                         <div class="table-responsive">
                             <table class="tablecalendar">
@@ -550,6 +569,12 @@
                             <span>6</span>
                             <span>>></span>
                         </div>
+                        <?php
+                            } else {
+                                echo '<h1>Quản lý lịch làm việc</h1>';
+                                echo '<h2>Hiện tại bạn không có quyền truy cập !</h2>';
+                            }
+                        ?>
                     </div>                   
                     <div id="admin_user">
                         <table>

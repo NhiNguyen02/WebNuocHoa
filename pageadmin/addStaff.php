@@ -108,8 +108,8 @@
             <label for="">Chức vụ:</label>
             <select required name="cv">
                 <option disabled selected hidden >--Chọn chức vụ--</option>
-                <option value="admin_phu">Nhân viên</option>
-                <option value="admin">Quản lý</option>
+                <option value="Nhân viên">Nhân viên</option>
+                <option value="Quản lý">Quản lý</option>
             </select>
         </div>
 
