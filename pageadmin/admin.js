@@ -215,6 +215,7 @@ edits.forEach(function(edit1,index) {
             const dungtich = this.getAttribute('data-dungtich');
             const giaban = this.getAttribute('data-giaban');
             const soluong = this.getAttribute('data-soluong');
+            const mahd = this.getAttribute('data-mahd');
 
             modal.style.display = "block";
             contentModal.innerHTML="<span class=\"close\">&times;</span><br>";
@@ -240,6 +241,7 @@ edits.forEach(function(edit1,index) {
             document.querySelector('#capacity').value = dungtich;
             document.querySelector('#giaban').value = giaban;
             document.querySelector('#soluong').value = soluong;
+            document.querySelector('#mahd').value = mahd;
         };
     })
 }); // Chọn phần tử đầu tiên trong HTMLCollection

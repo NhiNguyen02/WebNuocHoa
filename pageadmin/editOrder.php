@@ -1,3 +1,17 @@
+<?php
+    include '../components/connect/config.php';
+    if(isset($_POST['update_hd'])){
+        $mahd = $_POST['mahd'];
+        $tt = $_POST['tt'];
+        $gh = $_POST['gh'];
+        $mota = $_POST['mota'];
+
+        $update_product = $conn->prepare("UPDATE `donhang` SET XULYTT = ?, TRANGTHAI = ?, GHICHU = ? WHERE MAHD = ?");
+        $update_product->bind_param("sssi", $tt, $gh, $mota, $mahd);
+        $update_product->execute();
+        $update_product->close();
+    }  
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,43 +22,55 @@
 </head>
 <body>
 
-    <h1 style="text-align:center;">Chỉnh sửa lịch làm việc</h1>
-    <form action="">
-        <div>
-            <label for="">Thời gian:</label>
-            <input value="s" type="date" name="" id="">
-        </div>
-        <div>
-            <label for="">Chọn ngày:</label>
-            <select name="" id="">
-                <option value="">Chọn ngày trong tuần</option>
-                <option value="">Thứ 2</option>
-                <option value="">Thứ 3</option>
-                <option value="">Thứ 4</option>
-                <option value="">Thứ 5</option>
-                <option value="">Thứ 6</option>
-                <option value="">Thứ 7</option>
-                <option value="">Chủ nhật</option>
-            </select>
-        </div>
-        <div>  
-            <label for="">Chọn ca:</label>  
-            <select name="" id="">
-                <option value="">Chọn ca</option>
-                <option value="">Sáng</option>
-                <option value="">Chiều</option>
-                <option value="">Tối</option>
-            </select>
-        </div>
+    <h1 style="text-align:center;">Cập nhật đơn đặt hàng</h1>
+    <form action="" method="post">
+        <!-- <div>
+            <label for="">Mã đơn hàng:</label>
+            <input  value="mahd" type="number" name="mahd" id="mahd">
+            
+        </div> -->
+        <!-- readonly -->
         <div>
             <label for="">Mã đơn hàng:</label>
-            <input value="s" type="text" name="" id="">
+            <select required name="mahd" >
+                <option disabled selected hidden >--- Chọn mã đơn hàng ---</option>
+                <?php
+                    $select = "SELECT * FROM donhang ";
+                    $result = mysqli_query($conn, $select);
+                    if(mysqli_num_rows($result) > 0){
+                        while($fetch = mysqli_fetch_assoc($result)){
+                ?>
+                    <option value="<?= $fetch['MAHD']; ?>">Mã <?= $fetch['MAHD']; ?></option>
+                <?php
+                    }
+                }
+                ?>
+            </select>
         </div>
         <div>
-            <label for="">Họ và tên:</label>
-            <input value="s" type="text" name="" id="">
-        </div>    
-        <div style="display: flex; justify-content:flex-end; margin-top:5px; padding:10px 30px;"><button>UPDATE</button></div>
+            <label for="">Trạng thái thanh toán:</label>
+            <select required name="tt" id="">
+                <option disabled selected hidden >-Chọn trạng thái-</option>
+                <option value="Đang xửa lý thanh toán">Đang xửa lý thanh toán</option>
+                <option value="Đã thanh toán">Đã thanh toán</option>
+                <option value="Hoàn trả">Hoàn trả thành công</option>
+            </select> 
+        </div>
+        <div>
+            <label for="">Trạng thái giao hàng:</label>
+            <select name="gh" id="">
+                <option disabled selected hidden >-Chọn trạng thái-</option>
+                <option value="Người bán đang chuẩn bị hàng">Người bán đang chuẩn bị hàng</option>
+                <option value="Đơn hàng đang vận chuyển">Đơn hàng đang vận chuyển</option>
+                <option value="Đã nhận hàng">Đã nhận hàng</option>
+                <option value="Hủy đơn hàng">Hủy đơn hàng</option>
+            </select>
+        </div>
+        <div>
+            <label for="">Ghi chú:</label>
+            <textarea required value="d" style="resize: none;" cols="30" name="mota" rows="10"></textarea>
+        </div>
+        <div style="display: flex; justify-content:flex-end; margin-top:5px; padding:10px 30px;"><button name="update_hd">UPDATE</button></div>
     </form>
 </body>
 </html>

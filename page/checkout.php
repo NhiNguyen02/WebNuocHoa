@@ -24,6 +24,7 @@ if(isset($_POST['order'])){
     $tongia = $_POST['tongia'];
     $gc = $_POST['gc'];
     $ttgiao = "Người bán đang chuẩn bị hàng";
+    $tttt = "Đang xửa lý thanh toán";
     $km = '';
 
     $update_user = mysqli_prepare($conn, "UPDATE `taikhoan` SET name = ?, email = ?, sdt = ?, tinhthanh = ?, quanhuyen = ?, phuongxa = ?, sonha = ? WHERE id = ?");
@@ -48,8 +49,8 @@ if(isset($_POST['order'])){
         mysqli_stmt_execute($delete_cart);
     }
 
-    $insert_dh = $conn->prepare("INSERT INTO `donhang`(MAKH, SANPHAM, MACTKM, THANHTOAN, THANHTIEN, TRANGTHAI, GHICHU) VALUES(?,?,?,?,?,?,?)");
-    $insert_dh->bind_param("isssiss", $id, $sp, $km, $tt, $tongia, $ttgiao, $gc);
+    $insert_dh = $conn->prepare("INSERT INTO `donhang`(MAKH, SANPHAM, MACTKM, THANHTOAN, THANHTIEN, TRANGTHAI, XULYTT,GHICHU) VALUES(?,?,?,?,?,?,?,?)");
+    $insert_dh->bind_param("isssisss", $id, $sp, $km, $tt, $tongia, $ttgiao, $tttt, $gc);
     $insert_dh->execute();
     $insert_dh->close();
 

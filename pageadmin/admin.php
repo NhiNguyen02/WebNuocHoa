@@ -206,33 +206,335 @@
                                 <tbody>
                                     <tr>
                                         <td><span>Sáng</span></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>
+                                            <?php
+                                            $select_lich = "SELECT lichlamviec.* , HOTEN FROM lichlamviec , admin where lichlamviec.MANV = admin.MANV ";
+                                            $result_lich = mysqli_query($conn, $select_lich);
+                                            if (mysqli_num_rows($result_lich) > 0) {
+                                                while ($fetch = mysqli_fetch_assoc($result_lich)) {
+
+                                                    if ($fetch['BUOI'] == "Thứ 2" && $fetch['CA'] == "Sáng") {
+                                                        $idlich = $fetch['MALICH'];
+                                            ?>
+                                                        (MÃ:<?= $fetch['MANV']; ?>) <?= $fetch['HOTEN']; ?><a href="editCalendar.php?delete_lich=<?php echo $idlich; ?>"><i  class="fa-solid fa-trash"></i></a><br>
+
+                                            <?php
+                                                    }
+                                                }
+                                            }
+                                            ?> </td>
+                                        <td>
+                                            <?php
+                                            $select_lich = "SELECT lichlamviec.* , HOTEN FROM lichlamviec , admin where lichlamviec.MANV = admin.MANV ";
+                                            $result_lich = mysqli_query($conn, $select_lich);
+                                            if (mysqli_num_rows($result_lich) > 0) {
+                                                while ($fetch = mysqli_fetch_assoc($result_lich)) {
+                                                    if ($fetch['BUOI'] == "Thứ 3" && $fetch['CA'] == "Sáng") {
+                                                        $idlich = $fetch['MALICH'];
+                                            ?>
+                                                        (MÃ:<?= $fetch['MANV']; ?>) <?= $fetch['HOTEN']; ?> <a href="editCalendar.php?delete_lich=<?php echo $idlich; ?>"><i class="fa-solid fa-trash"></i></a><br>
+                                            <?php
+                                                    }
+                                                }
+                                            }
+                                            ?> </td>
+                                        <td>
+                                            <?php
+                                            $select_lich = "SELECT lichlamviec.* , HOTEN FROM lichlamviec , admin where lichlamviec.MANV = admin.MANV ";
+                                            $result_lich = mysqli_query($conn, $select_lich);
+                                            if (mysqli_num_rows($result_lich) > 0) {
+                                                while ($fetch = mysqli_fetch_assoc($result_lich)) {
+                                                    if ($fetch['BUOI'] == "Thứ 4" && $fetch['CA'] == "Sáng") {
+                                                        $idlich = $fetch['MALICH'];
+                                            ?>
+                                            
+                                                        (MÃ:<?= $fetch['MANV']; ?>) <?= $fetch['HOTEN']; ?> <a href="editCalendar.php?delete_lich=<?php echo $idlich; ?>"><i class="fa-solid fa-trash"></i></a><br>
+                                            <?php
+                                                    }
+                                                }
+                                            }
+                                            ?> </td>
+                                        <td>
+                                            <?php
+                                            $select_lich = "SELECT lichlamviec.* , HOTEN FROM lichlamviec , admin where lichlamviec.MANV = admin.MANV ";
+                                            $result_lich = mysqli_query($conn, $select_lich);
+                                            if (mysqli_num_rows($result_lich) > 0) {
+                                                while ($fetch = mysqli_fetch_assoc($result_lich)) {
+                                                    if ($fetch['BUOI'] == "Thứ 5" && $fetch['CA'] == "Sáng") {
+                                                        $idlich = $fetch['MALICH'];
+                                            ?>
+                                                        (MÃ:<?= $fetch['MANV']; ?>) <?= $fetch['HOTEN']; ?> <a href="editCalendar.php?delete_lich=<?php echo $idlich; ?>"><i class="fa-solid fa-trash"></i></a><br>
+                                            <?php
+                                                    }
+                                                }
+                                            }
+                                            ?> </td>
+                                        <td>
+                                            <?php
+                                            $select_lich = "SELECT lichlamviec.* , HOTEN FROM lichlamviec , admin where lichlamviec.MANV = admin.MANV ";
+                                            $result_lich = mysqli_query($conn, $select_lich);
+                                            if (mysqli_num_rows($result_lich) > 0) {
+                                                while ($fetch = mysqli_fetch_assoc($result_lich)) {
+                                                    if ($fetch['BUOI'] == "Thứ 6" && $fetch['CA'] == "Sáng") {
+                                                        $idlich = $fetch['MALICH'];
+                                            ?>
+                                                        (MÃ:<?= $fetch['MANV']; ?>) <?= $fetch['HOTEN']; ?> <a href="editCalendar.php?delete_lich=<?php echo $idlich; ?>"><i class="fa-solid fa-trash"></i></a><br>
+                                            <?php
+                                                    }
+                                                }
+                                            }
+                                            ?> </td>
+                                        <td>
+                                            <?php
+                                            $select_lich = "SELECT lichlamviec.* , HOTEN FROM lichlamviec , admin where lichlamviec.MANV = admin.MANV ";
+                                            $result_lich = mysqli_query($conn, $select_lich);
+                                            if (mysqli_num_rows($result_lich) > 0) {
+                                                while ($fetch = mysqli_fetch_assoc($result_lich)) {
+                                                    if ($fetch['BUOI'] == "Thứ 7" && $fetch['CA'] == "Sáng") {
+                                                        $idlich = $fetch['MALICH'];
+                                            ?>
+                                                        (MÃ:<?= $fetch['MANV']; ?>) <?= $fetch['HOTEN']; ?> <a href="editCalendar.php?delete_lich=<?php echo $idlich; ?>"><i class="fa-solid fa-trash"></i></a><br>
+                                            <?php
+                                                    }
+                                                }
+                                            }
+                                            ?> </td>
+                                        <td>
+                                            <?php
+                                            $select_lich = "SELECT lichlamviec.* , HOTEN FROM lichlamviec , admin where lichlamviec.MANV = admin.MANV ";
+                                            $result_lich = mysqli_query($conn, $select_lich);
+                                            if (mysqli_num_rows($result_lich) > 0) {
+                                                while ($fetch = mysqli_fetch_assoc($result_lich)) {
+                                                    if ($fetch['BUOI'] == "Chủ nhật" && $fetch['CA'] == "Sáng") {
+                                                        $idlich = $fetch['MALICH'];
+                                            ?>
+                                                        (MÃ:<?= $fetch['MANV']; ?>) <?= $fetch['HOTEN']; ?> <a href="editCalendar.php?delete_lich=<?php echo $idlich; ?>"><i class="fa-solid fa-trash"></i></a><br>
+                                            <?php
+                                                    }
+                                                }
+                                            }
+                                            ?> </td>
                                     </tr>
                                     <tr class="align-bottom">
                                         <td><span>Chiều</span></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>
+                                            <?php
+                                            $select_lich = "SELECT lichlamviec.* , HOTEN FROM lichlamviec , admin where lichlamviec.MANV = admin.MANV ";
+                                            $result_lich = mysqli_query($conn, $select_lich);
+                                            if (mysqli_num_rows($result_lich) > 0) {
+                                                while ($fetch = mysqli_fetch_assoc($result_lich)) {
+
+                                                    if ($fetch['BUOI'] == "Thứ 2" && $fetch['CA'] == "Chiều") {
+                                                        $idlich = $fetch['MALICH'];
+                                            ?>
+                                                        (MÃ:<?= $fetch['MANV']; ?>) <?= $fetch['HOTEN']; ?><a href="editCalendar.php?delete_lich=<?php echo $idlich; ?>"><i class="fa-solid fa-trash"></i></a><br>
+
+                                            <?php
+                                                    }
+                                                }
+                                            }
+                                            ?> </td>
+                                        <td>
+                                            <?php
+                                            $select_lich = "SELECT lichlamviec.* , HOTEN FROM lichlamviec , admin where lichlamviec.MANV = admin.MANV ";
+                                            $result_lich = mysqli_query($conn, $select_lich);
+                                            if (mysqli_num_rows($result_lich) > 0) {
+                                                while ($fetch = mysqli_fetch_assoc($result_lich)) {
+                                                    if ($fetch['BUOI'] == "Thứ 3" && $fetch['CA'] == "Chiều") {
+                                                        $idlich = $fetch['MALICH'];
+                                            ?>
+                                                        (MÃ:<?= $fetch['MANV']; ?>) <?= $fetch['HOTEN']; ?> <a href="editCalendar.php?delete_lich=<?php echo $idlich; ?>"><i class="fa-solid fa-trash"></i></a><br>
+                                            <?php
+                                                    }
+                                                }
+                                            }
+                                            ?> </td>
+                                        <td>
+                                            <?php
+                                            $select_lich = "SELECT lichlamviec.* , HOTEN FROM lichlamviec , admin where lichlamviec.MANV = admin.MANV ";
+                                            $result_lich = mysqli_query($conn, $select_lich);
+                                            if (mysqli_num_rows($result_lich) > 0) {
+                                                while ($fetch = mysqli_fetch_assoc($result_lich)) {
+                                                    if ($fetch['BUOI'] == "Thứ 4" && $fetch['CA'] == "Chiều") {
+                                                        $idlich = $fetch['MALICH'];
+                                            ?>
+                                                        (MÃ:<?= $fetch['MANV']; ?>) <?= $fetch['HOTEN']; ?> <a href="editCalendar.php?delete_lich=<?php echo $idlich; ?>"><i class="fa-solid fa-trash"></i></a><br>
+                                            <?php
+                                                    }
+                                                }
+                                            }
+                                            ?> </td>
+                                        <td>
+                                            <?php
+                                            $select_lich = "SELECT lichlamviec.* , HOTEN FROM lichlamviec , admin where lichlamviec.MANV = admin.MANV ";
+                                            $result_lich = mysqli_query($conn, $select_lich);
+                                            if (mysqli_num_rows($result_lich) > 0) {
+                                                while ($fetch = mysqli_fetch_assoc($result_lich)) {
+                                                    if ($fetch['BUOI'] == "Thứ 5" && $fetch['CA'] == "Chiều") {
+                                                        $idlich = $fetch['MALICH'];
+                                            ?>
+                                                        (MÃ:<?= $fetch['MANV']; ?>) <?= $fetch['HOTEN']; ?> <a href="editCalendar.php?delete_lich=<?php echo $idlich; ?>"><i class="fa-solid fa-trash"></i></a><br>
+                                            <?php
+                                                    }
+                                                }
+                                            }
+                                            ?> </td>
+                                        <td>
+                                            <?php
+                                            $select_lich = "SELECT lichlamviec.* , HOTEN FROM lichlamviec , admin where lichlamviec.MANV = admin.MANV ";
+                                            $result_lich = mysqli_query($conn, $select_lich);
+                                            if (mysqli_num_rows($result_lich) > 0) {
+                                                while ($fetch = mysqli_fetch_assoc($result_lich)) {
+                                                    if ($fetch['BUOI'] == "Thứ 6" && $fetch['CA'] == "Chiều") {
+                                                        $idlich = $fetch['MALICH'];
+                                            ?>
+                                                        (MÃ:<?= $fetch['MANV']; ?>) <?= $fetch['HOTEN']; ?> <a href="editCalendar.php?delete_lich=<?php echo $idlich; ?>"><i class="fa-solid fa-trash"></i></a><br>
+                                            <?php
+                                                    }
+                                                }
+                                            }
+                                            ?> </td>
+                                        <td>
+                                            <?php
+                                            $select_lich = "SELECT lichlamviec.* , HOTEN FROM lichlamviec , admin where lichlamviec.MANV = admin.MANV ";
+                                            $result_lich = mysqli_query($conn, $select_lich);
+                                            if (mysqli_num_rows($result_lich) > 0) {
+                                                while ($fetch = mysqli_fetch_assoc($result_lich)) {
+                                                    if ($fetch['BUOI'] == "Thứ 7" && $fetch['CA'] == "Chiều") {
+                                                        $idlich = $fetch['MALICH'];
+                                            ?>
+                                                        (MÃ:<?= $fetch['MANV']; ?>) <?= $fetch['HOTEN']; ?> <a href="editCalendar.php?delete_lich=<?php echo $idlich; ?>"><i class="fa-solid fa-trash"></i></a><br>
+                                            <?php
+                                                    }
+                                                }
+                                            }
+                                            ?> </td>
+                                        <td>
+                                            <?php
+                                            $select_lich = "SELECT lichlamviec.* , HOTEN FROM lichlamviec , admin where lichlamviec.MANV = admin.MANV ";
+                                            $result_lich = mysqli_query($conn, $select_lich);
+                                            if (mysqli_num_rows($result_lich) > 0) {
+                                                while ($fetch = mysqli_fetch_assoc($result_lich)) {
+                                                    if ($fetch['BUOI'] == "Chủ nhật" && $fetch['CA'] == "Chiều") {
+                                                        $idlich = $fetch['MALICH'];
+                                            ?>
+                                                        (MÃ:<?= $fetch['MANV']; ?>) <?= $fetch['HOTEN']; ?> <a href="editCalendar.php?delete_lich=<?php echo $idlich; ?>"><i class="fa-solid fa-trash"></i></a><br>
+                                            <?php
+                                                    }
+                                                }
+                                            }
+                                            ?> </td>
                                     </tr>
                                     <tr>
                                         <td><span>Tối</span></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td class="align-top">This cell is aligned to the top.</td>
-                                        <td></td>
+                                        <td>
+                                            <?php
+                                            $select_lich = "SELECT lichlamviec.* , HOTEN FROM lichlamviec , admin where lichlamviec.MANV = admin.MANV ";
+                                            $result_lich = mysqli_query($conn, $select_lich);
+                                            if (mysqli_num_rows($result_lich) > 0) {
+                                                while ($fetch = mysqli_fetch_assoc($result_lich)) {
+
+                                                    if ($fetch['BUOI'] == "Thứ 2" && $fetch['CA'] == "Tối") {
+                                                        $idlich = $fetch['MALICH'];
+                                            ?>
+                                                        (MÃ:<?= $fetch['MANV']; ?>) <?= $fetch['HOTEN']; ?><a href="editCalendar.php?delete_lich=<?php echo $idlich; ?>"><i class="fa-solid fa-trash"></i></a><br>
+
+                                            <?php
+                                                    }
+                                                }
+                                            }
+                                            ?> </td>
+                                        <td>
+                                            <?php
+                                            $select_lich = "SELECT lichlamviec.* , HOTEN FROM lichlamviec , admin where lichlamviec.MANV = admin.MANV ";
+                                            $result_lich = mysqli_query($conn, $select_lich);
+                                            if (mysqli_num_rows($result_lich) > 0) {
+                                                while ($fetch = mysqli_fetch_assoc($result_lich)) {
+                                                    if ($fetch['BUOI'] == "Thứ 3" && $fetch['CA'] == "Tối") {
+                                                        $idlich = $fetch['MALICH'];
+                                            ?>
+                                                        (MÃ:<?= $fetch['MANV']; ?>) <?= $fetch['HOTEN']; ?> <a href="editCalendar.php?delete_lich=<?php echo $idlich; ?>"><i class="fa-solid fa-trash"></i></a><br>
+                                            <?php
+                                                    }
+                                                }
+                                            }
+                                            ?> </td>
+                                        <td>
+                                            <?php
+                                            $select_lich = "SELECT lichlamviec.* , HOTEN FROM lichlamviec , admin where lichlamviec.MANV = admin.MANV ";
+                                            $result_lich = mysqli_query($conn, $select_lich);
+                                            if (mysqli_num_rows($result_lich) > 0) {
+                                                while ($fetch = mysqli_fetch_assoc($result_lich)) {
+                                                    if ($fetch['BUOI'] == "Thứ 4" && $fetch['CA'] == "Tối") {
+                                                        $idlich = $fetch['MALICH'];
+                                            ?>
+                                                        (MÃ:<?= $fetch['MANV']; ?>) <?= $fetch['HOTEN']; ?> <a href="editCalendar.php?delete_lich=<?php echo $idlich; ?>"><i class="fa-solid fa-trash"></i></a><br>
+                                            <?php
+                                                    }
+                                                }
+                                            }
+                                            ?> </td>
+                                        <td>
+                                            <?php
+                                            $select_lich = "SELECT lichlamviec.* , HOTEN FROM lichlamviec , admin where lichlamviec.MANV = admin.MANV ";
+                                            $result_lich = mysqli_query($conn, $select_lich);
+                                            if (mysqli_num_rows($result_lich) > 0) {
+                                                while ($fetch = mysqli_fetch_assoc($result_lich)) {
+                                                    if ($fetch['BUOI'] == "Thứ 5" && $fetch['CA'] == "Tối") {
+                                                        $idlich = $fetch['MALICH'];
+                                            ?>
+                                                        (MÃ:<?= $fetch['MANV']; ?>) <?= $fetch['HOTEN']; ?> <a href="editCalendar.php?delete_lich=<?php echo $idlich; ?>"><i class="fa-solid fa-trash"></i></a><br>
+                                            <?php
+                                                    }
+                                                }
+                                            }
+                                            ?> </td>
+                                        <td>
+                                            <?php
+                                            $select_lich = "SELECT lichlamviec.* , HOTEN FROM lichlamviec , admin where lichlamviec.MANV = admin.MANV ";
+                                            $result_lich = mysqli_query($conn, $select_lich);
+                                            if (mysqli_num_rows($result_lich) > 0) {
+                                                while ($fetch = mysqli_fetch_assoc($result_lich)) {
+                                                    if ($fetch['BUOI'] == "Thứ 6" && $fetch['CA'] == "Tối") {
+                                                        $idlich = $fetch['MALICH'];
+                                            ?>
+                                                        (MÃ:<?= $fetch['MANV']; ?>) <?= $fetch['HOTEN']; ?> <a href="editCalendar.php?delete_lich=<?php echo $idlich; ?>"><i class="fa-solid fa-trash"></i></a><br>
+                                            <?php
+                                                    }
+                                                }
+                                            }
+                                            ?> </td>
+                                        <td>
+                                            <?php
+                                            $select_lich = "SELECT lichlamviec.* , HOTEN FROM lichlamviec , admin where lichlamviec.MANV = admin.MANV ";
+                                            $result_lich = mysqli_query($conn, $select_lich);
+                                            if (mysqli_num_rows($result_lich) > 0) {
+                                                while ($fetch = mysqli_fetch_assoc($result_lich)) {
+                                                    if ($fetch['BUOI'] == "Thứ 7" && $fetch['CA'] == "Tối") {
+                                                        $idlich = $fetch['MALICH'];
+                                            ?>
+                                                        (MÃ:<?= $fetch['MANV']; ?>) <?= $fetch['HOTEN']; ?> <a href="editCalendar.php?delete_lich=<?php echo $idlich; ?>"><i class="fa-solid fa-trash"></i></a><br>
+                                            <?php
+                                                    }
+                                                }
+                                            }
+                                            ?> </td>
+                                        <td>
+                                            <?php
+                                            $select_lich = "SELECT lichlamviec.* , HOTEN FROM lichlamviec , admin where lichlamviec.MANV = admin.MANV ";
+                                            $result_lich = mysqli_query($conn, $select_lich);
+                                            if (mysqli_num_rows($result_lich) > 0) {
+                                                while ($fetch = mysqli_fetch_assoc($result_lich)) {
+                                                    if ($fetch['BUOI'] == "Chủ nhật" && $fetch['CA'] == "Tối") {
+                                                        $idlich = $fetch['MALICH'];
+                                            ?>
+                                            
+                                                        (MÃ:<?= $fetch['MANV']; ?>) <?= $fetch['HOTEN']; ?> <a href="editCalendar.php?delete_lich=<?php echo $idlich; ?>"><i class="fa-solid fa-trash"></i></a><br>
+                                            <?php
+                                                    }
+                                                }
+                                            }
+                                            ?> </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -264,7 +566,11 @@
                             </thead>
                             <tbody>
                                 <?php
-                                    $select = "SELECT * FROM taikhoan ";
+                                    $select = "SELECT t.*, COUNT(d.MAHD) AS so_luong_don_hang
+                                                FROM taikhoan t
+                                                LEFT JOIN donhang d ON t.id = d.MAKH
+                                                GROUP BY t.id, t.name;";
+                                    // SELECT * FROM taikhoan 
                                     $result = mysqli_query($conn, $select);
                                     if(mysqli_num_rows($result) > 0){
                                         while($fetch = mysqli_fetch_assoc($result)){
@@ -274,8 +580,8 @@
                                         <td><?= $fetch['name']; ?></td>
                                         <td><?= $fetch['email']; ?></td>
                                         <td><?= $fetch['sdt']; ?></td>
-                                        <td><?= $fetch['diachi']; ?></td>
-                                        <td>0</td>
+                                        <td><?= $fetch['sonha']; ?>, <?= $fetch['phuongxa']; ?>, <?= $fetch['quanhuyen']; ?>, <?= $fetch['tinhthanh']; ?></td>
+                                        <td><?= $fetch['so_luong_don_hang']; ?></td>
                                         <td><a href="admin.php?deleteuser=<?= $fetch['id']; ?>"><i class="fa-solid fa-trash"></i></a></td>
                                     </tr>
 
@@ -382,13 +688,12 @@
                                         <th>Khách hàng</th>
                                         <th>Sản phẩm</th>
                                         <th>Thời gian đặt hàng</th>
+                                        <th>Hình thức thanh toán</th>
                                         <th>Tình trạng thanh toán</th>
-                                        <!-- <th>Hình thức thanh toán</th> -->
                                         <th>MÃ Voucher</th>
                                         <th>Thành tiền (VNĐ)</th>
                                         <th>Trạng thái</th>
                                         <th>Ghi chú</th>
-                                        <!-- <th>Đang chuẩn bị hàng</th> -->
                                         <th>Chỉnh sửa</th>
                                         <th>Xóa</th>
                                     </tr>
@@ -400,34 +705,26 @@
                                         if(mysqli_num_rows($result_dh) > 0){
                                             while($fetch_dh = mysqli_fetch_assoc($result_dh)){ 
                                     ?>
-                                        <tr>
-                                        <td><?= $fetch_dh['MAHD']; ?></td>
-                                        <td><?= $fetch_dh['name']; ?></td>
-                                        <td><?= $fetch_dh['SANPHAM']; ?></td>
-                                        <td><?= $fetch_dh['NGAYBAN']; ?></td>
-                                        <td style="display: <?php echo $input1;?>;"><?= $fetch_dh['NGAYBAN']; ?></td>
-                                        <!-- <td style="display: <?php echo $input2;?>;"><select required name="gt" id="">
+                                            <tr>
+                                                <td><?= $fetch_dh['MAHD']; ?></td>
+                                                <td><?= $fetch_dh['name']; ?></td>
+                                                <td><?= $fetch_dh['SANPHAM']; ?></td>
+                                                <td><?= $fetch_dh['NGAYBAN']; ?></td>
+                                                <td><?= $fetch_dh['THANHTOAN']; ?></td>
+                                                <td><?= $fetch_dh['XULYTT']; ?></td>
+                                                <!-- <td><select required name="gt" id="">
                                                 <option disabled selected hidden >-Chọn trạng thái-</option>
                                                 <option value="Đang xửa lý thanh toán">Đang xửa lý thanh toán</option>
                                                 <option value="Đã thanh toán">Đã thanh toán</option>
                                             </select>
                                         </td> -->
-                                        <td><?= $fetch_dh['THANHTOAN']; ?></td>
-                                        <td><?= $fetch_dh['MACTKM']; ?></td>
-                                        <td><?= $fetch_dh['THANHTIEN']; ?></td>
-                                        <td style="display: <?php echo $input1;?>;"><?= $fetch_dh['TRANGTHAI']; ?></td>
-                                        <!-- <td style="display: <?php echo $input2;?>;"><select required name="gt" id="">
-                                                <option disabled selected hidden >-Chọn trạng thái-</option>
-                                                <option value="Đợi xác thực thanh toán">Đợi xác thực thanh toán</option>
-                                                <option value="Người bán đang chuẩn bị hàng">Người bán đang chuẩn bị hàng</option>
-                                                <option value="Đơn hàng đang vận chuyển đến bạn">Đơn hàng đang vận chuyển đến bạn</option>
-                                                <option value="Đã nhận hàng">Đã nhận hàng</option>
-                                            </select>
-                                        </td> -->
-                                        <td><?= $fetch_dh['GHICHU']; ?></td>
-                                        <td><i class="fa-solid fa-pen-to-square editorder"></i></td>
-                                        <td><a href="admin.php?delete_dh=<?= $fetch_dh['MAHD']; ?>"><i class="fa-solid fa-trash"></i></a></td>
-                                        </tr>
+                                                <td><?= $fetch_dh['MACTKM']; ?></td>
+                                                <td><?= $fetch_dh['THANHTIEN']; ?></td>
+                                                <td><?= $fetch_dh['TRANGTHAI']; ?></td>
+                                                <td><?= $fetch_dh['GHICHU']; ?></td>
+                                                <td><i class="fa-solid fa-pen-to-square editorder" data-mahd="<?= $fetch_dh['MAHD']; ?>"></i></td>
+                                                <td><a href="admin.php?delete_dh=<?= $fetch_dh['MAHD']; ?>"><i class="fa-solid fa-trash"></i></a></td>
+                                            </tr>
                                     <?php
                                         }
                                     } else {

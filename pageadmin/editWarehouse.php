@@ -9,40 +9,16 @@
 <body>
 
     <h1 style="text-align:center;">Chỉnh sửa thông tin kho hàng</h1>
-    <form action="">
-        <div>
-            <label for="">Mã sản phẩm:</label>
-            <input type="text">
-        </div>
+    <form action="" method="post">
         <div>    
-            <label for="">Tên sản phẩm:</label>    
-            <input type="text">
+            <label for="">Tên kho hàng:</label>    
+            <input type="text" name="ten">
         </div>
         <div>
-            <label for="">Hình ảnh:</label>
-            <input type="file">
+            <label for="">Địa chỉ kho:</label>
+            <input type="text" name="dc">
         </div>
-        <div>
-            <label for="">Thương hiệu:</label>
-            <input type="text">
-        </div>
-        <div>
-            <label for="">Số lượng tồn kho:</label>
-            <input type="text">
-        </div>
-        <div>
-            <label for="">Đã bán:</label>
-            <input type="number" name="" id="">
-        </div>
-        <div>
-            <label  for="">Đang giao dịch:</label>
-            <input id="" type="number">
-        </div>
-        <div>
-            <label  for="">Trạng thái:</label>
-            <input id="" type="text">
-        </div>        
-        <div style="display: flex; justify-content:flex-end; margin-top:5px; padding:10px 30px;"><button>UPDATE</button></div>   
-    </form>   
+        <div style="display: flex; justify-content:flex-end; margin-top:5px; padding:10px 30px;" ><button name="add_kh">ADD</button></div>   
+    </form>     
 </body>
 </html>

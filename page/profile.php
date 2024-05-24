@@ -5,6 +5,8 @@ session_start();
 
     if(!isset($_SESSION['user_name'])){
     header('location:http://localhost/WebNuocHoa/');
+    }else{
+        $user_id = $_SESSION['user_id'];
     }
     
     if(isset($_POST['update']))
@@ -37,6 +39,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../WebNuocHoa/assets/css/style.css">
     <link rel="stylesheet" href="../../WebNuocHoa/assets/css/profile.css">
+    <link rel="stylesheet" href="../../WebNuocHoa/assets/css/admin.css">
     <title>Document</title>
 </head>
 <body>
@@ -139,7 +142,7 @@ session_start();
         </div>
         <div class="inforOder" style="display: <?php echo $input1;?>;">
             <div>
-                <div>
+                <!-- <div>
                     <div><span>Trạng thái:</span> <span>Đã giao</span></div>
                     <div><span>Số lượng đơn hàng:</span> <span>100</span></div>
                     <div><span>Tạm tính:</span> <span>100.000 đ</span></div>
@@ -153,7 +156,47 @@ session_start();
                     <div><span>Trạng thái:</span> <span>Đang chuẩn bị hàng</span></div>
                     <div><span>Số lượng đơn hàng:</span> <span>100</span></div>
                     <div><span>Tạm tính:</span> <span>100.000 đ</span></div>
-                </div>
+                </div> -->
+                <table style="max-width: 1200px;">
+                                <thead>
+                                    <tr>
+                                        <th>Mã đơn hàng</th>
+                                        <th>Sản phẩm</th>
+                                        <th>Thời gian đặt hàng</th>
+                                        <th>Hình thức thanh toán</th>
+                                        <th>Tình trạng thanh toán</th>
+                                        <th>MÃ Voucher</th>
+                                        <th>Thành tiền (VNĐ)</th>
+                                        <th>Trạng thái</th>
+                                        <th>Ghi chú</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                        $select_dh = "SELECT donhang.*, name FROM donhang, taikhoan WHERE donhang.MAKH = taikhoan.id AND donhang.MAKH = $user_id";
+                                        $result_dh = mysqli_query($conn, $select_dh);
+                                        if(mysqli_num_rows($result_dh) > 0){
+                                            while($fetch_dh = mysqli_fetch_assoc($result_dh)){ 
+                                    ?>
+                                            <tr>
+                                                <td><?= $fetch_dh['MAHD']; ?></td>
+                                                <td><?= $fetch_dh['SANPHAM']; ?></td>
+                                                <td><?= $fetch_dh['NGAYBAN']; ?></td>
+                                                <td><?= $fetch_dh['THANHTOAN']; ?></td>
+                                                <td><?= $fetch_dh['XULYTT']; ?></td>
+                                                <td><?= $fetch_dh['MACTKM']; ?></td>
+                                                <td><?= $fetch_dh['THANHTIEN']; ?></td>
+                                                <td><?= $fetch_dh['TRANGTHAI']; ?></td>
+                                                <td><?= $fetch_dh['GHICHU']; ?></td>
+                                            </tr>
+                                    <?php
+                                        }
+                                    } else {
+                                            echo '<h2>Hiện tại chưa có đơn đặt hàng!</h2>';
+                                        }
+                                    ?>
+                                </tbody>
+                            </table>
             </div>
         </div>
         <?php include "../../WebNuocHoa/components/footer/footer.php" ?>
