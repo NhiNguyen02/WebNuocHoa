@@ -27,7 +27,7 @@
             mysqli_query($conn, $insert);
             
         }
-        
+                                                                     
         header('location:http://localhost/webNuocHoa/pageadmin/admin.php');
     }
     if(isset($_GET['delete_staff'])){
