@@ -19,7 +19,7 @@
 
         $select = "SELECT * FROM admin WHERE EMAIL = '$email'";
         $result = mysqli_query($conn, $select);
-
+                 
        if (mysqli_num_rows($result) == 0) {
             move_uploaded_file($image_tmp_name_01, $image_folder_01);
             
